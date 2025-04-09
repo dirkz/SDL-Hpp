@@ -20,7 +20,7 @@ target_sources(${PROJECT_NAME} PUBLIC
  )
 
  if(SDL_STATIC)
-    target_link_libraries(${PROJECT_NAME} PUBLIC SDL3::SDL3-static)
+    target_link_libraries(${PROJECT_NAME} INTERFACE SDL3::SDL3-static)
 else()
-    target_link_libraries(${PROJECT_NAME} PUBLIC SDL3::SDL3)
+    target_link_libraries(${PROJECT_NAME} INTERFACE SDL3::SDL3)
 endif()
