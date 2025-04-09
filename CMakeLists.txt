@@ -7,9 +7,9 @@ project(SDL-Hpp
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(SDL_STATIC "Build SDL as a shared library" ON)
+option(SDL_STATIC "Build SDL as a static library" ON)
 
-add_subdirectory(SDL)
+add_subdirectory(SDL EXCLUDE_FROM_ALL)
 
 add_library(${PROJECT_NAME} INTERFACE)
 
