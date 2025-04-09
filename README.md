@@ -18,6 +18,6 @@ For example:
 
 * Add the project as a git submodule.
 * In your `CMakeLists.txt`, set `SDL_STATIC` or offer it as option.
-* Add the project: `add_subdirectory(SDL)`.
-* Link to it: `target_link_libraries(${PROJECT_NAME} PRIVATE sdl-hpp)`.
+* Add the project: `add_subdirectory(SDL-Hpp)`.
+* Link to it: `target_link_libraries(${PROJECT_NAME} PRIVATE SDL-Hpp)`.
 * Include it like this: `#include <SDL.hpp>`.
