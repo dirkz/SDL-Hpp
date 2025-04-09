@@ -3,7 +3,7 @@
 C++ header file for SDL3, offering built-in error handling via exceptions
 and a `std::unique_ptr`-like `UniquePointer` for SDL types.
 
-Currently implemeneted manually step-by-step to test out the waters,
+Currently implemented manually step-by-step to test out the waters,
 but should be generated
 later using [libclang](https://clang.llvm.org/), in order to give
 complete API coverage.
