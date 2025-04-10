@@ -7,11 +7,13 @@ Has SDL "vendored-in" via git submodules if that is wanted.
 
 ## Status
 
-The [SDL.hpp](SDL.hpp) is a short proof-of-concept implementation of a tiny
-subset of the API.
+The current [SDL.hpp](SDL.hpp) is a short proof-of-concept implementation of a tiny
+subset of the API. Not usable yet unless you want to add all the functions
+you need manually. Which is not the plan.
 
 The [generator](generator) is under development, using [libclang](https://clang.llvm.org/)
-to parse [SDL3/SDL.h](SDL/include/SDL3/SDL.h) and emit a complete c++ SDL3 API.
+to parse [SDL3/SDL.h](https://github.com/libsdl-org/SDL/blob/main/include/SDL3/SDL.h)
+and emit a complete c++ SDL3 API.
 
 ## Usage with CMake
 
