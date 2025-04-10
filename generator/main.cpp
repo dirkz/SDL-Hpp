@@ -1,5 +1,7 @@
 ﻿#include <iostream>
 
+#include <clang-c/Index.h>
+
 using namespace std;
 
 int main()
