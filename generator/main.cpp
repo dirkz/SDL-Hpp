@@ -53,7 +53,7 @@ int main()
 
     auto outputDirectory = fs::path{location.file_name()}.parent_path().parent_path();
     auto sdlHeaderDirectory =
-        fs::path{location.file_name()}.parent_path().parent_path() / "SDL/include/SDL3";
+        fs::path{location.file_name()}.parent_path().parent_path() / "SDL" / "include" / "SDL3";
 
     for (const auto &entry : fs::directory_iterator(sdlHeaderDirectory))
     {
