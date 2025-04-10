@@ -31,22 +31,38 @@ static bool parseHeader(const fs::path &path)
         [](CXCursor currentCursor, CXCursor parent, CXClientData clientData) {
             CXString current_display_name = clang_getCursorDisplayName(currentCursor);
 
+            bool shouldRecurse = false;
+
             CXCursorKind cursorKind = clang_getCursorKind(currentCursor);
             switch (cursorKind)
             {
-            case CXCursor_StructDecl:
+            case CXCursor_StructDecl: {
                 string structName{clang_getCString(current_display_name)};
                 if (structName.starts_with("SDL_"))
                 {
-					cout << "struct " << structName << "\n";
+                    cout << "struct " << structName << "\n";
                     structNames.push_back(structName);
                 }
                 break;
             }
 
+            case CXCursor_FunctionDecl:
+                string functionName{clang_getCString(current_display_name)};
+                cout << "function " << functionName << "\n";
+                shouldRecurse = true;
+                break;
+            }
+
             clang_disposeString(current_display_name);
 
-            return CXChildVisit_Recurse;
+            if (shouldRecurse)
+            {
+                return CXChildVisit_Recurse;
+            }
+            else
+            {
+                return CXChildVisit_Continue;
+            }
         },
         nullptr // clientData
     );
