@@ -55,6 +55,10 @@ static bool parseHeader(const fs::path &path)
 
             case CXCursor_ParmDecl: {
                 CXType cursorType = clang_getCursorType(currentCursor);
+                if (cursorType.kind == CXType_Pointer)
+                {
+					CXType pointeeType = clang_getPointeeType(cursorType);
+                }
                 CXString paramTypeNameSpelling = clang_getTypeKindSpelling(cursorType.kind);
                 string paramName{clang_getCString(current_display_name)};
                 string paramTypeSpelling{clang_getCString(paramTypeNameSpelling)};
