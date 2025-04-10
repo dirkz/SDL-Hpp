@@ -1,7 +1,8 @@
 # SDL-Hpp (SDL.hpp)
 
 [Single C++ header file for SDL3](SDL.hpp), offering built-in error handling via exceptions
-and a `std::unique_ptr`-like `UniquePointer` for SDL types.
+and a [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr)-like
+`UniquePointer` for SDL types.
 
 Has SDL "vendored-in" via git submodules if that is wanted.
 
