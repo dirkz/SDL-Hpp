@@ -1,16 +1,17 @@
 # SDL-Hpp (SDL.hpp)
 
-C++ header file for SDL3, offering built-in error handling via exceptions
+[Single C++ header file for SDL3](SDL.hpp), offering built-in error handling via exceptions
 and a `std::unique_ptr`-like `UniquePointer` for SDL types.
 
-Currently implemented manually step-by-step to test out the waters,
-but should be generated
-later using [libclang](https://clang.llvm.org/), in order to give
-complete API coverage.
-
-As such, it is currently INCOMPLETE but in use (for driving the implementation).
-
 Has SDL "vendored-in" via git submodules if that is wanted.
+
+## Status
+
+The [SDL.hpp](SDL.hpp) is a short proof-of-concept implementation of a tiny
+subset of the API.
+
+The [generator](generator) is under development, using [libclang](https://clang.llvm.org/)
+to parse [SDL3/SDL.h](SDL/include/SDL3/SDL.h) and emit a complete c++ SDL3 API.
 
 ## Usage with CMake
 
