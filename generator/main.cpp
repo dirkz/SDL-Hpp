@@ -83,7 +83,7 @@ static bool parseHeader(const fs::path &path)
                 string typeString = ctypeString(cursorType);
                 string paramName{clang_getCString(current_display_name)};
                 cout << "  parameter: " << typeString << " " << paramName << "\n";
-                shouldRecurse = false;
+                shouldRecurse = true;
                 break;
             }
             }
