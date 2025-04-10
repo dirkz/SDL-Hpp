@@ -14,6 +14,23 @@ namespace zlang
 
 vector<string> structNames{};
 
+static string ctypeString(CXType cursorType)
+{
+    if (cursorType.kind == CXType_Pointer)
+    {
+        CXType pointeeType = clang_getPointeeType(cursorType);
+        return "* " + ctypeString(pointeeType);
+    }
+    else
+    {
+        CXString typeStringCX = clang_getTypeKindSpelling(cursorType.kind);
+        string s{clang_getCString(typeStringCX)};
+        clang_disposeString(typeStringCX);
+
+        return s;
+    }
+}
+
 static bool parseHeader(const fs::path &path)
 {
     cout << "*** Parsing: " << path << "\n";
@@ -60,16 +77,10 @@ static bool parseHeader(const fs::path &path)
 
             case CXCursor_ParmDecl: {
                 CXType cursorType = clang_getCursorType(currentCursor);
-                if (cursorType.kind == CXType_Pointer)
-                {
-                    CXType pointeeType = clang_getPointeeType(cursorType);
-                }
-                CXString paramTypeNameSpelling = clang_getTypeKindSpelling(cursorType.kind);
+                string typeString = ctypeString(cursorType);
                 string paramName{clang_getCString(current_display_name)};
-                string paramTypeSpelling{clang_getCString(paramTypeNameSpelling)};
-                cout << "  parameter " << paramName << ": " << paramTypeSpelling << "\n";
-                clang_disposeString(paramTypeNameSpelling);
-                shouldRecurse = true;
+                cout << "  parameter: " << typeString << " " << paramName << "\n";
+                shouldRecurse = false;
                 break;
             }
             }
