@@ -4,8 +4,13 @@
 
 #include <clang-c/Index.h>
 
+#include "Parameter.h"
+
 using namespace std;
 namespace fs = std::filesystem;
+
+namespace zlang
+{
 
 vector<string> structNames{};
 
@@ -57,7 +62,7 @@ static bool parseHeader(const fs::path &path)
                 CXType cursorType = clang_getCursorType(currentCursor);
                 if (cursorType.kind == CXType_Pointer)
                 {
-					CXType pointeeType = clang_getPointeeType(cursorType);
+                    CXType pointeeType = clang_getPointeeType(cursorType);
                 }
                 CXString paramTypeNameSpelling = clang_getTypeKindSpelling(cursorType.kind);
                 string paramName{clang_getCString(current_display_name)};
@@ -86,6 +91,8 @@ static bool parseHeader(const fs::path &path)
     return true;
 }
 
+} // namespace zlang
+
 int main()
 {
     auto location = source_location::current();
@@ -96,7 +103,7 @@ int main()
 
     for (const auto &entry : fs::directory_iterator(sdlHeaderDirectory))
     {
-        parseHeader(entry.path());
+        zlang::parseHeader(entry.path());
     }
 
     return 0;
