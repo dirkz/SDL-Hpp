@@ -46,11 +46,19 @@ static bool parseHeader(const fs::path &path)
                 break;
             }
 
-            case CXCursor_FunctionDecl:
-                string functionName{clang_getCString(current_display_name)};
-                cout << "function " << functionName << "\n";
+            case CXCursor_FunctionDecl: {
+                string functionDecl{clang_getCString(current_display_name)};
+                cout << "function " << functionDecl << "\n";
                 shouldRecurse = true;
                 break;
+            }
+
+            case CXCursor_ParmDecl: {
+                string paramName{clang_getCString(current_display_name)};
+                cout << "  parameter " << paramName << "\n";
+                shouldRecurse = true;
+                break;
+            }
             }
 
             clang_disposeString(current_display_name);
