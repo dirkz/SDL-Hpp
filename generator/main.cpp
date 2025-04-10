@@ -7,7 +7,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-bool parseHeader(const fs::path &path)
+static bool parseHeader(const fs::path &path)
 {
     cout << "*** Parsing: " << path << "\n";
 
