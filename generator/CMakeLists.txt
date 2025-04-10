@@ -11,6 +11,9 @@ endif()
 
 project (SDL-Generator)
 
+# Please see https://llvm.org/docs/CMake.html#embedding-llvm-in-your-project
+# for how to configure this, or use a CMakeUserPresets.json
+# (as in CMakeUserPresets.json_sample).
 find_package(LLVM REQUIRED CONFIG)
 message(STATUS "*** Found LLVM ${LLVM_PACKAGE_VERSION}")
 message(STATUS "*** Using LLVMConfig.cmake in: ${LLVM_DIR}")

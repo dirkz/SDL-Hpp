@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "inherits": "x64-debug",
+      "name": "x64-debug LLVM 20.1.2",
+      "cacheVariables": {
+        "LLVM_DIR": "C:/local/llvmorg-20.1.2_debug/lib/cmake/llvm"
+      }
+    }
+  ]
+}
