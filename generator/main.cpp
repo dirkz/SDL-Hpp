@@ -59,8 +59,8 @@ static bool parseHeader(const fs::path &path)
                 string paramName{clang_getCString(current_display_name)};
                 string paramTypeSpelling{clang_getCString(paramTypeNameSpelling)};
                 cout << "  parameter " << paramName << ": " << paramTypeSpelling << "\n";
-                shouldRecurse = true;
                 clang_disposeString(paramTypeNameSpelling);
+                shouldRecurse = true;
                 break;
             }
             }
