@@ -11,6 +11,11 @@ endif()
 
 project (SDL-Generator)
 
+find_package(CLANG REQUIRED CONFIG)
+
+message(STATUS "*** Found CLANG ${CLANG_PACKAGE_VERSION}")
+message(STATUS "*** Using CLANGConfig.cmake in: ${CLANG_DIR}")
+
 # Add source to this project's executable.
 add_executable (${PROJECT_NAME} "main.cpp")
 
