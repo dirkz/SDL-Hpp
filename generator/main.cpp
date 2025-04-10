@@ -70,8 +70,11 @@ static bool parseHeader(const fs::path &path)
 
             case CXCursor_FunctionDecl: {
                 string functionDecl{clang_getCString(current_display_name)};
-                cout << "function " << functionDecl << "\n";
-                shouldRecurse = true;
+                if (functionDecl.starts_with("SDL_"))
+                {
+                    cout << "function " << functionDecl << "\n";
+                    shouldRecurse = true;
+                }
                 break;
             }
 
