@@ -86,6 +86,15 @@ static bool parseHeader(const fs::path &path)
                 shouldRecurse = true;
                 break;
             }
+
+            case CXCursor_VarDecl: {
+                CXType cursorType = clang_getCursorType(currentCursor);
+                string typeString = ctypeString(cursorType);
+                string varName{clang_getCString(current_display_name)};
+                cout << "  var: " << typeString << " " << varName << "\n";
+                shouldRecurse = true;
+                break;
+            }
             }
 
             clang_disposeString(current_display_name);
