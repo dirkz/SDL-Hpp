@@ -9,8 +9,8 @@ using namespace std;
 int main()
 {
     auto location = source_location::current();
-    auto path =
-        filesystem::path{location.file_name()}.parent_path().parent_path() / "SDL/include/SDL3";
+    auto path = filesystem::path{location.file_name()}.parent_path().parent_path() /
+                "SDL/include/SDL3/SDL.h";
 
     CXIndex index = clang_createIndex(0, 0);
 
