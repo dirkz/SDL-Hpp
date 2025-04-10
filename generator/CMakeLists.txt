@@ -20,7 +20,7 @@ include_directories(${CLANG_INCLUDE_DIRS})
 add_definitions(${CLANG_DEFINITIONS})
 
 # Add source to this project's executable.
-add_executable (${PROJECT_NAME} "main.cpp" "Parameter.h" "Parameter.cpp")
+add_executable (${PROJECT_NAME} "main.cpp" "Parameter.h" "Parameter.cpp" "CType.h" "CType.cpp")
 
 target_link_libraries(${PROJECT_NAME} libclang)
 
