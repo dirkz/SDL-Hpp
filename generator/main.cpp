@@ -54,9 +54,13 @@ static bool parseHeader(const fs::path &path)
             }
 
             case CXCursor_ParmDecl: {
+                CXType cursorType = clang_getCursorType(currentCursor);
+                CXString paramTypeNameSpelling = clang_getTypeKindSpelling(cursorType.kind);
                 string paramName{clang_getCString(current_display_name)};
-                cout << "  parameter " << paramName << "\n";
+                string paramTypeSpelling{clang_getCString(paramTypeNameSpelling)};
+                cout << "  parameter " << paramName << ": " << paramTypeSpelling << "\n";
                 shouldRecurse = true;
+                clang_disposeString(paramTypeNameSpelling);
                 break;
             }
             }
