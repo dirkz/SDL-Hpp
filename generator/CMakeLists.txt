@@ -15,6 +15,7 @@ project (SDL-Generator)
 # for how to configure this, or use a CMakeUserPresets.json
 # (as in CMakeUserPresets.json_sample).
 find_package(LLVM REQUIRED CONFIG)
+
 message(STATUS "*** Found LLVM ${LLVM_PACKAGE_VERSION}")
 message(STATUS "*** Using LLVMConfig.cmake in: ${LLVM_DIR}")
 message(STATUS "*** LLVM_INCLUDE_DIRS: ${LLVM_INCLUDE_DIRS}")
