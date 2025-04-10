@@ -12,7 +12,7 @@ endif()
 project ("generator")
 
 # Add source to this project's executable.
-add_executable (generator "generator.cpp" "generator.h")
+add_executable (generator "main.cpp" )
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET generator PROPERTY CXX_STANDARD 20)
