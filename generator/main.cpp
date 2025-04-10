@@ -57,10 +57,7 @@ int main()
 
     for (const auto &entry : fs::directory_iterator(sdlHeaderDirectory))
     {
-        if (!parseHeader(entry.path()))
-        {
-            break;
-        }
+        parseHeader(entry.path());
     }
 
     return 0;
