@@ -19,6 +19,7 @@ find_package(LLVM REQUIRED CONFIG)
 message(STATUS "*** Found LLVM ${LLVM_PACKAGE_VERSION}")
 message(STATUS "*** Using LLVMConfig.cmake in: ${LLVM_DIR}")
 message(STATUS "*** LLVM_INCLUDE_DIRS: ${LLVM_INCLUDE_DIRS}")
+message(STATUS "*** LLVM_LIBRARY_DIRS: ${LLVM_LIBRARY_DIRS}")
 
 include_directories(${LLVM_INCLUDE_DIRS})
 add_definitions(${LLVM_DEFINITIONS})
@@ -26,7 +27,7 @@ add_definitions(${LLVM_DEFINITIONS})
 # Add source to this project's executable.
 add_executable (${PROJECT_NAME} "main.cpp")
 
-target_link_libraries(${PROJECT_NAME} ${LLVM_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} libclang)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
