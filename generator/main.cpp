@@ -7,6 +7,8 @@
 using namespace std;
 namespace fs = std::filesystem;
 
+vector<string> structNames{};
+
 static bool parseHeader(const fs::path &path)
 {
     cout << "*** Parsing: " << path << "\n";
@@ -33,7 +35,12 @@ static bool parseHeader(const fs::path &path)
             switch (cursorKind)
             {
             case CXCursor_StructDecl:
-                cout << "struct " << clang_getCString(current_display_name) << "\n";
+                string structName{clang_getCString(current_display_name)};
+                if (structName.starts_with("SDL_"))
+                {
+					cout << "struct " << structName << "\n";
+                    structNames.push_back(structName);
+                }
                 break;
             }
 
