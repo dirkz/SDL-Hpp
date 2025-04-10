@@ -7,8 +7,10 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-void parseHeader(const fs::path &path)
+bool parseHeader(const fs::path &path)
 {
+    cout << "*** Parsing: " << path << "\n";
+
     CXIndex index = clang_createIndex(0, 0);
 
     CXTranslationUnit unit = clang_parseTranslationUnit(index, path.string().c_str(), nullptr, 0,
@@ -16,29 +18,33 @@ void parseHeader(const fs::path &path)
 
     if (unit == nullptr)
     {
-        std::cerr << "Unable to parse translation unit. Quitting.\n";
-        return;
+        cerr << "*** Unable to parse " << path << "\n";
+        return false;
     }
 
     CXCursor cursor = clang_getTranslationUnitCursor(unit);
 
     clang_visitChildren(
         cursor, // Root cursor
-        [](CXCursor current_cursor, CXCursor parent, CXClientData client_data) {
-            CXString current_display_name = clang_getCursorDisplayName(current_cursor);
-            // Allocate a CXString representing the name of the current cursor
+        [](CXCursor currentCursor, CXCursor parent, CXClientData clientData) {
+            CXString current_display_name = clang_getCursorDisplayName(currentCursor);
 
-            std::cout << "Visiting element " << clang_getCString(current_display_name) << "\n";
-            // Print the char* value of current_display_name
+            CXCursorKind cursorKind = clang_getCursorKind(currentCursor);
+            switch (cursorKind)
+            {
+            case CXCursor_StructDecl:
+                cout << "struct " << clang_getCString(current_display_name) << "\n";
+                break;
+            }
 
             clang_disposeString(current_display_name);
-            // Since clang_getCursorDisplayName allocates a new CXString, it must be freed. This
-            // applies to all functions returning a CXString
 
             return CXChildVisit_Recurse;
-        },      // CXCursorVisitor: a function pointer
-        nullptr // client_data
+        },
+        nullptr // clientData
     );
+
+    return true;
 }
 
 int main()
@@ -51,8 +57,10 @@ int main()
 
     for (const auto &entry : fs::directory_iterator(sdlHeaderDirectory))
     {
-        cout << "*** Parsing: " << entry.path() << "\n";
-        parseHeader(entry.path());
+        if (!parseHeader(entry.path()))
+        {
+            break;
+        }
     }
 
     return 0;
