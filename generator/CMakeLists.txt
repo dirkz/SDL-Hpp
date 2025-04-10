@@ -26,7 +26,7 @@ add_definitions(${LLVM_DEFINITIONS})
 # Add source to this project's executable.
 add_executable (${PROJECT_NAME} "main.cpp")
 
-target_link_libraries(${PROJECT_NAME} ${LLVM_LIBS})
+target_link_libraries(${PROJECT_NAME} ${LLVM_LIBRARIES})
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
