@@ -51,15 +51,13 @@ static bool parseHeader(const fs::path &path)
     clang_visitChildren(
         cursor, // Root cursor
         [](CXCursor currentCursor, CXCursor parentCursor, CXClientData clientData) {
-            CXString current_display_name = clang_getCursorDisplayName(currentCursor);
-
-            bool shouldRecurse = false;
+            CXString currentDisplayName = clang_getCursorDisplayName(currentCursor);
 
             CXCursorKind cursorKind = clang_getCursorKind(currentCursor);
             switch (cursorKind)
             {
             case CXCursor_StructDecl: {
-                string structName{clang_getCString(current_display_name)};
+                string structName{clang_getCString(currentDisplayName)};
                 if (structName.starts_with("SDL_"))
                 {
                     cout << "struct " << structName << "\n";
@@ -69,52 +67,18 @@ static bool parseHeader(const fs::path &path)
             }
 
             case CXCursor_FunctionDecl: {
-                string functionDecl{clang_getCString(current_display_name)};
+                string functionDecl{clang_getCString(currentDisplayName)};
                 if (functionDecl.starts_with("SDL_"))
                 {
                     cout << "function " << functionDecl << "\n";
-                    shouldRecurse = true;
-                }
-                break;
-            }
-
-            case CXCursor_ParmDecl: {
-                CXType cursorType = clang_getCursorType(currentCursor);
-                string typeString = ctypeString(cursorType);
-                string paramName{clang_getCString(current_display_name)};
-                cout << "  parameter: " << typeString << " " << paramName << "\n";
-                shouldRecurse = true;
-                break;
-            }
-
-            case CXCursor_VarDecl: {
-                CXCursorKind cursorKindParent = clang_getCursorKind(parentCursor);
-                if (cursorKindParent == CXCursor_FunctionDecl)
-                {
-                    CXType cursorType = clang_getCursorType(currentCursor);
-                    string typeString = ctypeString(cursorType);
-                    string varName{clang_getCString(current_display_name)};
-                    cout << "  var: " << typeString << " " << varName << "\n";
-                    shouldRecurse = true;
                 }
                 break;
             }
             }
 
-            clang_disposeString(current_display_name);
+            clang_disposeString(currentDisplayName);
 
-            /*
-            if (shouldRecurse)
-            {
-                return CXChildVisit_Recurse;
-            }
-            else
-            {
-                return CXChildVisit_Continue;
-            }
-            */
-
-			return CXChildVisit_Recurse;
+            return CXChildVisit_Continue;
         },
         nullptr // clientData
     );
