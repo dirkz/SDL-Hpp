@@ -78,7 +78,7 @@ static bool parseHeader(const fs::path &path, std::ostream &out)
                 string structName{clang_getCString(currentDisplayName)};
                 if (structName.starts_with("SDL_"))
                 {
-                    cout << "struct " << structName << "\n";
+                    cout << "// struct " << structName << "\n";
                     structNames.push_back(structName);
                 }
                 break;
@@ -98,7 +98,7 @@ static bool parseHeader(const fs::path &path, std::ostream &out)
 
                 if (functionNameString.starts_with("SDL_"))
                 {
-                    cout << "function: " << functionDecl << "\n";
+                    cout << "// function: " << functionDecl << "\n";
                     int numArgs = clang_Cursor_getNumArguments(currentCursor);
                     if (numArgs != -1)
                     {
@@ -117,7 +117,7 @@ static bool parseHeader(const fs::path &path, std::ostream &out)
                             string prettyString{clang_getCString(pretty)};
                             clang_disposeString(pretty);
 
-                            cout << "  arg: " << prettyString << "\n";
+                            cout << "//  arg: " << prettyString << "\n";
                         }
                     }
 
