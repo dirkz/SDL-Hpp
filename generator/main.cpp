@@ -36,7 +36,7 @@ static std::vector<Function> parseHeader(const fs::path &path)
 {
     cout << "*** Parsing: " << path << "\n";
 
-    CXIndex index = clang_createIndex(0, 0);
+    CXIndex index = clang_createIndex(0, 1);
 
     CXTranslationUnit unit = clang_parseTranslationUnit(index, path.string().c_str(), nullptr, 0,
                                                         nullptr, 0, CXTranslationUnit_None);
