@@ -37,8 +37,10 @@ struct Function
 
         m_returnsBool = m_returnType.kind == CXType_Bool;
 
-        // TODO: This is not very reliable.
-        m_returnsPointer = m_returnType.kind = CXType_Pointer;
+        if (m_returnType.kind == CXType_Pointer && m_returnTypeString != "void")
+        {
+            m_returnsPointer = true;
+        }
     }
 
     void AddArgument(CXCursor cursor)
