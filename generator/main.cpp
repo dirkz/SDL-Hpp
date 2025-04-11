@@ -75,10 +75,6 @@ static bool parseHeader(const fs::path &path)
                     cout << "function " << functionDecl << "\n";
                     shouldRecurse = true;
                 }
-                if (functionDecl.starts_with("SDL_Init"))
-                {
-                    cout << "SDL_Init\n";
-                }
                 break;
             }
 
