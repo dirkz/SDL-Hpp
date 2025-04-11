@@ -17,6 +17,8 @@ struct Function
         m_name = clang_getCString(functionName);
         clang_disposeString(functionName);
 
+        m_namespacedName = m_name.substr(0, 4);
+
         m_returnType = clang_getCursorResultType(cursor);
         CXString functionResultTypeCX = clang_getTypeSpelling(m_returnType);
         m_returnTypeString = clang_getCString(functionResultTypeCX);
@@ -41,6 +43,11 @@ struct Function
         return m_name;
     }
 
+    const std::string &NamespacedName() const
+    {
+        return m_namespacedName;
+    }
+
     CXType ReturnType() const
     {
         return m_returnType;
@@ -53,6 +60,7 @@ struct Function
 
   private:
     std::string m_name;
+    std::string m_namespacedName;
     CXType m_returnType;
     std::string m_returnTypeString;
     std::vector<Argument> m_arguments;
