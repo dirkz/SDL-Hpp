@@ -100,14 +100,8 @@ static bool parseHeader(const fs::path &path)
                         }
                     }
 
-                    result = CXChildVisit_Recurse;
+                    result = CXChildVisit_Continue;
                 }
-                break;
-            }
-
-            case CXCursor_ParmDecl: {
-                string paramDecl{clang_getCString(currentDisplayName)};
-                cout << "  param: " << paramDecl << "\n";
                 break;
             }
             }
