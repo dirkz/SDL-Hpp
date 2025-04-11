@@ -102,11 +102,15 @@ static std::vector<Function> parseHeader(const fs::path &path)
     return functions;
 }
 
-void output(const std::vector<Function> functions)
+static void output(const std::vector<Function> functions)
 {
-    for (const Function& fn : functions)
+    for (const Function &fn : functions)
     {
-
+        cout << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
+        cout << ")\n";
+        cout << "{\n";
+        cout << "}\n";
+        cout << "\n";
     }
 }
 

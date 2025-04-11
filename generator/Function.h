@@ -17,7 +17,14 @@ struct Function
         m_name = clang_getCString(functionName);
         clang_disposeString(functionName);
 
-        m_namespacedName = m_name.substr(0, 4);
+        if (m_name.starts_with("SDL_"))
+        {
+            m_namespacedName = m_name.substr(4);
+        }
+        else
+        {
+            m_namespacedName = m_name;
+        }
 
         m_returnType = clang_getCursorResultType(cursor);
         CXString functionResultTypeCX = clang_getTypeSpelling(m_returnType);
