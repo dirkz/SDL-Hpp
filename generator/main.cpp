@@ -75,6 +75,11 @@ static bool parseHeader(const fs::path &path)
                 string functionNameString{clang_getCString(functionName)};
                 clang_disposeString(functionName);
 
+                CXType functionResultType = clang_getCursorResultType(currentCursor);
+                CXString functionResultTypeCX = clang_getTypeSpelling(functionResultType);
+                string functionResultString{clang_getCString(functionResultTypeCX)};
+                clang_disposeString(functionResultTypeCX);
+
                 if (functionNameString.starts_with("SDL_"))
                 {
                     cout << "function: " << functionDecl << "\n";
