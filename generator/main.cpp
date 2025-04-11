@@ -42,10 +42,12 @@ static std::vector<Function> parseHeader(const fs::path &path,
     std::vector<const char *> paths;
     for (const fs::path &includePath : includePaths)
     {
+        paths.push_back(includePath.string().c_str());
     }
 
-    CXTranslationUnit unit = clang_parseTranslationUnit(index, path.string().c_str(), nullptr, 0,
-                                                        nullptr, 0, CXTranslationUnit_None);
+    CXTranslationUnit unit =
+        clang_parseTranslationUnit(index, path.string().c_str(), paths.data(), paths.size(),
+                                   nullptr, 0, CXTranslationUnit_None);
 
     if (unit == nullptr)
     {
