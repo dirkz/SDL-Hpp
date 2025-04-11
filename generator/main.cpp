@@ -75,6 +75,10 @@ static bool parseHeader(const fs::path &path)
                     cout << "function " << functionDecl << "\n";
                     shouldRecurse = true;
                 }
+                if (functionDecl.starts_with("SDL_Init"))
+                {
+                    cout << "SDL_Init\n";
+                }
                 break;
             }
 
@@ -124,10 +128,15 @@ int main()
     auto sdlHeaderDirectory =
         fs::path{location.file_name()}.parent_path().parent_path() / "SDL" / "include" / "SDL3";
 
+    auto sdlInitPath = sdlHeaderDirectory / "SDL_init.h";
+    zlang::parseHeader(sdlInitPath);
+
+    /*
     for (const auto &entry : fs::directory_iterator(sdlHeaderDirectory))
     {
         zlang::parseHeader(entry.path());
     }
+    */
 
     return 0;
 }
