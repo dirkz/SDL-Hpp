@@ -32,11 +32,17 @@ static string ctypeString(CXType cursorType)
     }
 }
 
-static std::vector<Function> parseHeader(const fs::path &path)
+static std::vector<Function> parseHeader(const fs::path &path,
+                                         const std::vector<fs::path> &includePaths)
 {
     cout << "*** Parsing: " << path << "\n";
 
     CXIndex index = clang_createIndex(0, 1);
+
+    std::vector<const char *> paths;
+    for (const fs::path &includePath : includePaths)
+    {
+    }
 
     CXTranslationUnit unit = clang_parseTranslationUnit(index, path.string().c_str(), nullptr, 0,
                                                         nullptr, 0, CXTranslationUnit_None);
@@ -121,11 +127,12 @@ int main()
     auto location = source_location::current();
 
     auto outputDirectory = fs::path{location.file_name()}.parent_path().parent_path();
-    auto sdlHeaderDirectory =
-        fs::path{location.file_name()}.parent_path().parent_path() / "SDL" / "include" / "SDL3";
+    auto sdlIncludePath =
+        fs::path{location.file_name()}.parent_path().parent_path() / "SDL" / "include";
+    auto sdlHeaderDirectory = sdlIncludePath / "SDL3";
 
     auto sdlInitPath = sdlHeaderDirectory / "SDL_init.h";
-    std::vector<zlang::Function> functions = zlang::parseHeader(sdlInitPath);
+    std::vector<zlang::Function> functions = zlang::parseHeader(sdlInitPath, {sdlIncludePath});
     zlang::output(functions);
 
     /*
