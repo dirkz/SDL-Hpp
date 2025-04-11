@@ -72,7 +72,7 @@ static bool parseHeader(const fs::path &path)
                 string functionDecl{clang_getCString(currentDisplayName)};
                 if (functionDecl.starts_with("SDL_"))
                 {
-                    cout << "function " << functionDecl << "\n";
+                    cout << "function: " << functionDecl << "\n";
                     int numArgs = clang_Cursor_getNumArguments(currentCursor);
                     if (numArgs != -1)
                     {
@@ -87,7 +87,11 @@ static bool parseHeader(const fs::path &path)
                             CXType argCursorType = clang_getCursorType(argCursor);
                             string argTypeString = ctypeString(argCursorType);
 
-                            cout << "  param " << argTypeString << " " << argNameString << "\n";
+                            CXString pretty = clang_getCursorPrettyPrinted(argCursor, nullptr);
+                            string prettyString{clang_getCString(pretty)};
+                            clang_disposeString(pretty);
+
+                            cout << "  arg: " << prettyString << "\n";
                         }
                     }
                 }
