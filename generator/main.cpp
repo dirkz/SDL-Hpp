@@ -71,6 +71,29 @@ static bool parseHeader(const fs::path &path)
                 if (functionDecl.starts_with("SDL_"))
                 {
                     cout << "function " << functionDecl << "\n";
+                    clang_visitChildren(
+                        currentCursor,
+                        [](CXCursor functionCursor, CXCursor functionParentCursor,
+                           CXClientData clientData) {
+                            CXString functionDisplayName =
+                                clang_getCursorDisplayName(functionCursor);
+                            CXCursorKind functionCursorKind = clang_getCursorKind(functionCursor);
+
+                            switch (functionCursorKind)
+                            {
+                            case CXCursor_ParmDecl:
+                                CXType cursorType = clang_getCursorType(functionCursor);
+                                string typeString = ctypeString(cursorType);
+                                string paramName{clang_getCString(functionDisplayName)};
+                                cout << "  parameter: " << typeString << " " << paramName << "\n";
+                                break;
+                            }
+
+                            clang_disposeString(functionDisplayName);
+
+                            return CXChildVisit_Recurse;
+                        },
+                        nullptr);
                 }
                 break;
             }
