@@ -45,9 +45,9 @@ static std::vector<Function> parseHeader(const fs::path &path,
         paths.push_back(includePath.c_str());
     }
 
-    CXTranslationUnit unit =
-        clang_parseTranslationUnit(index, path.string().c_str(), paths.data(), paths.size(),
-                                   nullptr, 0, CXTranslationUnit_None);
+    CXTranslationUnit unit = clang_parseTranslationUnit(index, path.string().c_str(), paths.data(),
+                                                        static_cast<int>(paths.size()), nullptr, 0,
+                                                        CXTranslationUnit_None);
 
     if (unit == nullptr)
     {
