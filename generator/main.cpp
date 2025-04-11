@@ -70,7 +70,12 @@ static bool parseHeader(const fs::path &path)
 
             case CXCursor_FunctionDecl: {
                 string functionDecl{clang_getCString(currentDisplayName)};
-                if (functionDecl.starts_with("SDL_"))
+
+                CXString functionName = clang_getCursorSpelling(currentCursor);
+                string functionNameString{clang_getCString(functionName)};
+                clang_disposeString(functionName);
+
+                if (functionNameString.starts_with("SDL_"))
                 {
                     cout << "function: " << functionDecl << "\n";
                     int numArgs = clang_Cursor_getNumArguments(currentCursor);
