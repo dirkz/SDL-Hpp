@@ -5,9 +5,9 @@
 namespace zlang
 {
 
-struct Parameter
+struct Argument
 {
-    Parameter(const std::string &name, const std::string &declaration)
+    Argument(const std::string &name, const std::string &declaration)
         : m_name{name}, m_declaration{declaration}
     {
     }

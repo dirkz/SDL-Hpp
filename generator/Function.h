@@ -4,7 +4,7 @@
 
 #include <clang-c/Index.h>
 
-#include "Parameter.h"
+#include "Argument.h"
 
 namespace zlang
 {
@@ -26,15 +26,14 @@ struct Function
     void AddArgument(CXCursor cursor)
     {
         CXString argName = clang_getCursorDisplayName(cursor);
-        string argNameString{clang_getCString(argName)};
+        std::string argNameString{clang_getCString(argName)};
         clang_disposeString(argName);
 
-        CXType argCursorType = clang_getCursorType(cursor);
-        string argTypeString = ctypeString(argCursorType);
-
         CXString pretty = clang_getCursorPrettyPrinted(cursor, nullptr);
-        string prettyString{clang_getCString(pretty)};
+        std::string prettyString{clang_getCString(pretty)};
         clang_disposeString(pretty);
+
+        m_arguments.emplace_back(argNameString, prettyString);
     }
 
     const std::string &Name() const
@@ -56,7 +55,7 @@ struct Function
     std::string m_name;
     CXType m_returnType;
     std::string m_returnTypeString;
-    std::vector<std::string> m_parameters;
+    std::vector<Argument> m_arguments;
 };
 
 } // namespace zlang

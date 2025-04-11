@@ -4,8 +4,8 @@
 
 #include <clang-c/Index.h>
 
+#include "Argument.h"
 #include "Function.h"
-#include "Parameter.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -70,41 +70,19 @@ static bool parseHeader(const fs::path &path)
             }
 
             case CXCursor_FunctionDecl: {
-                string functionDecl{clang_getCString(currentDisplayName)};
+                Function fn{currentCursor};
 
-                CXString functionName = clang_getCursorSpelling(currentCursor);
-                string functionNameString{clang_getCString(functionName)};
-                clang_disposeString(functionName);
-
-                CXType functionResultType = clang_getCursorResultType(currentCursor);
-                CXString functionResultTypeCX = clang_getTypeSpelling(functionResultType);
-                string functionResultString{clang_getCString(functionResultTypeCX)};
-                clang_disposeString(functionResultTypeCX);
-
-                if (functionNameString.starts_with("SDL_"))
+                if (fn.Name().starts_with("SDL_"))
                 {
-                    Function fn{currentCursor};
+                    cout << "function: " << fn.Name() << "\n";
 
-                    cout << "// function: " << functionDecl << "\n";
                     int numArgs = clang_Cursor_getNumArguments(currentCursor);
                     if (numArgs != -1)
                     {
                         for (int i = 0; i < numArgs; ++i)
                         {
                             CXCursor argCursor = clang_Cursor_getArgument(currentCursor, i);
-
-                            CXString argName = clang_getCursorDisplayName(argCursor);
-                            string argNameString{clang_getCString(argName)};
-                            clang_disposeString(argName);
-
-                            CXType argCursorType = clang_getCursorType(argCursor);
-                            string argTypeString = ctypeString(argCursorType);
-
-                            CXString pretty = clang_getCursorPrettyPrinted(argCursor, nullptr);
-                            string prettyString{clang_getCString(pretty)};
-                            clang_disposeString(pretty);
-
-                            cout << "//  arg: " << prettyString << "\n";
+                            fn.AddArgument(argCursor);
                         }
                     }
 
