@@ -114,7 +114,7 @@ static void output(const std::vector<Function> functions)
 {
     for (const Function &fn : functions)
     {
-        if (!fn.IsHidden())
+        if (fn.HasSDLPrefix())
         {
             cout << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
             cout << ")\n";
