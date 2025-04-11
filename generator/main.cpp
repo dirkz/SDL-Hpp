@@ -52,20 +52,21 @@ static bool parseHeader(const fs::path &path)
     clang_visitChildren(
         cursor, // Root cursor
         [](CXCursor currentCursor, CXCursor parentCursor, CXClientData clientData) {
-            CXChildVisitResult result = CXChildVisit_Continue;
-
-            CXString currentDisplayName = clang_getCursorDisplayName(currentCursor);
-
             CXCursorKind cursorKind = clang_getCursorKind(currentCursor);
+
             switch (cursorKind)
             {
             case CXCursor_StructDecl: {
+                CXString currentDisplayName = clang_getCursorDisplayName(currentCursor);
                 string structName{clang_getCString(currentDisplayName)};
+                clang_disposeString(currentDisplayName);
+
                 if (structName.starts_with("SDL_"))
                 {
                     cout << "// struct " << structName << "\n";
                     structNames.push_back(structName);
                 }
+
                 break;
             }
 
@@ -85,16 +86,12 @@ static bool parseHeader(const fs::path &path)
                             fn.AddArgument(argCursor);
                         }
                     }
-
-                    result = CXChildVisit_Continue;
                 }
                 break;
             }
             }
 
-            clang_disposeString(currentDisplayName);
-
-            return result;
+            return CXChildVisit_Continue;
         },
         nullptr // clientData
     );
