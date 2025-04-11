@@ -35,8 +35,6 @@ static string ctypeString(CXType cursorType)
 static std::vector<Function> parseHeader(const fs::path &path,
                                          const std::vector<std::string> &includePaths)
 {
-    cout << "*** Parsing: " << path << "\n";
-
     CXIndex index = clang_createIndex(0, 1);
 
     std::vector<const char *> paths;
