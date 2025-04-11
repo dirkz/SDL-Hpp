@@ -50,7 +50,7 @@ static bool parseHeader(const fs::path &path)
 
     clang_visitChildren(
         cursor, // Root cursor
-        [](CXCursor currentCursor, CXCursor parent, CXClientData clientData) {
+        [](CXCursor currentCursor, CXCursor parentCursor, CXClientData clientData) {
             CXString current_display_name = clang_getCursorDisplayName(currentCursor);
 
             bool shouldRecurse = false;
@@ -92,11 +92,15 @@ static bool parseHeader(const fs::path &path)
             }
 
             case CXCursor_VarDecl: {
-                CXType cursorType = clang_getCursorType(currentCursor);
-                string typeString = ctypeString(cursorType);
-                string varName{clang_getCString(current_display_name)};
-                cout << "  var: " << typeString << " " << varName << "\n";
-                shouldRecurse = true;
+                CXCursorKind cursorKindParent = clang_getCursorKind(parentCursor);
+                if (cursorKindParent == CXCursor_FunctionDecl)
+                {
+                    CXType cursorType = clang_getCursorType(currentCursor);
+                    string typeString = ctypeString(cursorType);
+                    string varName{clang_getCString(current_display_name)};
+                    cout << "  var: " << typeString << " " << varName << "\n";
+                    shouldRecurse = true;
+                }
                 break;
             }
             }
