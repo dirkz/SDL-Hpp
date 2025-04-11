@@ -51,6 +51,8 @@ static bool parseHeader(const fs::path &path)
     clang_visitChildren(
         cursor, // Root cursor
         [](CXCursor currentCursor, CXCursor parentCursor, CXClientData clientData) {
+            CXChildVisitResult result = CXChildVisit_Continue;
+
             CXString currentDisplayName = clang_getCursorDisplayName(currentCursor);
 
             CXCursorKind cursorKind = clang_getCursorKind(currentCursor);
@@ -63,6 +65,7 @@ static bool parseHeader(const fs::path &path)
                     cout << "struct " << structName << "\n";
                     structNames.push_back(structName);
                 }
+                result = CXChildVisit_Continue;
                 break;
             }
 
@@ -71,37 +74,33 @@ static bool parseHeader(const fs::path &path)
                 if (functionDecl.starts_with("SDL_"))
                 {
                     cout << "function " << functionDecl << "\n";
-                    clang_visitChildren(
-                        currentCursor,
-                        [](CXCursor functionCursor, CXCursor functionParentCursor,
-                           CXClientData clientData) {
-                            CXString functionDisplayName =
-                                clang_getCursorDisplayName(functionCursor);
-                            CXCursorKind functionCursorKind = clang_getCursorKind(functionCursor);
-
-                            switch (functionCursorKind)
-                            {
-                            case CXCursor_ParmDecl:
-                                CXType cursorType = clang_getCursorType(functionCursor);
-                                string typeString = ctypeString(cursorType);
-                                string paramName{clang_getCString(functionDisplayName)};
-                                cout << "  parameter: " << typeString << " " << paramName << "\n";
-                                break;
-                            }
-
-                            clang_disposeString(functionDisplayName);
-
-                            return CXChildVisit_Recurse;
-                        },
-                        nullptr);
                 }
+                result = CXChildVisit_Recurse;
+                break;
+            }
+
+            case CXCursor_ParmDecl: {
+                CXType cursorType = clang_getCursorType(currentCursor);
+                string typeString = ctypeString(cursorType);
+                string paramName{clang_getCString(currentDisplayName)};
+                cout << "  parameter: " << typeString << " " << paramName << "\n";
+                result = CXChildVisit_Continue;
+                break;
+            }
+
+            case CXCursor_VarDecl: {
+                CXType cursorType = clang_getCursorType(currentCursor);
+                string typeString = ctypeString(cursorType);
+                string varName{clang_getCString(currentDisplayName)};
+                cout << "  var: " << typeString << " " << varName << "\n";
+                result = CXChildVisit_Recurse;
                 break;
             }
             }
 
             clang_disposeString(currentDisplayName);
 
-            return CXChildVisit_Recurse;
+            return result;
         },
         nullptr // clientData
     );
