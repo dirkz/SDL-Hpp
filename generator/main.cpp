@@ -29,9 +29,24 @@ static string ctypeString(CXType cursorType)
     }
 }
 
-static bool parseHeader(const fs::path &path)
+struct Parameters
+{
+    Parameters(std::ostream &out) : m_out{out} {};
+
+    std::ostream &Out()
+    {
+        return m_out;
+    }
+
+  private:
+    std::ostream &m_out;
+};
+
+static bool parseHeader(const fs::path &path, std::ostream &out)
 {
     cout << "*** Parsing: " << path << "\n";
+
+    Parameters params{out};
 
     CXIndex index = clang_createIndex(0, 0);
 
@@ -49,6 +64,9 @@ static bool parseHeader(const fs::path &path)
     clang_visitChildren(
         cursor, // Root cursor
         [](CXCursor currentCursor, CXCursor parentCursor, CXClientData clientData) {
+            Parameters *pParams = reinterpret_cast<Parameters *>(clientData);
+            std::ostream &out = pParams->Out();
+
             CXChildVisitResult result = CXChildVisit_Continue;
 
             CXString currentDisplayName = clang_getCursorDisplayName(currentCursor);
@@ -113,7 +131,7 @@ static bool parseHeader(const fs::path &path)
 
             return result;
         },
-        nullptr // clientData
+        &params // clientData
     );
 
     return true;
@@ -130,7 +148,7 @@ int main()
         fs::path{location.file_name()}.parent_path().parent_path() / "SDL" / "include" / "SDL3";
 
     auto sdlInitPath = sdlHeaderDirectory / "SDL_init.h";
-    zlang::parseHeader(sdlInitPath);
+    zlang::parseHeader(sdlInitPath, std::cout);
 
     /*
     for (const auto &entry : fs::directory_iterator(sdlHeaderDirectory))
