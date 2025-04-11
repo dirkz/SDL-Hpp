@@ -4,8 +4,6 @@
 
 #include <clang-c/Index.h>
 
-#include "Parameter.h"
-
 using namespace std;
 namespace fs = std::filesystem;
 
