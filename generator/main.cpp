@@ -135,17 +135,9 @@ int main()
 
     std::string includePath1 = "-I" + sdlIncludePath.string();
 
-    auto sdlInitPath = sdlHeaderDirectory / "SDL_init.h";
-    std::vector<zlang::Function> functions = zlang::parseHeader(sdlInitPath, {includePath1});
+    auto sdlIncludeFile = sdlHeaderDirectory / "SDL.h";
+    std::vector<zlang::Function> functions = zlang::parseHeader(sdlIncludeFile, {includePath1});
     zlang::output(functions);
-
-    /*
-    for (const auto &entry : fs::directory_iterator(sdlHeaderDirectory))
-    {
-        std::vector<zlang::Function> functions = zlang::parseHeader(entry.path());
-        zlang::output(functions);
-    }
-    */
 
     return 0;
 }
