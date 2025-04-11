@@ -19,10 +19,12 @@ struct Function
 
         if (m_name.starts_with("SDL_"))
         {
+            m_hasSdlPrefix = true;
             m_namespacedName = m_name.substr(4);
         }
         else
         {
+            m_hasSdlPrefix = false;
             m_namespacedName = m_name;
         }
 
@@ -30,6 +32,11 @@ struct Function
         CXString functionResultTypeCX = clang_getTypeSpelling(m_returnType);
         m_returnTypeString = clang_getCString(functionResultTypeCX);
         clang_disposeString(functionResultTypeCX);
+
+        m_returnsBool = m_returnType.kind == CXType_Bool;
+
+        // TODO: This is not very reliable.
+        m_returnsPointer = m_returnType.kind = CXType_Pointer;
     }
 
     void AddArgument(CXCursor cursor)
@@ -65,12 +72,30 @@ struct Function
         return m_returnTypeString;
     }
 
+    bool ReturnsBool() const
+    {
+        return m_returnsBool;
+    }
+
+    bool ReturnsPointer() const
+    {
+        return m_returnsPointer;
+    }
+
+    bool HasSDLPrefix() const
+    {
+        return m_hasSdlPrefix;
+    }
+
   private:
     std::string m_name;
     std::string m_namespacedName;
     CXType m_returnType;
     std::string m_returnTypeString;
     std::vector<Argument> m_arguments;
+    bool m_returnsBool;
+    bool m_returnsPointer;
+    bool m_hasSdlPrefix;
 };
 
 } // namespace zlang
