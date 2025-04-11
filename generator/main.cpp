@@ -19,7 +19,7 @@ static string ctypeString(CXType cursorType)
     if (cursorType.kind == CXType_Pointer)
     {
         CXType pointeeType = clang_getPointeeType(cursorType);
-        return "* " + ctypeString(pointeeType);
+        return ctypeString(pointeeType) + " *";
     }
     else
     {
