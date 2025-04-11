@@ -129,12 +129,15 @@ static void output(const std::vector<Function> functions)
                 atLeastOneArgument = true;
             }
 
-            if (atLeastOneArgument)
+            if (fn.ReturnsBool() || fn.ReturnsPointer())
             {
-                cout << ", ";
-            }
+                if (atLeastOneArgument)
+                {
+                    cout << ", ";
+                }
 
-            cout << "std::source_location location = std::source_location::current()";
+                cout << "std::source_location location = std::source_location::current()";
+            }
 
             cout << ")\n";
             cout << "{\n";
