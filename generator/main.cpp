@@ -4,6 +4,9 @@
 
 #include <clang-c/Index.h>
 
+#include "Function.h"
+#include "Parameter.h"
+
 using namespace std;
 namespace fs = std::filesystem;
 
@@ -80,6 +83,8 @@ static bool parseHeader(const fs::path &path)
 
                 if (functionNameString.starts_with("SDL_"))
                 {
+                    Function fn{currentCursor};
+
                     cout << "// function: " << functionDecl << "\n";
                     int numArgs = clang_Cursor_getNumArguments(currentCursor);
                     if (numArgs != -1)
