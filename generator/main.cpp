@@ -129,6 +129,13 @@ static void output(const std::vector<Function> functions)
                 atLeastOneArgument = true;
             }
 
+            if (atLeastOneArgument)
+            {
+                cout << ", ";
+            }
+
+            cout << "std::source_location location = std::source_location::current()";
+
             cout << ")\n";
             cout << "{\n";
             cout << "}\n";
