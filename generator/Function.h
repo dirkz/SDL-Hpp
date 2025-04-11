@@ -40,6 +40,8 @@ struct Function
         m_returnsPointer = m_returnType.kind == CXType_Pointer && m_returnTypeString != "void";
 
         m_isUnchecked = !m_returnsBool && !m_returnsPointer;
+
+        m_isVoid = m_returnTypeString == "void";
     }
 
     void AddArgument(CXCursor cursor)
@@ -105,6 +107,11 @@ struct Function
         return m_isUnchecked;
     }
 
+    bool IsVoid() const
+    {
+        return m_isVoid;
+    }
+
   private:
     std::string m_name;
     std::string m_namespacedName;
@@ -116,6 +123,7 @@ struct Function
     bool m_hasSdlPrefix;
     bool m_isHidden;
     bool m_isUnchecked;
+    bool m_isVoid;
 };
 
 } // namespace zlang

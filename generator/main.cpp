@@ -116,20 +116,20 @@ static void output(const std::vector<Function> functions)
         {
             cout << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
 
-            bool atLeastOneArgument = false;
+            bool haveOutputAtLeastOneFunctionArgument = false;
             for (const Argument &arg : fn.Arguments())
             {
-                if (atLeastOneArgument)
+                if (haveOutputAtLeastOneFunctionArgument)
                 {
                     cout << ", ";
                 }
                 cout << arg.Declaration();
-                atLeastOneArgument = true;
+                haveOutputAtLeastOneFunctionArgument = true;
             }
 
             if (!fn.IsUnchecked())
             {
-                if (atLeastOneArgument)
+                if (haveOutputAtLeastOneFunctionArgument)
                 {
                     cout << ", ";
                 }
@@ -142,6 +142,26 @@ static void output(const std::vector<Function> functions)
 
             if (fn.IsUnchecked())
             {
+                if (fn.IsVoid())
+                {
+                    cout << "    return ";
+                }
+                else
+                {
+                    cout << "    ";
+                }
+                cout << fn.Name() << "(";
+                bool haveOutputAtLeastOneParameter = false;
+                for (const Argument &arg : fn.Arguments())
+                {
+                    if (haveOutputAtLeastOneParameter)
+                    {
+                        cout << ", ";
+                    }
+                    cout << arg.Name();
+                    haveOutputAtLeastOneParameter = true;
+                }
+                cout << ")\n";
             }
 
             cout << "}\n";
