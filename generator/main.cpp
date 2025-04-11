@@ -114,7 +114,7 @@ static void output(const std::vector<Function> functions)
     {
         if (fn.HasSDLPrefix())
         {
-            cout << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
+            cout << "inline " << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
 
             bool haveOutputAtLeastOneFunctionArgument = false;
             for (const Argument &arg : fn.Arguments())
