@@ -127,7 +127,7 @@ static void output(const std::vector<Function> functions)
                 atLeastOneArgument = true;
             }
 
-            if (fn.ReturnsBool() || fn.ReturnsPointer())
+            if (!fn.IsUnchecked())
             {
                 if (atLeastOneArgument)
                 {
@@ -139,6 +139,11 @@ static void output(const std::vector<Function> functions)
 
             cout << ")\n";
             cout << "{\n";
+
+            if (fn.IsUnchecked())
+            {
+            }
+
             cout << "}\n";
             cout << "\n";
         }
