@@ -101,7 +101,7 @@ static bool parseHeader(const fs::path &path)
 
             clang_disposeString(currentDisplayName);
 
-            return CXChildVisit_Continue;
+            return CXChildVisit_Recurse;
         },
         nullptr // clientData
     );
