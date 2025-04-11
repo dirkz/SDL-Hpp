@@ -117,6 +117,18 @@ static void output(const std::vector<Function> functions)
         if (fn.HasSDLPrefix())
         {
             cout << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
+
+            bool atLeastOneArgument = false;
+            for (const Argument &arg : fn.Arguments())
+            {
+                if (atLeastOneArgument)
+                {
+                    cout << ", ";
+                }
+                cout << arg.Declaration();
+                atLeastOneArgument = true;
+            }
+
             cout << ")\n";
             cout << "{\n";
             cout << "}\n";

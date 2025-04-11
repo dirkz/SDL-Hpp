@@ -76,6 +76,11 @@ struct Function
         return m_returnTypeString;
     }
 
+    const std::vector<Argument> &Arguments() const
+    {
+        return m_arguments;
+    }
+
     bool ReturnsBool() const
     {
         return m_returnsBool;
