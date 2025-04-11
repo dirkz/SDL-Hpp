@@ -89,6 +89,11 @@ static bool parseHeader(const fs::path &path)
             }
 
             case CXCursor_VarDecl: {
+				CXCursorKind parentCursorKind = clang_getCursorKind(parentCursor);
+                if (parentCursorKind == CXType_FunctionProto)
+                {
+                    cout << "  var under function prototype\n";
+                }
                 CXType cursorType = clang_getCursorType(currentCursor);
                 string typeString = ctypeString(cursorType);
                 string varName{clang_getCString(currentDisplayName)};
