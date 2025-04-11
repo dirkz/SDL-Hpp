@@ -21,9 +21,11 @@ struct Function
         {
             m_hasSdlPrefix = true;
             m_namespacedName = m_name.substr(4);
+            m_isHidden = false;
         }
         else
         {
+            m_isHidden = m_name.starts_with("_");
             m_hasSdlPrefix = false;
             m_namespacedName = m_name;
         }
@@ -87,6 +89,11 @@ struct Function
         return m_hasSdlPrefix;
     }
 
+    bool IsHidden() const
+    {
+        return m_isHidden;
+    }
+
   private:
     std::string m_name;
     std::string m_namespacedName;
@@ -96,6 +103,7 @@ struct Function
     bool m_returnsBool;
     bool m_returnsPointer;
     bool m_hasSdlPrefix;
+    bool m_isHidden;
 };
 
 } // namespace zlang

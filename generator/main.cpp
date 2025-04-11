@@ -114,11 +114,14 @@ static void output(const std::vector<Function> functions)
 {
     for (const Function &fn : functions)
     {
-        cout << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
-        cout << ")\n";
-        cout << "{\n";
-        cout << "}\n";
-        cout << "\n";
+        if (!fn.IsHidden())
+        {
+            cout << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
+            cout << ")\n";
+            cout << "{\n";
+            cout << "}\n";
+            cout << "\n";
+        }
     }
 }
 
