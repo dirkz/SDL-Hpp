@@ -32,7 +32,7 @@ static string ctypeString(CXType cursorType)
     }
 }
 
-static bool parseHeader(const fs::path &path)
+static std::vector<Function> parseHeader(const fs::path &path)
 {
     cout << "*** Parsing: " << path << "\n";
 
@@ -44,14 +44,18 @@ static bool parseHeader(const fs::path &path)
     if (unit == nullptr)
     {
         cerr << "*** Unable to parse " << path << "\n";
-        return false;
+        return {};
     }
+
+    std::vector<Function> functions;
 
     CXCursor cursor = clang_getTranslationUnitCursor(unit);
 
     clang_visitChildren(
         cursor, // Root cursor
         [](CXCursor currentCursor, CXCursor parentCursor, CXClientData clientData) {
+            std::vector<Function> *pFunctions = static_cast<std::vector<Function> *>(clientData);
+
             CXCursorKind cursorKind = clang_getCursorKind(currentCursor);
 
             switch (cursorKind)
@@ -63,7 +67,6 @@ static bool parseHeader(const fs::path &path)
 
                 if (structName.starts_with("SDL_"))
                 {
-                    cout << "// struct " << structName << "\n";
                     structNames.push_back(structName);
                 }
 
@@ -75,8 +78,6 @@ static bool parseHeader(const fs::path &path)
 
                 if (fn.Name().starts_with("SDL_"))
                 {
-                    cout << "function: " << fn.Name() << "\n";
-
                     int numArgs = clang_Cursor_getNumArguments(currentCursor);
                     if (numArgs != -1)
                     {
@@ -86,6 +87,8 @@ static bool parseHeader(const fs::path &path)
                             fn.AddArgument(argCursor);
                         }
                     }
+
+                    pFunctions->push_back(fn);
                 }
                 break;
             }
@@ -93,10 +96,18 @@ static bool parseHeader(const fs::path &path)
 
             return CXChildVisit_Continue;
         },
-        nullptr // clientData
+        &functions // clientData
     );
 
-    return true;
+    return functions;
+}
+
+void output(const std::vector<Function> functions)
+{
+    for (const Function& fn : functions)
+    {
+
+    }
 }
 
 } // namespace zlang
@@ -110,12 +121,14 @@ int main()
         fs::path{location.file_name()}.parent_path().parent_path() / "SDL" / "include" / "SDL3";
 
     auto sdlInitPath = sdlHeaderDirectory / "SDL_init.h";
-    zlang::parseHeader(sdlInitPath);
+    std::vector<zlang::Function> functions = zlang::parseHeader(sdlInitPath);
+    zlang::output(functions);
 
     /*
     for (const auto &entry : fs::directory_iterator(sdlHeaderDirectory))
     {
-        zlang::parseHeader(entry.path());
+        std::vector<zlang::Function> functions = zlang::parseHeader(entry.path());
+        zlang::output(functions);
     }
     */
 
