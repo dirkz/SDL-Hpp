@@ -1119,14 +1119,6 @@ inline bool size_add_check_overflow(size_t a, size_t b, size_t *ret, std::source
     }
 }
 
-inline bool size_add_check_overflow_builtin(size_t a, size_t b, size_t *ret, std::source_location location = std::source_location::current())
-{
-    if (!SDL_size_add_check_overflow_builtin(a, b, ret))
-    {
-        SDLThrow(location);
-    }
-}
-
 inline SDL_AssertState ReportAssertion(SDL_AssertData *data, const char *func, const char *file, int line)
 {
     return SDL_ReportAssertion(data, func, file, line);

@@ -1,6 +1,7 @@
 ﻿#include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <set>
 #include <source_location>
 
 #include <clang-c/Index.h>
@@ -115,9 +116,12 @@ static void OutputFunctionArguments(std::ostream &out, const Function &fn, bool 
 
 static void OutputFunctions(std::ostream &out, const std::vector<Function> functions)
 {
+    std::set<std::string> functionsToSkip{"SDL_size_mul_check_overflow_builtin",
+                                          "SDL_size_add_check_overflow_builtin"};
+
     for (const Function &fn : functions)
     {
-        if (fn.HasSDLPrefix() && fn.Name() != "SDL_size_mul_check_overflow_builtin")
+        if (fn.HasSDLPrefix() && !functionsToSkip.contains(fn.Name()))
         {
             out << "inline " << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
             OutputFunctionArguments(out, fn, false);
