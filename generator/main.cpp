@@ -142,7 +142,7 @@ static void output(const std::vector<Function> functions, std::ostream &out)
 
             if (fn.IsUnchecked())
             {
-                if (fn.IsVoid())
+                if (!fn.IsVoid())
                 {
                     out << "    return ";
                 }
