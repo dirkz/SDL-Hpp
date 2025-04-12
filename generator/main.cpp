@@ -204,7 +204,6 @@ int main()
     auto sdlIncludeFile = sdlHeaderDirectory / "SDL.h";
 
     std::vector<Function> functions = ParseHeader(sdlIncludeFile, {includePath1});
-    OutputFunctions(std::cout, functions);
     OutputFunctions(out, functions);
 
     std::ifstream ifsEpilogue{epilogueFile};
