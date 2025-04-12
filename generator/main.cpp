@@ -179,7 +179,7 @@ using namespace zlang;
 int main()
 {
     auto location = source_location::current();
-    auto locationPath = fs::path{location.file_name()};
+    auto locationPath = fs::path{location.file_name()}.parent_path();
     auto outputDirectory = fs::path{location.file_name()}.parent_path().parent_path();
 
     auto outputFile = outputDirectory / "SDL.hpp";
@@ -205,7 +205,7 @@ int main()
 
     std::vector<Function> functions = ParseHeader(sdlIncludeFile, {includePath1});
     Output(std::cout, functions);
-    //Output(out, functions);
+    Output(out, functions);
 
     std::ifstream ifsEpilogue{epilogueFile};
     while (std::getline(ifsEpilogue, line))
