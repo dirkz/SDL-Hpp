@@ -1,4 +1,5 @@
 ﻿#include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <source_location>
 
@@ -185,6 +186,16 @@ int main()
     auto prologueFile = locationPath / "Prologue.h";
     auto epilogueFile = locationPath / "Epilogue.h";
 
+    std::ofstream out{outputFile};
+
+    std::ifstream ifsPrologue{prologueFile};
+    std::string line;
+    while (std::getline(ifsPrologue, line))
+    {
+        out << line << "\n";
+    }
+    ifsPrologue.close();
+
     auto sdlIncludePath =
         fs::path{location.file_name()}.parent_path().parent_path() / "SDL" / "include";
     auto sdlHeaderDirectory = sdlIncludePath / "SDL3";
@@ -194,6 +205,16 @@ int main()
 
     std::vector<Function> functions = ParseHeader(sdlIncludeFile, {includePath1});
     Output(std::cout, functions);
+    //Output(out, functions);
+
+    std::ifstream ifsEpilogue{epilogueFile};
+    while (std::getline(ifsEpilogue, line))
+    {
+        out << line << "\n";
+    }
+    ifsEpilogue.close();
+
+    out.close();
 
     return 0;
 }
