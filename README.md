@@ -8,13 +8,19 @@ Has SDL "vendored-in" via git submodules if that is wanted.
 
 ## Status
 
-The current [SDL.hpp](SDL.hpp) is a short proof-of-concept implementation of a tiny
-subset of the API. Not usable yet unless you want to add all the functions
-you need manually. Which is not the plan.
+Those unique pointer types are currently generated for SDL types that have a destroy/release
+function that accepts a single argument of that type.
 
-The [generator](generator) is under development, using [libclang](https://clang.llvm.org/)
+E.g., functions like [SDL_ReleaseGPUBuffer](https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUBuffer)
+are _not_ taken into account. Probably worth generating, too. There are probably
+other missing cases, too.
+
+Looks usable, but has to be put under test in a real project in order
+to find out what is missing or not correctly generated.
+
+The [generator](generator) uses [libclang](https://clang.llvm.org/)
 to parse [SDL3/SDL.h](https://github.com/libsdl-org/SDL/blob/main/include/SDL3/SDL.h)
-and emit a complete c++ SDL3 API.
+and emits a complete C++ SDL3 API.
 
 ## Usage with CMake
 
