@@ -151,14 +151,6 @@ void Release<SDL_Window>(SDL_Window *window)
 using Window = UniquePointer<SDL_Window>;
 
 template<>
-void Release<SDL_Window>(SDL_Window *window)
-{
-    SDL_DestroyWindow(window);
-}
-
-using Window = UniquePointer<SDL_Window>;
-
-template<>
 void Release<SDL_Cursor>(SDL_Cursor *cursor)
 {
     SDL_DestroyCursor(cursor);

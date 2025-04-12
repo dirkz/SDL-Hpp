@@ -116,6 +116,8 @@ static void OutputFunctionArguments(std::ostream &out, const Function &fn, bool 
 
 static void OutputDestructors(std::ostream &out, const std::vector<Function> functions)
 {
+    std::set<std::string> alreadyGenerated{};
+
     for (const Function &fn : functions)
     {
         if (fn.Name().find("Destroy") != std::string::npos ||
@@ -124,20 +126,21 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
             if (fn.Arguments().size() == 1)
             {
                 const Argument &arg = fn.Arguments()[0];
-                if (arg.IsPointer())
+                std::string pointedType = arg.PointeeTypeString();
+
+                if (arg.IsPointer() && !alreadyGenerated.contains(pointedType))
                 {
+                    alreadyGenerated.insert(pointedType);
+
                     out << "template<>\n";
-                    out << "void Release<" << arg.PointeeTypeString() << ">(" << arg.Declaration()
-                        << ")\n";
+                    out << "void Release<" << pointedType << ">(" << arg.Declaration() << ")\n";
                     out << "{\n";
                     out << "    " << fn.Name() << "(" << arg.Name() << ");\n";
                     out << "}\n\n";
 
-                    std::string typeString = arg.PointeeTypeString().starts_with("SDL_")
-                                                 ? arg.PointeeTypeString().substr(4)
-                                                 : arg.PointeeTypeString();
-                    out << "using " << typeString << " = UniquePointer<" << arg.PointeeTypeString()
-                        << ">;\n\n";
+                    std::string typeString =
+                        pointedType.starts_with("SDL_") ? pointedType.substr(4) : pointedType;
+                    out << "using " << typeString << " = UniquePointer<" << pointedType << ">;\n\n";
                 }
             }
         }
