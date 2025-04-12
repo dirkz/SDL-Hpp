@@ -132,6 +132,12 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                     out << "{\n";
                     out << "    " << fn.Name() << "(" << arg.Name() << ");\n";
                     out << "}\n\n";
+
+                    std::string typeString = arg.PointeeTypeString().starts_with("SDL_")
+                                                 ? arg.PointeeTypeString().substr(4)
+                                                 : arg.PointeeTypeString();
+                    out << "using " << typeString << " = UniquePointer<" << arg.PointeeTypeString()
+                        << ">;\n\n";
                 }
             }
         }

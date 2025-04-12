@@ -69,3 +69,4 @@ template <class T> struct UniquePointer
   private:
     T *m_object = nullptr;
 };
+

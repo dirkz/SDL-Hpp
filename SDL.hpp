@@ -69,11 +69,14 @@ template <class T> struct UniquePointer
   private:
     T *m_object = nullptr;
 };
+
 template<>
 void Release<SDL_Environment>(SDL_Environment *env)
 {
     SDL_DestroyEnvironment(env);
 }
+
+using Environment = UniquePointer<SDL_Environment>;
 
 template<>
 void Release<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
@@ -81,11 +84,15 @@ void Release<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
     SDL_DestroyAsyncIOQueue(queue);
 }
 
+using AsyncIOQueue = UniquePointer<SDL_AsyncIOQueue>;
+
 template<>
 void Release<SDL_Mutex>(SDL_Mutex *mutex)
 {
     SDL_DestroyMutex(mutex);
 }
+
+using Mutex = UniquePointer<SDL_Mutex>;
 
 template<>
 void Release<SDL_RWLock>(SDL_RWLock *rwlock)
@@ -93,11 +100,15 @@ void Release<SDL_RWLock>(SDL_RWLock *rwlock)
     SDL_DestroyRWLock(rwlock);
 }
 
+using RWLock = UniquePointer<SDL_RWLock>;
+
 template<>
 void Release<SDL_Semaphore>(SDL_Semaphore *sem)
 {
     SDL_DestroySemaphore(sem);
 }
+
+using Semaphore = UniquePointer<SDL_Semaphore>;
 
 template<>
 void Release<SDL_Condition>(SDL_Condition *cond)
@@ -105,11 +116,15 @@ void Release<SDL_Condition>(SDL_Condition *cond)
     SDL_DestroyCondition(cond);
 }
 
+using Condition = UniquePointer<SDL_Condition>;
+
 template<>
 void Release<SDL_AudioStream>(SDL_AudioStream *stream)
 {
     SDL_DestroyAudioStream(stream);
 }
+
+using AudioStream = UniquePointer<SDL_AudioStream>;
 
 template<>
 void Release<SDL_Palette>(SDL_Palette *palette)
@@ -117,11 +132,15 @@ void Release<SDL_Palette>(SDL_Palette *palette)
     SDL_DestroyPalette(palette);
 }
 
+using Palette = UniquePointer<SDL_Palette>;
+
 template<>
 void Release<SDL_Surface>(SDL_Surface *surface)
 {
     SDL_DestroySurface(surface);
 }
+
+using Surface = UniquePointer<SDL_Surface>;
 
 template<>
 void Release<SDL_Window>(SDL_Window *window)
@@ -129,11 +148,15 @@ void Release<SDL_Window>(SDL_Window *window)
     SDL_DestroyWindowSurface(window);
 }
 
+using Window = UniquePointer<SDL_Window>;
+
 template<>
 void Release<SDL_Window>(SDL_Window *window)
 {
     SDL_DestroyWindow(window);
 }
+
+using Window = UniquePointer<SDL_Window>;
 
 template<>
 void Release<SDL_Cursor>(SDL_Cursor *cursor)
@@ -141,11 +164,15 @@ void Release<SDL_Cursor>(SDL_Cursor *cursor)
     SDL_DestroyCursor(cursor);
 }
 
+using Cursor = UniquePointer<SDL_Cursor>;
+
 template<>
 void Release<SDL_GPUDevice>(SDL_GPUDevice *device)
 {
     SDL_DestroyGPUDevice(device);
 }
+
+using GPUDevice = UniquePointer<SDL_GPUDevice>;
 
 template<>
 void Release<SDL_Process>(SDL_Process *process)
@@ -153,11 +180,15 @@ void Release<SDL_Process>(SDL_Process *process)
     SDL_DestroyProcess(process);
 }
 
+using Process = UniquePointer<SDL_Process>;
+
 template<>
 void Release<SDL_Texture>(SDL_Texture *texture)
 {
     SDL_DestroyTexture(texture);
 }
+
+using Texture = UniquePointer<SDL_Texture>;
 
 template<>
 void Release<SDL_Renderer>(SDL_Renderer *renderer)
@@ -165,11 +196,15 @@ void Release<SDL_Renderer>(SDL_Renderer *renderer)
     SDL_DestroyRenderer(renderer);
 }
 
+using Renderer = UniquePointer<SDL_Renderer>;
+
 template<>
 void Release<SDL_Tray>(SDL_Tray *tray)
 {
     SDL_DestroyTray(tray);
 }
+
+using Tray = UniquePointer<SDL_Tray>;
 
 inline void * malloc(size_t size, std::source_location location = std::source_location::current())
 {
