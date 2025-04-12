@@ -91,28 +91,39 @@ static std::vector<Function> ParseHeader(const fs::path &path,
     return functions;
 }
 
-static void Output(const std::vector<Function> functions, std::ostream &out)
+static void OutputArguments(std::ostream &out, const Function &fn, bool namesOnly)
+{
+    bool haveOutputAtLeastOneFunctionArgument = false;
+    for (const Argument &arg : fn.Arguments())
+    {
+        if (haveOutputAtLeastOneFunctionArgument)
+        {
+            out << ", ";
+        }
+        if (namesOnly)
+        {
+            out << arg.Name();
+        }
+        else
+        {
+            out << arg.Declaration();
+        }
+        haveOutputAtLeastOneFunctionArgument = true;
+    }
+}
+
+static void Output(std::ostream &out, const std::vector<Function> functions)
 {
     for (const Function &fn : functions)
     {
         if (fn.HasSDLPrefix())
         {
             out << "inline " << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
-
-            bool haveOutputAtLeastOneFunctionArgument = false;
-            for (const Argument &arg : fn.Arguments())
-            {
-                if (haveOutputAtLeastOneFunctionArgument)
-                {
-                    out << ", ";
-                }
-                out << arg.Declaration();
-                haveOutputAtLeastOneFunctionArgument = true;
-            }
+            OutputArguments(out, fn, false);
 
             if (!fn.IsUnchecked())
             {
-                if (haveOutputAtLeastOneFunctionArgument)
+                if (fn.NumberOfArguments() > 0)
                 {
                     out << ", ";
                 }
@@ -134,31 +145,13 @@ static void Output(const std::vector<Function> functions, std::ostream &out)
                     out << "    ";
                 }
                 out << fn.Name() << "(";
-                bool haveOutputAtLeastOneParameter = false;
-                for (const Argument &arg : fn.Arguments())
-                {
-                    if (haveOutputAtLeastOneParameter)
-                    {
-                        out << ", ";
-                    }
-                    out << arg.Name();
-                    haveOutputAtLeastOneParameter = true;
-                }
-                out << ")\n";
+                OutputArguments(out, fn, true);
+                out << ");\n";
             }
             else if (fn.ReturnsBool())
             {
                 out << "    if (!" << fn.Name() << "(";
-                bool haveOutputAtLeastOneParameter = false;
-                for (const Argument &arg : fn.Arguments())
-                {
-                    if (haveOutputAtLeastOneParameter)
-                    {
-                        out << ", ";
-                    }
-                    out << arg.Name();
-                    haveOutputAtLeastOneParameter = true;
-                }
+                OutputArguments(out, fn, true);
                 out << "))\n" << "    {\n";
                 out << "        SDLThrow(location);\n";
                 out << "    }\n";
@@ -166,7 +159,7 @@ static void Output(const std::vector<Function> functions, std::ostream &out)
             else if (fn.ReturnsPointer())
             {
                 out << "    " << fn.ReturnTypeString() << "result = " << fn.Name() << "(";
-                out << ")\n";
+                out << ");\n";
             }
 
             out << "}\n";
@@ -190,7 +183,7 @@ int main()
 
     auto sdlIncludeFile = sdlHeaderDirectory / "SDL.h";
     std::vector<zlang::Function> functions = zlang::ParseHeader(sdlIncludeFile, {includePath1});
-    zlang::Output(functions, std::cout);
+    zlang::Output(std::cout, functions);
 
     return 0;
 }

@@ -89,6 +89,11 @@ struct Function
         return m_arguments;
     }
 
+    const size_t NumberOfArguments() const
+    {
+        return m_arguments.size();
+    }
+
     bool ReturnsBool() const
     {
         return m_returnsBool;
