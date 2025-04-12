@@ -173,6 +173,8 @@ static void Output(std::ostream &out, const std::vector<Function> functions)
 
 } // namespace zlang
 
+using namespace zlang;
+
 int main()
 {
     auto location = source_location::current();
@@ -185,8 +187,8 @@ int main()
     std::string includePath1 = "-I" + sdlIncludePath.string();
 
     auto sdlIncludeFile = sdlHeaderDirectory / "SDL.h";
-    std::vector<zlang::Function> functions = zlang::ParseHeader(sdlIncludeFile, {includePath1});
-    zlang::Output(std::cout, functions);
+    std::vector<Function> functions = ParseHeader(sdlIncludeFile, {includePath1});
+    Output(std::cout, functions);
 
     return 0;
 }
