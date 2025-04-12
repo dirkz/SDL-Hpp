@@ -198,7 +198,7 @@ void Release<SDL_Tray>(SDL_Tray *tray)
 
 using Tray = UniquePointer<SDL_Tray>;
 
-inline void * malloc(size_t size, std::source_location location = std::source_location::current())
+inline void *malloc(size_t size, std::source_location location = std::source_location::current())
 {
     void *result = SDL_malloc(size);
     if (!result)
@@ -208,7 +208,7 @@ inline void * malloc(size_t size, std::source_location location = std::source_lo
     return result;
 }
 
-inline void * calloc(size_t nmemb, size_t size, std::source_location location = std::source_location::current())
+inline void *calloc(size_t nmemb, size_t size, std::source_location location = std::source_location::current())
 {
     void *result = SDL_calloc(nmemb, size);
     if (!result)
@@ -218,7 +218,7 @@ inline void * calloc(size_t nmemb, size_t size, std::source_location location = 
     return result;
 }
 
-inline void * realloc(void *mem, size_t size, std::source_location location = std::source_location::current())
+inline void *realloc(void *mem, size_t size, std::source_location location = std::source_location::current())
 {
     void *result = SDL_realloc(mem, size);
     if (!result)
@@ -243,7 +243,7 @@ inline void GetMemoryFunctions(SDL_malloc_func *malloc_func, SDL_calloc_func *ca
     SDL_GetMemoryFunctions(malloc_func, calloc_func, realloc_func, free_func);
 }
 
-inline bool SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func calloc_func, SDL_realloc_func realloc_func, SDL_free_func free_func, std::source_location location = std::source_location::current())
+inline void SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func calloc_func, SDL_realloc_func realloc_func, SDL_free_func free_func, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetMemoryFunctions(malloc_func, calloc_func, realloc_func, free_func))
     {
@@ -251,7 +251,7 @@ inline bool SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func call
     }
 }
 
-inline void * aligned_alloc(size_t alignment, size_t size, std::source_location location = std::source_location::current())
+inline void *aligned_alloc(size_t alignment, size_t size, std::source_location location = std::source_location::current())
 {
     void *result = SDL_aligned_alloc(alignment, size);
     if (!result)
@@ -271,7 +271,7 @@ inline int GetNumAllocations()
     return SDL_GetNumAllocations();
 }
 
-inline SDL_Environment * GetEnvironment(std::source_location location = std::source_location::current())
+inline SDL_Environment *GetEnvironment(std::source_location location = std::source_location::current())
 {
     SDL_Environment *result = SDL_GetEnvironment();
     if (!result)
@@ -281,7 +281,7 @@ inline SDL_Environment * GetEnvironment(std::source_location location = std::sou
     return result;
 }
 
-inline SDL_Environment * CreateEnvironment(bool populated, std::source_location location = std::source_location::current())
+inline SDL_Environment *CreateEnvironment(bool populated, std::source_location location = std::source_location::current())
 {
     SDL_Environment *result = SDL_CreateEnvironment(populated);
     if (!result)
@@ -291,7 +291,7 @@ inline SDL_Environment * CreateEnvironment(bool populated, std::source_location 
     return result;
 }
 
-inline const char * GetEnvironmentVariable(SDL_Environment *env, const char *name, std::source_location location = std::source_location::current())
+inline const char *GetEnvironmentVariable(SDL_Environment *env, const char *name, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetEnvironmentVariable(env, name);
     if (!result)
@@ -301,7 +301,7 @@ inline const char * GetEnvironmentVariable(SDL_Environment *env, const char *nam
     return result;
 }
 
-inline char ** GetEnvironmentVariables(SDL_Environment *env, std::source_location location = std::source_location::current())
+inline char **GetEnvironmentVariables(SDL_Environment *env, std::source_location location = std::source_location::current())
 {
     char **result = SDL_GetEnvironmentVariables(env);
     if (!result)
@@ -311,7 +311,7 @@ inline char ** GetEnvironmentVariables(SDL_Environment *env, std::source_locatio
     return result;
 }
 
-inline bool SetEnvironmentVariable(SDL_Environment *env, const char *name, const char *value, bool overwrite, std::source_location location = std::source_location::current())
+inline void SetEnvironmentVariable(SDL_Environment *env, const char *name, const char *value, bool overwrite, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetEnvironmentVariable(env, name, value, overwrite))
     {
@@ -319,7 +319,7 @@ inline bool SetEnvironmentVariable(SDL_Environment *env, const char *name, const
     }
 }
 
-inline bool UnsetEnvironmentVariable(SDL_Environment *env, const char *name, std::source_location location = std::source_location::current())
+inline void UnsetEnvironmentVariable(SDL_Environment *env, const char *name, std::source_location location = std::source_location::current())
 {
     if (!SDL_UnsetEnvironmentVariable(env, name))
     {
@@ -332,7 +332,7 @@ inline void DestroyEnvironment(SDL_Environment *env)
     SDL_DestroyEnvironment(env);
 }
 
-inline const char * getenv(const char *name, std::source_location location = std::source_location::current())
+inline const char *getenv(const char *name, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_getenv(name);
     if (!result)
@@ -342,7 +342,7 @@ inline const char * getenv(const char *name, std::source_location location = std
     return result;
 }
 
-inline const char * getenv_unsafe(const char *name, std::source_location location = std::source_location::current())
+inline const char *getenv_unsafe(const char *name, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_getenv_unsafe(name);
     if (!result)
@@ -367,7 +367,7 @@ inline void qsort(void *base, size_t nmemb, size_t size, SDL_CompareCallback com
     SDL_qsort(base, nmemb, size, compare);
 }
 
-inline void * bsearch(const void *key, const void *base, size_t nmemb, size_t size, SDL_CompareCallback compare, std::source_location location = std::source_location::current())
+inline void *bsearch(const void *key, const void *base, size_t nmemb, size_t size, SDL_CompareCallback compare, std::source_location location = std::source_location::current())
 {
     void *result = SDL_bsearch(key, base, nmemb, size, compare);
     if (!result)
@@ -382,7 +382,7 @@ inline void qsort_r(void *base, size_t nmemb, size_t size, SDL_CompareCallback_r
     SDL_qsort_r(base, nmemb, size, compare, userdata);
 }
 
-inline void * bsearch_r(const void *key, const void *base, size_t nmemb, size_t size, SDL_CompareCallback_r compare, void *userdata, std::source_location location = std::source_location::current())
+inline void *bsearch_r(const void *key, const void *base, size_t nmemb, size_t size, SDL_CompareCallback_r compare, void *userdata, std::source_location location = std::source_location::current())
 {
     void *result = SDL_bsearch_r(key, base, nmemb, size, compare, userdata);
     if (!result)
@@ -482,7 +482,7 @@ inline Uint32 murmur3_32(const void *data, size_t len, Uint32 seed)
     return SDL_murmur3_32(data, len, seed);
 }
 
-inline void * memcpy(void *dst, const void *src, size_t len, std::source_location location = std::source_location::current())
+inline void *memcpy(void *dst, const void *src, size_t len, std::source_location location = std::source_location::current())
 {
     void *result = SDL_memcpy(dst, src, len);
     if (!result)
@@ -492,7 +492,7 @@ inline void * memcpy(void *dst, const void *src, size_t len, std::source_locatio
     return result;
 }
 
-inline void * memmove(void *dst, const void *src, size_t len, std::source_location location = std::source_location::current())
+inline void *memmove(void *dst, const void *src, size_t len, std::source_location location = std::source_location::current())
 {
     void *result = SDL_memmove(dst, src, len);
     if (!result)
@@ -502,7 +502,7 @@ inline void * memmove(void *dst, const void *src, size_t len, std::source_locati
     return result;
 }
 
-inline void * memset(void *dst, int c, size_t len, std::source_location location = std::source_location::current())
+inline void *memset(void *dst, int c, size_t len, std::source_location location = std::source_location::current())
 {
     void *result = SDL_memset(dst, c, len);
     if (!result)
@@ -512,7 +512,7 @@ inline void * memset(void *dst, int c, size_t len, std::source_location location
     return result;
 }
 
-inline void * memset4(void *dst, Uint32 val, size_t dwords, std::source_location location = std::source_location::current())
+inline void *memset4(void *dst, Uint32 val, size_t dwords, std::source_location location = std::source_location::current())
 {
     void *result = SDL_memset4(dst, val, dwords);
     if (!result)
@@ -547,7 +547,7 @@ inline size_t wcslcat(wchar_t *dst, const wchar_t *src, size_t maxlen)
     return SDL_wcslcat(dst, src, maxlen);
 }
 
-inline wchar_t * wcsdup(const wchar_t *wstr, std::source_location location = std::source_location::current())
+inline wchar_t *wcsdup(const wchar_t *wstr, std::source_location location = std::source_location::current())
 {
     wchar_t *result = SDL_wcsdup(wstr);
     if (!result)
@@ -557,7 +557,7 @@ inline wchar_t * wcsdup(const wchar_t *wstr, std::source_location location = std
     return result;
 }
 
-inline wchar_t * wcsstr(const wchar_t *haystack, const wchar_t *needle, std::source_location location = std::source_location::current())
+inline wchar_t *wcsstr(const wchar_t *haystack, const wchar_t *needle, std::source_location location = std::source_location::current())
 {
     wchar_t *result = SDL_wcsstr(haystack, needle);
     if (!result)
@@ -567,7 +567,7 @@ inline wchar_t * wcsstr(const wchar_t *haystack, const wchar_t *needle, std::sou
     return result;
 }
 
-inline wchar_t * wcsnstr(const wchar_t *haystack, const wchar_t *needle, size_t maxlen, std::source_location location = std::source_location::current())
+inline wchar_t *wcsnstr(const wchar_t *haystack, const wchar_t *needle, size_t maxlen, std::source_location location = std::source_location::current())
 {
     wchar_t *result = SDL_wcsnstr(haystack, needle, maxlen);
     if (!result)
@@ -627,7 +627,7 @@ inline size_t strlcat(char *dst, const char *src, size_t maxlen)
     return SDL_strlcat(dst, src, maxlen);
 }
 
-inline char * strdup(const char *str, std::source_location location = std::source_location::current())
+inline char *strdup(const char *str, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strdup(str);
     if (!result)
@@ -637,7 +637,7 @@ inline char * strdup(const char *str, std::source_location location = std::sourc
     return result;
 }
 
-inline char * strndup(const char *str, size_t maxlen, std::source_location location = std::source_location::current())
+inline char *strndup(const char *str, size_t maxlen, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strndup(str, maxlen);
     if (!result)
@@ -647,7 +647,7 @@ inline char * strndup(const char *str, size_t maxlen, std::source_location locat
     return result;
 }
 
-inline char * strrev(char *str, std::source_location location = std::source_location::current())
+inline char *strrev(char *str, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strrev(str);
     if (!result)
@@ -657,7 +657,7 @@ inline char * strrev(char *str, std::source_location location = std::source_loca
     return result;
 }
 
-inline char * strupr(char *str, std::source_location location = std::source_location::current())
+inline char *strupr(char *str, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strupr(str);
     if (!result)
@@ -667,7 +667,7 @@ inline char * strupr(char *str, std::source_location location = std::source_loca
     return result;
 }
 
-inline char * strlwr(char *str, std::source_location location = std::source_location::current())
+inline char *strlwr(char *str, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strlwr(str);
     if (!result)
@@ -677,7 +677,7 @@ inline char * strlwr(char *str, std::source_location location = std::source_loca
     return result;
 }
 
-inline char * strchr(const char *str, int c, std::source_location location = std::source_location::current())
+inline char *strchr(const char *str, int c, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strchr(str, c);
     if (!result)
@@ -687,7 +687,7 @@ inline char * strchr(const char *str, int c, std::source_location location = std
     return result;
 }
 
-inline char * strrchr(const char *str, int c, std::source_location location = std::source_location::current())
+inline char *strrchr(const char *str, int c, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strrchr(str, c);
     if (!result)
@@ -697,7 +697,7 @@ inline char * strrchr(const char *str, int c, std::source_location location = st
     return result;
 }
 
-inline char * strstr(const char *haystack, const char *needle, std::source_location location = std::source_location::current())
+inline char *strstr(const char *haystack, const char *needle, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strstr(haystack, needle);
     if (!result)
@@ -707,7 +707,7 @@ inline char * strstr(const char *haystack, const char *needle, std::source_locat
     return result;
 }
 
-inline char * strnstr(const char *haystack, const char *needle, size_t maxlen, std::source_location location = std::source_location::current())
+inline char *strnstr(const char *haystack, const char *needle, size_t maxlen, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strnstr(haystack, needle, maxlen);
     if (!result)
@@ -717,7 +717,7 @@ inline char * strnstr(const char *haystack, const char *needle, size_t maxlen, s
     return result;
 }
 
-inline char * strcasestr(const char *haystack, const char *needle, std::source_location location = std::source_location::current())
+inline char *strcasestr(const char *haystack, const char *needle, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strcasestr(haystack, needle);
     if (!result)
@@ -727,7 +727,7 @@ inline char * strcasestr(const char *haystack, const char *needle, std::source_l
     return result;
 }
 
-inline char * strtok_r(char *str, const char *delim, char **saveptr, std::source_location location = std::source_location::current())
+inline char *strtok_r(char *str, const char *delim, char **saveptr, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strtok_r(str, delim, saveptr);
     if (!result)
@@ -747,7 +747,7 @@ inline size_t utf8strnlen(const char *str, size_t bytes)
     return SDL_utf8strnlen(str, bytes);
 }
 
-inline char * itoa(int value, char *str, int radix, std::source_location location = std::source_location::current())
+inline char *itoa(int value, char *str, int radix, std::source_location location = std::source_location::current())
 {
     char *result = SDL_itoa(value, str, radix);
     if (!result)
@@ -757,7 +757,7 @@ inline char * itoa(int value, char *str, int radix, std::source_location locatio
     return result;
 }
 
-inline char * uitoa(unsigned int value, char *str, int radix, std::source_location location = std::source_location::current())
+inline char *uitoa(unsigned int value, char *str, int radix, std::source_location location = std::source_location::current())
 {
     char *result = SDL_uitoa(value, str, radix);
     if (!result)
@@ -767,7 +767,7 @@ inline char * uitoa(unsigned int value, char *str, int radix, std::source_locati
     return result;
 }
 
-inline char * ltoa(long value, char *str, int radix, std::source_location location = std::source_location::current())
+inline char *ltoa(long value, char *str, int radix, std::source_location location = std::source_location::current())
 {
     char *result = SDL_ltoa(value, str, radix);
     if (!result)
@@ -777,7 +777,7 @@ inline char * ltoa(long value, char *str, int radix, std::source_location locati
     return result;
 }
 
-inline char * ultoa(unsigned long value, char *str, int radix, std::source_location location = std::source_location::current())
+inline char *ultoa(unsigned long value, char *str, int radix, std::source_location location = std::source_location::current())
 {
     char *result = SDL_ultoa(value, str, radix);
     if (!result)
@@ -787,7 +787,7 @@ inline char * ultoa(unsigned long value, char *str, int radix, std::source_locat
     return result;
 }
 
-inline char * lltoa(long long value, char *str, int radix, std::source_location location = std::source_location::current())
+inline char *lltoa(long long value, char *str, int radix, std::source_location location = std::source_location::current())
 {
     char *result = SDL_lltoa(value, str, radix);
     if (!result)
@@ -797,7 +797,7 @@ inline char * lltoa(long long value, char *str, int radix, std::source_location 
     return result;
 }
 
-inline char * ulltoa(unsigned long long value, char *str, int radix, std::source_location location = std::source_location::current())
+inline char *ulltoa(unsigned long long value, char *str, int radix, std::source_location location = std::source_location::current())
 {
     char *result = SDL_ulltoa(value, str, radix);
     if (!result)
@@ -862,7 +862,7 @@ inline int strncasecmp(const char *str1, const char *str2, size_t maxlen)
     return SDL_strncasecmp(str1, str2, maxlen);
 }
 
-inline char * strpbrk(const char *str, const char *breakset, std::source_location location = std::source_location::current())
+inline char *strpbrk(const char *str, const char *breakset, std::source_location location = std::source_location::current())
 {
     char *result = SDL_strpbrk(str, breakset);
     if (!result)
@@ -882,7 +882,7 @@ inline Uint32 StepBackUTF8(const char *start, const char **pstr)
     return SDL_StepBackUTF8(start, pstr);
 }
 
-inline char * UCS4ToUTF8(Uint32 codepoint, char *dst, std::source_location location = std::source_location::current())
+inline char *UCS4ToUTF8(Uint32 codepoint, char *dst, std::source_location location = std::source_location::current())
 {
     char *result = SDL_UCS4ToUTF8(codepoint, dst);
     if (!result)
@@ -1222,7 +1222,7 @@ inline size_t iconv(SDL_iconv_t cd, const char **inbuf, size_t *inbytesleft, cha
     return SDL_iconv(cd, inbuf, inbytesleft, outbuf, outbytesleft);
 }
 
-inline char * iconv_string(const char *tocode, const char *fromcode, const char *inbuf, size_t inbytesleft, std::source_location location = std::source_location::current())
+inline char *iconv_string(const char *tocode, const char *fromcode, const char *inbuf, size_t inbytesleft, std::source_location location = std::source_location::current())
 {
     char *result = SDL_iconv_string(tocode, fromcode, inbuf, inbytesleft);
     if (!result)
@@ -1232,7 +1232,7 @@ inline char * iconv_string(const char *tocode, const char *fromcode, const char 
     return result;
 }
 
-inline bool size_mul_check_overflow(size_t a, size_t b, size_t *ret, std::source_location location = std::source_location::current())
+inline void size_mul_check_overflow(size_t a, size_t b, size_t *ret, std::source_location location = std::source_location::current())
 {
     if (!SDL_size_mul_check_overflow(a, b, ret))
     {
@@ -1240,7 +1240,7 @@ inline bool size_mul_check_overflow(size_t a, size_t b, size_t *ret, std::source
     }
 }
 
-inline bool size_add_check_overflow(size_t a, size_t b, size_t *ret, std::source_location location = std::source_location::current())
+inline void size_add_check_overflow(size_t a, size_t b, size_t *ret, std::source_location location = std::source_location::current())
 {
     if (!SDL_size_add_check_overflow(a, b, ret))
     {
@@ -1268,7 +1268,7 @@ inline SDL_AssertionHandler GetAssertionHandler(void **puserdata)
     return SDL_GetAssertionHandler(puserdata);
 }
 
-inline const SDL_AssertData * GetAssertionReport(std::source_location location = std::source_location::current())
+inline const SDL_AssertData *GetAssertionReport(std::source_location location = std::source_location::current())
 {
     const SDL_AssertData *result = SDL_GetAssertionReport();
     if (!result)
@@ -1283,7 +1283,7 @@ inline void ResetAssertionReport()
     SDL_ResetAssertionReport();
 }
 
-inline SDL_AsyncIO * AsyncIOFromFile(const char *file, const char *mode, std::source_location location = std::source_location::current())
+inline SDL_AsyncIO *AsyncIOFromFile(const char *file, const char *mode, std::source_location location = std::source_location::current())
 {
     SDL_AsyncIO *result = SDL_AsyncIOFromFile(file, mode);
     if (!result)
@@ -1298,7 +1298,7 @@ inline Sint64 GetAsyncIOSize(SDL_AsyncIO *asyncio)
     return SDL_GetAsyncIOSize(asyncio);
 }
 
-inline bool ReadAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata, std::source_location location = std::source_location::current())
+inline void ReadAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadAsyncIO(asyncio, ptr, offset, size, queue, userdata))
     {
@@ -1306,7 +1306,7 @@ inline bool ReadAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 s
     }
 }
 
-inline bool WriteAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata, std::source_location location = std::source_location::current())
+inline void WriteAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteAsyncIO(asyncio, ptr, offset, size, queue, userdata))
     {
@@ -1314,7 +1314,7 @@ inline bool WriteAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 
     }
 }
 
-inline bool CloseAsyncIO(SDL_AsyncIO *asyncio, bool flush, SDL_AsyncIOQueue *queue, void *userdata, std::source_location location = std::source_location::current())
+inline void CloseAsyncIO(SDL_AsyncIO *asyncio, bool flush, SDL_AsyncIOQueue *queue, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_CloseAsyncIO(asyncio, flush, queue, userdata))
     {
@@ -1322,7 +1322,7 @@ inline bool CloseAsyncIO(SDL_AsyncIO *asyncio, bool flush, SDL_AsyncIOQueue *que
     }
 }
 
-inline SDL_AsyncIOQueue * CreateAsyncIOQueue(std::source_location location = std::source_location::current())
+inline SDL_AsyncIOQueue *CreateAsyncIOQueue(std::source_location location = std::source_location::current())
 {
     SDL_AsyncIOQueue *result = SDL_CreateAsyncIOQueue();
     if (!result)
@@ -1337,7 +1337,7 @@ inline void DestroyAsyncIOQueue(SDL_AsyncIOQueue *queue)
     SDL_DestroyAsyncIOQueue(queue);
 }
 
-inline bool GetAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome, std::source_location location = std::source_location::current())
+inline void GetAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetAsyncIOResult(queue, outcome))
     {
@@ -1345,7 +1345,7 @@ inline bool GetAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcom
     }
 }
 
-inline bool WaitAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome, Sint32 timeoutMS, std::source_location location = std::source_location::current())
+inline void WaitAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome, Sint32 timeoutMS, std::source_location location = std::source_location::current())
 {
     if (!SDL_WaitAsyncIOResult(queue, outcome, timeoutMS))
     {
@@ -1358,7 +1358,7 @@ inline void SignalAsyncIOQueue(SDL_AsyncIOQueue *queue)
     SDL_SignalAsyncIOQueue(queue);
 }
 
-inline bool LoadFileAsync(const char *file, SDL_AsyncIOQueue *queue, void *userdata, std::source_location location = std::source_location::current())
+inline void LoadFileAsync(const char *file, SDL_AsyncIOQueue *queue, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_LoadFileAsync(file, queue, userdata))
     {
@@ -1366,7 +1366,7 @@ inline bool LoadFileAsync(const char *file, SDL_AsyncIOQueue *queue, void *userd
     }
 }
 
-inline bool TryLockSpinlock(SDL_SpinLock *lock, std::source_location location = std::source_location::current())
+inline void TryLockSpinlock(SDL_SpinLock *lock, std::source_location location = std::source_location::current())
 {
     if (!SDL_TryLockSpinlock(lock))
     {
@@ -1394,7 +1394,7 @@ inline void MemoryBarrierAcquireFunction()
     SDL_MemoryBarrierAcquireFunction();
 }
 
-inline bool CompareAndSwapAtomicInt(SDL_AtomicInt *a, int oldval, int newval, std::source_location location = std::source_location::current())
+inline void CompareAndSwapAtomicInt(SDL_AtomicInt *a, int oldval, int newval, std::source_location location = std::source_location::current())
 {
     if (!SDL_CompareAndSwapAtomicInt(a, oldval, newval))
     {
@@ -1417,7 +1417,7 @@ inline int AddAtomicInt(SDL_AtomicInt *a, int v)
     return SDL_AddAtomicInt(a, v);
 }
 
-inline bool CompareAndSwapAtomicU32(SDL_AtomicU32 *a, Uint32 oldval, Uint32 newval, std::source_location location = std::source_location::current())
+inline void CompareAndSwapAtomicU32(SDL_AtomicU32 *a, Uint32 oldval, Uint32 newval, std::source_location location = std::source_location::current())
 {
     if (!SDL_CompareAndSwapAtomicU32(a, oldval, newval))
     {
@@ -1435,7 +1435,7 @@ inline Uint32 GetAtomicU32(SDL_AtomicU32 *a)
     return SDL_GetAtomicU32(a);
 }
 
-inline bool CompareAndSwapAtomicPointer(void **a, void *oldval, void *newval, std::source_location location = std::source_location::current())
+inline void CompareAndSwapAtomicPointer(void **a, void *oldval, void *newval, std::source_location location = std::source_location::current())
 {
     if (!SDL_CompareAndSwapAtomicPointer(a, oldval, newval))
     {
@@ -1443,7 +1443,7 @@ inline bool CompareAndSwapAtomicPointer(void **a, void *oldval, void *newval, st
     }
 }
 
-inline void * SetAtomicPointer(void **a, void *v, std::source_location location = std::source_location::current())
+inline void *SetAtomicPointer(void **a, void *v, std::source_location location = std::source_location::current())
 {
     void *result = SDL_SetAtomicPointer(a, v);
     if (!result)
@@ -1453,7 +1453,7 @@ inline void * SetAtomicPointer(void **a, void *v, std::source_location location 
     return result;
 }
 
-inline void * GetAtomicPointer(void **a, std::source_location location = std::source_location::current())
+inline void *GetAtomicPointer(void **a, std::source_location location = std::source_location::current())
 {
     void *result = SDL_GetAtomicPointer(a);
     if (!result)
@@ -1468,7 +1468,7 @@ inline float SwapFloat(float x)
     return SDL_SwapFloat(x);
 }
 
-inline bool SetError(const char *fmt, std::source_location location = std::source_location::current())
+inline void SetError(const char *fmt, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetError(fmt))
     {
@@ -1476,7 +1476,7 @@ inline bool SetError(const char *fmt, std::source_location location = std::sourc
     }
 }
 
-inline bool SetErrorV(const char *fmt, va_list ap, std::source_location location = std::source_location::current())
+inline void SetErrorV(const char *fmt, va_list ap, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetErrorV(fmt, ap))
     {
@@ -1484,7 +1484,7 @@ inline bool SetErrorV(const char *fmt, va_list ap, std::source_location location
     }
 }
 
-inline bool OutOfMemory(std::source_location location = std::source_location::current())
+inline void OutOfMemory(std::source_location location = std::source_location::current())
 {
     if (!SDL_OutOfMemory())
     {
@@ -1492,7 +1492,7 @@ inline bool OutOfMemory(std::source_location location = std::source_location::cu
     }
 }
 
-inline const char * GetError(std::source_location location = std::source_location::current())
+inline const char *GetError(std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetError();
     if (!result)
@@ -1502,7 +1502,7 @@ inline const char * GetError(std::source_location location = std::source_locatio
     return result;
 }
 
-inline bool ClearError(std::source_location location = std::source_location::current())
+inline void ClearError(std::source_location location = std::source_location::current())
 {
     if (!SDL_ClearError())
     {
@@ -1520,7 +1520,7 @@ inline SDL_PropertiesID CreateProperties()
     return SDL_CreateProperties();
 }
 
-inline bool CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst, std::source_location location = std::source_location::current())
+inline void CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst, std::source_location location = std::source_location::current())
 {
     if (!SDL_CopyProperties(src, dst))
     {
@@ -1528,7 +1528,7 @@ inline bool CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst, std::sour
     }
 }
 
-inline bool LockProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline void LockProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     if (!SDL_LockProperties(props))
     {
@@ -1541,7 +1541,7 @@ inline void UnlockProperties(SDL_PropertiesID props)
     SDL_UnlockProperties(props);
 }
 
-inline bool SetPointerPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, SDL_CleanupPropertyCallback cleanup, void *userdata, std::source_location location = std::source_location::current())
+inline void SetPointerPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, SDL_CleanupPropertyCallback cleanup, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetPointerPropertyWithCleanup(props, name, value, cleanup, userdata))
     {
@@ -1549,7 +1549,7 @@ inline bool SetPointerPropertyWithCleanup(SDL_PropertiesID props, const char *na
     }
 }
 
-inline bool SetPointerProperty(SDL_PropertiesID props, const char *name, void *value, std::source_location location = std::source_location::current())
+inline void SetPointerProperty(SDL_PropertiesID props, const char *name, void *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetPointerProperty(props, name, value))
     {
@@ -1557,7 +1557,7 @@ inline bool SetPointerProperty(SDL_PropertiesID props, const char *name, void *v
     }
 }
 
-inline bool SetStringProperty(SDL_PropertiesID props, const char *name, const char *value, std::source_location location = std::source_location::current())
+inline void SetStringProperty(SDL_PropertiesID props, const char *name, const char *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetStringProperty(props, name, value))
     {
@@ -1565,7 +1565,7 @@ inline bool SetStringProperty(SDL_PropertiesID props, const char *name, const ch
     }
 }
 
-inline bool SetNumberProperty(SDL_PropertiesID props, const char *name, Sint64 value, std::source_location location = std::source_location::current())
+inline void SetNumberProperty(SDL_PropertiesID props, const char *name, Sint64 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetNumberProperty(props, name, value))
     {
@@ -1573,7 +1573,7 @@ inline bool SetNumberProperty(SDL_PropertiesID props, const char *name, Sint64 v
     }
 }
 
-inline bool SetFloatProperty(SDL_PropertiesID props, const char *name, float value, std::source_location location = std::source_location::current())
+inline void SetFloatProperty(SDL_PropertiesID props, const char *name, float value, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetFloatProperty(props, name, value))
     {
@@ -1581,7 +1581,7 @@ inline bool SetFloatProperty(SDL_PropertiesID props, const char *name, float val
     }
 }
 
-inline bool SetBooleanProperty(SDL_PropertiesID props, const char *name, bool value, std::source_location location = std::source_location::current())
+inline void SetBooleanProperty(SDL_PropertiesID props, const char *name, bool value, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetBooleanProperty(props, name, value))
     {
@@ -1589,7 +1589,7 @@ inline bool SetBooleanProperty(SDL_PropertiesID props, const char *name, bool va
     }
 }
 
-inline bool HasProperty(SDL_PropertiesID props, const char *name, std::source_location location = std::source_location::current())
+inline void HasProperty(SDL_PropertiesID props, const char *name, std::source_location location = std::source_location::current())
 {
     if (!SDL_HasProperty(props, name))
     {
@@ -1602,7 +1602,7 @@ inline SDL_PropertyType GetPropertyType(SDL_PropertiesID props, const char *name
     return SDL_GetPropertyType(props, name);
 }
 
-inline void * GetPointerProperty(SDL_PropertiesID props, const char *name, void *default_value, std::source_location location = std::source_location::current())
+inline void *GetPointerProperty(SDL_PropertiesID props, const char *name, void *default_value, std::source_location location = std::source_location::current())
 {
     void *result = SDL_GetPointerProperty(props, name, default_value);
     if (!result)
@@ -1612,7 +1612,7 @@ inline void * GetPointerProperty(SDL_PropertiesID props, const char *name, void 
     return result;
 }
 
-inline const char * GetStringProperty(SDL_PropertiesID props, const char *name, const char *default_value, std::source_location location = std::source_location::current())
+inline const char *GetStringProperty(SDL_PropertiesID props, const char *name, const char *default_value, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetStringProperty(props, name, default_value);
     if (!result)
@@ -1632,7 +1632,7 @@ inline float GetFloatProperty(SDL_PropertiesID props, const char *name, float de
     return SDL_GetFloatProperty(props, name, default_value);
 }
 
-inline bool GetBooleanProperty(SDL_PropertiesID props, const char *name, bool default_value, std::source_location location = std::source_location::current())
+inline void GetBooleanProperty(SDL_PropertiesID props, const char *name, bool default_value, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetBooleanProperty(props, name, default_value))
     {
@@ -1640,7 +1640,7 @@ inline bool GetBooleanProperty(SDL_PropertiesID props, const char *name, bool de
     }
 }
 
-inline bool ClearProperty(SDL_PropertiesID props, const char *name, std::source_location location = std::source_location::current())
+inline void ClearProperty(SDL_PropertiesID props, const char *name, std::source_location location = std::source_location::current())
 {
     if (!SDL_ClearProperty(props, name))
     {
@@ -1648,7 +1648,7 @@ inline bool ClearProperty(SDL_PropertiesID props, const char *name, std::source_
     }
 }
 
-inline bool EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void *userdata, std::source_location location = std::source_location::current())
+inline void EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_EnumerateProperties(props, callback, userdata))
     {
@@ -1661,7 +1661,7 @@ inline void DestroyProperties(SDL_PropertiesID props)
     SDL_DestroyProperties(props);
 }
 
-inline SDL_Thread * CreateThreadRuntime(SDL_ThreadFunction fn, const char *name, void *data, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread, std::source_location location = std::source_location::current())
+inline SDL_Thread *CreateThreadRuntime(SDL_ThreadFunction fn, const char *name, void *data, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread, std::source_location location = std::source_location::current())
 {
     SDL_Thread *result = SDL_CreateThreadRuntime(fn, name, data, pfnBeginThread, pfnEndThread);
     if (!result)
@@ -1671,7 +1671,7 @@ inline SDL_Thread * CreateThreadRuntime(SDL_ThreadFunction fn, const char *name,
     return result;
 }
 
-inline SDL_Thread * CreateThreadWithPropertiesRuntime(SDL_PropertiesID props, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread, std::source_location location = std::source_location::current())
+inline SDL_Thread *CreateThreadWithPropertiesRuntime(SDL_PropertiesID props, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread, std::source_location location = std::source_location::current())
 {
     SDL_Thread *result = SDL_CreateThreadWithPropertiesRuntime(props, pfnBeginThread, pfnEndThread);
     if (!result)
@@ -1681,7 +1681,7 @@ inline SDL_Thread * CreateThreadWithPropertiesRuntime(SDL_PropertiesID props, SD
     return result;
 }
 
-inline const char * GetThreadName(SDL_Thread *thread, std::source_location location = std::source_location::current())
+inline const char *GetThreadName(SDL_Thread *thread, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetThreadName(thread);
     if (!result)
@@ -1701,7 +1701,7 @@ inline SDL_ThreadID GetThreadID(SDL_Thread *thread)
     return SDL_GetThreadID(thread);
 }
 
-inline bool SetCurrentThreadPriority(SDL_ThreadPriority priority, std::source_location location = std::source_location::current())
+inline void SetCurrentThreadPriority(SDL_ThreadPriority priority, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetCurrentThreadPriority(priority))
     {
@@ -1724,7 +1724,7 @@ inline void DetachThread(SDL_Thread *thread)
     SDL_DetachThread(thread);
 }
 
-inline void * GetTLS(SDL_TLSID *id, std::source_location location = std::source_location::current())
+inline void *GetTLS(SDL_TLSID *id, std::source_location location = std::source_location::current())
 {
     void *result = SDL_GetTLS(id);
     if (!result)
@@ -1734,7 +1734,7 @@ inline void * GetTLS(SDL_TLSID *id, std::source_location location = std::source_
     return result;
 }
 
-inline bool SetTLS(SDL_TLSID *id, const void *value, SDL_TLSDestructorCallback destructor, std::source_location location = std::source_location::current())
+inline void SetTLS(SDL_TLSID *id, const void *value, SDL_TLSDestructorCallback destructor, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetTLS(id, value, destructor))
     {
@@ -1747,7 +1747,7 @@ inline void CleanupTLS()
     SDL_CleanupTLS();
 }
 
-inline SDL_Mutex * CreateMutex(std::source_location location = std::source_location::current())
+inline SDL_Mutex *CreateMutex(std::source_location location = std::source_location::current())
 {
     SDL_Mutex *result = SDL_CreateMutex();
     if (!result)
@@ -1762,7 +1762,7 @@ inline void LockMutex(SDL_Mutex *mutex)
     SDL_LockMutex(mutex);
 }
 
-inline bool TryLockMutex(SDL_Mutex *mutex, std::source_location location = std::source_location::current())
+inline void TryLockMutex(SDL_Mutex *mutex, std::source_location location = std::source_location::current())
 {
     if (!SDL_TryLockMutex(mutex))
     {
@@ -1780,7 +1780,7 @@ inline void DestroyMutex(SDL_Mutex *mutex)
     SDL_DestroyMutex(mutex);
 }
 
-inline SDL_RWLock * CreateRWLock(std::source_location location = std::source_location::current())
+inline SDL_RWLock *CreateRWLock(std::source_location location = std::source_location::current())
 {
     SDL_RWLock *result = SDL_CreateRWLock();
     if (!result)
@@ -1800,7 +1800,7 @@ inline void LockRWLockForWriting(SDL_RWLock *rwlock)
     SDL_LockRWLockForWriting(rwlock);
 }
 
-inline bool TryLockRWLockForReading(SDL_RWLock *rwlock, std::source_location location = std::source_location::current())
+inline void TryLockRWLockForReading(SDL_RWLock *rwlock, std::source_location location = std::source_location::current())
 {
     if (!SDL_TryLockRWLockForReading(rwlock))
     {
@@ -1808,7 +1808,7 @@ inline bool TryLockRWLockForReading(SDL_RWLock *rwlock, std::source_location loc
     }
 }
 
-inline bool TryLockRWLockForWriting(SDL_RWLock *rwlock, std::source_location location = std::source_location::current())
+inline void TryLockRWLockForWriting(SDL_RWLock *rwlock, std::source_location location = std::source_location::current())
 {
     if (!SDL_TryLockRWLockForWriting(rwlock))
     {
@@ -1826,7 +1826,7 @@ inline void DestroyRWLock(SDL_RWLock *rwlock)
     SDL_DestroyRWLock(rwlock);
 }
 
-inline SDL_Semaphore * CreateSemaphore(Uint32 initial_value, std::source_location location = std::source_location::current())
+inline SDL_Semaphore *CreateSemaphore(Uint32 initial_value, std::source_location location = std::source_location::current())
 {
     SDL_Semaphore *result = SDL_CreateSemaphore(initial_value);
     if (!result)
@@ -1846,7 +1846,7 @@ inline void WaitSemaphore(SDL_Semaphore *sem)
     SDL_WaitSemaphore(sem);
 }
 
-inline bool TryWaitSemaphore(SDL_Semaphore *sem, std::source_location location = std::source_location::current())
+inline void TryWaitSemaphore(SDL_Semaphore *sem, std::source_location location = std::source_location::current())
 {
     if (!SDL_TryWaitSemaphore(sem))
     {
@@ -1854,7 +1854,7 @@ inline bool TryWaitSemaphore(SDL_Semaphore *sem, std::source_location location =
     }
 }
 
-inline bool WaitSemaphoreTimeout(SDL_Semaphore *sem, Sint32 timeoutMS, std::source_location location = std::source_location::current())
+inline void WaitSemaphoreTimeout(SDL_Semaphore *sem, Sint32 timeoutMS, std::source_location location = std::source_location::current())
 {
     if (!SDL_WaitSemaphoreTimeout(sem, timeoutMS))
     {
@@ -1872,7 +1872,7 @@ inline Uint32 GetSemaphoreValue(SDL_Semaphore *sem)
     return SDL_GetSemaphoreValue(sem);
 }
 
-inline SDL_Condition * CreateCondition(std::source_location location = std::source_location::current())
+inline SDL_Condition *CreateCondition(std::source_location location = std::source_location::current())
 {
     SDL_Condition *result = SDL_CreateCondition();
     if (!result)
@@ -1902,7 +1902,7 @@ inline void WaitCondition(SDL_Condition *cond, SDL_Mutex *mutex)
     SDL_WaitCondition(cond, mutex);
 }
 
-inline bool WaitConditionTimeout(SDL_Condition *cond, SDL_Mutex *mutex, Sint32 timeoutMS, std::source_location location = std::source_location::current())
+inline void WaitConditionTimeout(SDL_Condition *cond, SDL_Mutex *mutex, Sint32 timeoutMS, std::source_location location = std::source_location::current())
 {
     if (!SDL_WaitConditionTimeout(cond, mutex, timeoutMS))
     {
@@ -1910,7 +1910,7 @@ inline bool WaitConditionTimeout(SDL_Condition *cond, SDL_Mutex *mutex, Sint32 t
     }
 }
 
-inline bool ShouldInit(SDL_InitState *state, std::source_location location = std::source_location::current())
+inline void ShouldInit(SDL_InitState *state, std::source_location location = std::source_location::current())
 {
     if (!SDL_ShouldInit(state))
     {
@@ -1918,7 +1918,7 @@ inline bool ShouldInit(SDL_InitState *state, std::source_location location = std
     }
 }
 
-inline bool ShouldQuit(SDL_InitState *state, std::source_location location = std::source_location::current())
+inline void ShouldQuit(SDL_InitState *state, std::source_location location = std::source_location::current())
 {
     if (!SDL_ShouldQuit(state))
     {
@@ -1931,7 +1931,7 @@ inline void SetInitialized(SDL_InitState *state, bool initialized)
     SDL_SetInitialized(state, initialized);
 }
 
-inline SDL_IOStream * IOFromFile(const char *file, const char *mode, std::source_location location = std::source_location::current())
+inline SDL_IOStream *IOFromFile(const char *file, const char *mode, std::source_location location = std::source_location::current())
 {
     SDL_IOStream *result = SDL_IOFromFile(file, mode);
     if (!result)
@@ -1941,7 +1941,7 @@ inline SDL_IOStream * IOFromFile(const char *file, const char *mode, std::source
     return result;
 }
 
-inline SDL_IOStream * IOFromMem(void *mem, size_t size, std::source_location location = std::source_location::current())
+inline SDL_IOStream *IOFromMem(void *mem, size_t size, std::source_location location = std::source_location::current())
 {
     SDL_IOStream *result = SDL_IOFromMem(mem, size);
     if (!result)
@@ -1951,7 +1951,7 @@ inline SDL_IOStream * IOFromMem(void *mem, size_t size, std::source_location loc
     return result;
 }
 
-inline SDL_IOStream * IOFromConstMem(const void *mem, size_t size, std::source_location location = std::source_location::current())
+inline SDL_IOStream *IOFromConstMem(const void *mem, size_t size, std::source_location location = std::source_location::current())
 {
     SDL_IOStream *result = SDL_IOFromConstMem(mem, size);
     if (!result)
@@ -1961,7 +1961,7 @@ inline SDL_IOStream * IOFromConstMem(const void *mem, size_t size, std::source_l
     return result;
 }
 
-inline SDL_IOStream * IOFromDynamicMem(std::source_location location = std::source_location::current())
+inline SDL_IOStream *IOFromDynamicMem(std::source_location location = std::source_location::current())
 {
     SDL_IOStream *result = SDL_IOFromDynamicMem();
     if (!result)
@@ -1971,7 +1971,7 @@ inline SDL_IOStream * IOFromDynamicMem(std::source_location location = std::sour
     return result;
 }
 
-inline SDL_IOStream * OpenIO(const SDL_IOStreamInterface *iface, void *userdata, std::source_location location = std::source_location::current())
+inline SDL_IOStream *OpenIO(const SDL_IOStreamInterface *iface, void *userdata, std::source_location location = std::source_location::current())
 {
     SDL_IOStream *result = SDL_OpenIO(iface, userdata);
     if (!result)
@@ -1981,7 +1981,7 @@ inline SDL_IOStream * OpenIO(const SDL_IOStreamInterface *iface, void *userdata,
     return result;
 }
 
-inline bool CloseIO(SDL_IOStream *context, std::source_location location = std::source_location::current())
+inline void CloseIO(SDL_IOStream *context, std::source_location location = std::source_location::current())
 {
     if (!SDL_CloseIO(context))
     {
@@ -2034,7 +2034,7 @@ inline size_t IOvprintf(SDL_IOStream *context, const char *fmt, va_list ap)
     return SDL_IOvprintf(context, fmt, ap);
 }
 
-inline bool FlushIO(SDL_IOStream *context, std::source_location location = std::source_location::current())
+inline void FlushIO(SDL_IOStream *context, std::source_location location = std::source_location::current())
 {
     if (!SDL_FlushIO(context))
     {
@@ -2042,7 +2042,7 @@ inline bool FlushIO(SDL_IOStream *context, std::source_location location = std::
     }
 }
 
-inline void * LoadFile_IO(SDL_IOStream *src, size_t *datasize, bool closeio, std::source_location location = std::source_location::current())
+inline void *LoadFile_IO(SDL_IOStream *src, size_t *datasize, bool closeio, std::source_location location = std::source_location::current())
 {
     void *result = SDL_LoadFile_IO(src, datasize, closeio);
     if (!result)
@@ -2052,7 +2052,7 @@ inline void * LoadFile_IO(SDL_IOStream *src, size_t *datasize, bool closeio, std
     return result;
 }
 
-inline void * LoadFile(const char *file, size_t *datasize, std::source_location location = std::source_location::current())
+inline void *LoadFile(const char *file, size_t *datasize, std::source_location location = std::source_location::current())
 {
     void *result = SDL_LoadFile(file, datasize);
     if (!result)
@@ -2062,7 +2062,7 @@ inline void * LoadFile(const char *file, size_t *datasize, std::source_location 
     return result;
 }
 
-inline bool SaveFile_IO(SDL_IOStream *src, const void *data, size_t datasize, bool closeio, std::source_location location = std::source_location::current())
+inline void SaveFile_IO(SDL_IOStream *src, const void *data, size_t datasize, bool closeio, std::source_location location = std::source_location::current())
 {
     if (!SDL_SaveFile_IO(src, data, datasize, closeio))
     {
@@ -2070,7 +2070,7 @@ inline bool SaveFile_IO(SDL_IOStream *src, const void *data, size_t datasize, bo
     }
 }
 
-inline bool SaveFile(const char *file, const void *data, size_t datasize, std::source_location location = std::source_location::current())
+inline void SaveFile(const char *file, const void *data, size_t datasize, std::source_location location = std::source_location::current())
 {
     if (!SDL_SaveFile(file, data, datasize))
     {
@@ -2078,7 +2078,7 @@ inline bool SaveFile(const char *file, const void *data, size_t datasize, std::s
     }
 }
 
-inline bool ReadU8(SDL_IOStream *src, Uint8 *value, std::source_location location = std::source_location::current())
+inline void ReadU8(SDL_IOStream *src, Uint8 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadU8(src, value))
     {
@@ -2086,7 +2086,7 @@ inline bool ReadU8(SDL_IOStream *src, Uint8 *value, std::source_location locatio
     }
 }
 
-inline bool ReadS8(SDL_IOStream *src, Sint8 *value, std::source_location location = std::source_location::current())
+inline void ReadS8(SDL_IOStream *src, Sint8 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadS8(src, value))
     {
@@ -2094,7 +2094,7 @@ inline bool ReadS8(SDL_IOStream *src, Sint8 *value, std::source_location locatio
     }
 }
 
-inline bool ReadU16LE(SDL_IOStream *src, Uint16 *value, std::source_location location = std::source_location::current())
+inline void ReadU16LE(SDL_IOStream *src, Uint16 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadU16LE(src, value))
     {
@@ -2102,7 +2102,7 @@ inline bool ReadU16LE(SDL_IOStream *src, Uint16 *value, std::source_location loc
     }
 }
 
-inline bool ReadS16LE(SDL_IOStream *src, Sint16 *value, std::source_location location = std::source_location::current())
+inline void ReadS16LE(SDL_IOStream *src, Sint16 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadS16LE(src, value))
     {
@@ -2110,7 +2110,7 @@ inline bool ReadS16LE(SDL_IOStream *src, Sint16 *value, std::source_location loc
     }
 }
 
-inline bool ReadU16BE(SDL_IOStream *src, Uint16 *value, std::source_location location = std::source_location::current())
+inline void ReadU16BE(SDL_IOStream *src, Uint16 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadU16BE(src, value))
     {
@@ -2118,7 +2118,7 @@ inline bool ReadU16BE(SDL_IOStream *src, Uint16 *value, std::source_location loc
     }
 }
 
-inline bool ReadS16BE(SDL_IOStream *src, Sint16 *value, std::source_location location = std::source_location::current())
+inline void ReadS16BE(SDL_IOStream *src, Sint16 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadS16BE(src, value))
     {
@@ -2126,7 +2126,7 @@ inline bool ReadS16BE(SDL_IOStream *src, Sint16 *value, std::source_location loc
     }
 }
 
-inline bool ReadU32LE(SDL_IOStream *src, Uint32 *value, std::source_location location = std::source_location::current())
+inline void ReadU32LE(SDL_IOStream *src, Uint32 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadU32LE(src, value))
     {
@@ -2134,7 +2134,7 @@ inline bool ReadU32LE(SDL_IOStream *src, Uint32 *value, std::source_location loc
     }
 }
 
-inline bool ReadS32LE(SDL_IOStream *src, Sint32 *value, std::source_location location = std::source_location::current())
+inline void ReadS32LE(SDL_IOStream *src, Sint32 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadS32LE(src, value))
     {
@@ -2142,7 +2142,7 @@ inline bool ReadS32LE(SDL_IOStream *src, Sint32 *value, std::source_location loc
     }
 }
 
-inline bool ReadU32BE(SDL_IOStream *src, Uint32 *value, std::source_location location = std::source_location::current())
+inline void ReadU32BE(SDL_IOStream *src, Uint32 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadU32BE(src, value))
     {
@@ -2150,7 +2150,7 @@ inline bool ReadU32BE(SDL_IOStream *src, Uint32 *value, std::source_location loc
     }
 }
 
-inline bool ReadS32BE(SDL_IOStream *src, Sint32 *value, std::source_location location = std::source_location::current())
+inline void ReadS32BE(SDL_IOStream *src, Sint32 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadS32BE(src, value))
     {
@@ -2158,7 +2158,7 @@ inline bool ReadS32BE(SDL_IOStream *src, Sint32 *value, std::source_location loc
     }
 }
 
-inline bool ReadU64LE(SDL_IOStream *src, Uint64 *value, std::source_location location = std::source_location::current())
+inline void ReadU64LE(SDL_IOStream *src, Uint64 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadU64LE(src, value))
     {
@@ -2166,7 +2166,7 @@ inline bool ReadU64LE(SDL_IOStream *src, Uint64 *value, std::source_location loc
     }
 }
 
-inline bool ReadS64LE(SDL_IOStream *src, Sint64 *value, std::source_location location = std::source_location::current())
+inline void ReadS64LE(SDL_IOStream *src, Sint64 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadS64LE(src, value))
     {
@@ -2174,7 +2174,7 @@ inline bool ReadS64LE(SDL_IOStream *src, Sint64 *value, std::source_location loc
     }
 }
 
-inline bool ReadU64BE(SDL_IOStream *src, Uint64 *value, std::source_location location = std::source_location::current())
+inline void ReadU64BE(SDL_IOStream *src, Uint64 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadU64BE(src, value))
     {
@@ -2182,7 +2182,7 @@ inline bool ReadU64BE(SDL_IOStream *src, Uint64 *value, std::source_location loc
     }
 }
 
-inline bool ReadS64BE(SDL_IOStream *src, Sint64 *value, std::source_location location = std::source_location::current())
+inline void ReadS64BE(SDL_IOStream *src, Sint64 *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadS64BE(src, value))
     {
@@ -2190,7 +2190,7 @@ inline bool ReadS64BE(SDL_IOStream *src, Sint64 *value, std::source_location loc
     }
 }
 
-inline bool WriteU8(SDL_IOStream *dst, Uint8 value, std::source_location location = std::source_location::current())
+inline void WriteU8(SDL_IOStream *dst, Uint8 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteU8(dst, value))
     {
@@ -2198,7 +2198,7 @@ inline bool WriteU8(SDL_IOStream *dst, Uint8 value, std::source_location locatio
     }
 }
 
-inline bool WriteS8(SDL_IOStream *dst, Sint8 value, std::source_location location = std::source_location::current())
+inline void WriteS8(SDL_IOStream *dst, Sint8 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteS8(dst, value))
     {
@@ -2206,7 +2206,7 @@ inline bool WriteS8(SDL_IOStream *dst, Sint8 value, std::source_location locatio
     }
 }
 
-inline bool WriteU16LE(SDL_IOStream *dst, Uint16 value, std::source_location location = std::source_location::current())
+inline void WriteU16LE(SDL_IOStream *dst, Uint16 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteU16LE(dst, value))
     {
@@ -2214,7 +2214,7 @@ inline bool WriteU16LE(SDL_IOStream *dst, Uint16 value, std::source_location loc
     }
 }
 
-inline bool WriteS16LE(SDL_IOStream *dst, Sint16 value, std::source_location location = std::source_location::current())
+inline void WriteS16LE(SDL_IOStream *dst, Sint16 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteS16LE(dst, value))
     {
@@ -2222,7 +2222,7 @@ inline bool WriteS16LE(SDL_IOStream *dst, Sint16 value, std::source_location loc
     }
 }
 
-inline bool WriteU16BE(SDL_IOStream *dst, Uint16 value, std::source_location location = std::source_location::current())
+inline void WriteU16BE(SDL_IOStream *dst, Uint16 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteU16BE(dst, value))
     {
@@ -2230,7 +2230,7 @@ inline bool WriteU16BE(SDL_IOStream *dst, Uint16 value, std::source_location loc
     }
 }
 
-inline bool WriteS16BE(SDL_IOStream *dst, Sint16 value, std::source_location location = std::source_location::current())
+inline void WriteS16BE(SDL_IOStream *dst, Sint16 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteS16BE(dst, value))
     {
@@ -2238,7 +2238,7 @@ inline bool WriteS16BE(SDL_IOStream *dst, Sint16 value, std::source_location loc
     }
 }
 
-inline bool WriteU32LE(SDL_IOStream *dst, Uint32 value, std::source_location location = std::source_location::current())
+inline void WriteU32LE(SDL_IOStream *dst, Uint32 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteU32LE(dst, value))
     {
@@ -2246,7 +2246,7 @@ inline bool WriteU32LE(SDL_IOStream *dst, Uint32 value, std::source_location loc
     }
 }
 
-inline bool WriteS32LE(SDL_IOStream *dst, Sint32 value, std::source_location location = std::source_location::current())
+inline void WriteS32LE(SDL_IOStream *dst, Sint32 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteS32LE(dst, value))
     {
@@ -2254,7 +2254,7 @@ inline bool WriteS32LE(SDL_IOStream *dst, Sint32 value, std::source_location loc
     }
 }
 
-inline bool WriteU32BE(SDL_IOStream *dst, Uint32 value, std::source_location location = std::source_location::current())
+inline void WriteU32BE(SDL_IOStream *dst, Uint32 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteU32BE(dst, value))
     {
@@ -2262,7 +2262,7 @@ inline bool WriteU32BE(SDL_IOStream *dst, Uint32 value, std::source_location loc
     }
 }
 
-inline bool WriteS32BE(SDL_IOStream *dst, Sint32 value, std::source_location location = std::source_location::current())
+inline void WriteS32BE(SDL_IOStream *dst, Sint32 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteS32BE(dst, value))
     {
@@ -2270,7 +2270,7 @@ inline bool WriteS32BE(SDL_IOStream *dst, Sint32 value, std::source_location loc
     }
 }
 
-inline bool WriteU64LE(SDL_IOStream *dst, Uint64 value, std::source_location location = std::source_location::current())
+inline void WriteU64LE(SDL_IOStream *dst, Uint64 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteU64LE(dst, value))
     {
@@ -2278,7 +2278,7 @@ inline bool WriteU64LE(SDL_IOStream *dst, Uint64 value, std::source_location loc
     }
 }
 
-inline bool WriteS64LE(SDL_IOStream *dst, Sint64 value, std::source_location location = std::source_location::current())
+inline void WriteS64LE(SDL_IOStream *dst, Sint64 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteS64LE(dst, value))
     {
@@ -2286,7 +2286,7 @@ inline bool WriteS64LE(SDL_IOStream *dst, Sint64 value, std::source_location loc
     }
 }
 
-inline bool WriteU64BE(SDL_IOStream *dst, Uint64 value, std::source_location location = std::source_location::current())
+inline void WriteU64BE(SDL_IOStream *dst, Uint64 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteU64BE(dst, value))
     {
@@ -2294,7 +2294,7 @@ inline bool WriteU64BE(SDL_IOStream *dst, Uint64 value, std::source_location loc
     }
 }
 
-inline bool WriteS64BE(SDL_IOStream *dst, Sint64 value, std::source_location location = std::source_location::current())
+inline void WriteS64BE(SDL_IOStream *dst, Sint64 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteS64BE(dst, value))
     {
@@ -2307,7 +2307,7 @@ inline int GetNumAudioDrivers()
     return SDL_GetNumAudioDrivers();
 }
 
-inline const char * GetAudioDriver(int index, std::source_location location = std::source_location::current())
+inline const char *GetAudioDriver(int index, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetAudioDriver(index);
     if (!result)
@@ -2317,7 +2317,7 @@ inline const char * GetAudioDriver(int index, std::source_location location = st
     return result;
 }
 
-inline const char * GetCurrentAudioDriver(std::source_location location = std::source_location::current())
+inline const char *GetCurrentAudioDriver(std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetCurrentAudioDriver();
     if (!result)
@@ -2327,7 +2327,7 @@ inline const char * GetCurrentAudioDriver(std::source_location location = std::s
     return result;
 }
 
-inline SDL_AudioDeviceID * GetAudioPlaybackDevices(int *count, std::source_location location = std::source_location::current())
+inline SDL_AudioDeviceID *GetAudioPlaybackDevices(int *count, std::source_location location = std::source_location::current())
 {
     SDL_AudioDeviceID *result = SDL_GetAudioPlaybackDevices(count);
     if (!result)
@@ -2337,7 +2337,7 @@ inline SDL_AudioDeviceID * GetAudioPlaybackDevices(int *count, std::source_locat
     return result;
 }
 
-inline SDL_AudioDeviceID * GetAudioRecordingDevices(int *count, std::source_location location = std::source_location::current())
+inline SDL_AudioDeviceID *GetAudioRecordingDevices(int *count, std::source_location location = std::source_location::current())
 {
     SDL_AudioDeviceID *result = SDL_GetAudioRecordingDevices(count);
     if (!result)
@@ -2347,7 +2347,7 @@ inline SDL_AudioDeviceID * GetAudioRecordingDevices(int *count, std::source_loca
     return result;
 }
 
-inline const char * GetAudioDeviceName(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
+inline const char *GetAudioDeviceName(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetAudioDeviceName(devid);
     if (!result)
@@ -2357,7 +2357,7 @@ inline const char * GetAudioDeviceName(SDL_AudioDeviceID devid, std::source_loca
     return result;
 }
 
-inline bool GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec *spec, int *sample_frames, std::source_location location = std::source_location::current())
+inline void GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec *spec, int *sample_frames, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetAudioDeviceFormat(devid, spec, sample_frames))
     {
@@ -2365,7 +2365,7 @@ inline bool GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec *spec, i
     }
 }
 
-inline int * GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int *count, std::source_location location = std::source_location::current())
+inline int *GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int *count, std::source_location location = std::source_location::current())
 {
     int *result = SDL_GetAudioDeviceChannelMap(devid, count);
     if (!result)
@@ -2380,7 +2380,7 @@ inline SDL_AudioDeviceID OpenAudioDevice(SDL_AudioDeviceID devid, const SDL_Audi
     return SDL_OpenAudioDevice(devid, spec);
 }
 
-inline bool IsAudioDevicePhysical(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
+inline void IsAudioDevicePhysical(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
 {
     if (!SDL_IsAudioDevicePhysical(devid))
     {
@@ -2388,7 +2388,7 @@ inline bool IsAudioDevicePhysical(SDL_AudioDeviceID devid, std::source_location 
     }
 }
 
-inline bool IsAudioDevicePlayback(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
+inline void IsAudioDevicePlayback(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
 {
     if (!SDL_IsAudioDevicePlayback(devid))
     {
@@ -2396,7 +2396,7 @@ inline bool IsAudioDevicePlayback(SDL_AudioDeviceID devid, std::source_location 
     }
 }
 
-inline bool PauseAudioDevice(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
+inline void PauseAudioDevice(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
 {
     if (!SDL_PauseAudioDevice(devid))
     {
@@ -2404,7 +2404,7 @@ inline bool PauseAudioDevice(SDL_AudioDeviceID devid, std::source_location locat
     }
 }
 
-inline bool ResumeAudioDevice(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
+inline void ResumeAudioDevice(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
 {
     if (!SDL_ResumeAudioDevice(devid))
     {
@@ -2412,7 +2412,7 @@ inline bool ResumeAudioDevice(SDL_AudioDeviceID devid, std::source_location loca
     }
 }
 
-inline bool AudioDevicePaused(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
+inline void AudioDevicePaused(SDL_AudioDeviceID devid, std::source_location location = std::source_location::current())
 {
     if (!SDL_AudioDevicePaused(devid))
     {
@@ -2425,7 +2425,7 @@ inline float GetAudioDeviceGain(SDL_AudioDeviceID devid)
     return SDL_GetAudioDeviceGain(devid);
 }
 
-inline bool SetAudioDeviceGain(SDL_AudioDeviceID devid, float gain, std::source_location location = std::source_location::current())
+inline void SetAudioDeviceGain(SDL_AudioDeviceID devid, float gain, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAudioDeviceGain(devid, gain))
     {
@@ -2438,7 +2438,7 @@ inline void CloseAudioDevice(SDL_AudioDeviceID devid)
     SDL_CloseAudioDevice(devid);
 }
 
-inline bool BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream *const *streams, int num_streams, std::source_location location = std::source_location::current())
+inline void BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream *const *streams, int num_streams, std::source_location location = std::source_location::current())
 {
     if (!SDL_BindAudioStreams(devid, streams, num_streams))
     {
@@ -2446,7 +2446,7 @@ inline bool BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream *const *st
     }
 }
 
-inline bool BindAudioStream(SDL_AudioDeviceID devid, SDL_AudioStream *stream, std::source_location location = std::source_location::current())
+inline void BindAudioStream(SDL_AudioDeviceID devid, SDL_AudioStream *stream, std::source_location location = std::source_location::current())
 {
     if (!SDL_BindAudioStream(devid, stream))
     {
@@ -2469,7 +2469,7 @@ inline SDL_AudioDeviceID GetAudioStreamDevice(SDL_AudioStream *stream)
     return SDL_GetAudioStreamDevice(stream);
 }
 
-inline SDL_AudioStream * CreateAudioStream(const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec, std::source_location location = std::source_location::current())
+inline SDL_AudioStream *CreateAudioStream(const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec, std::source_location location = std::source_location::current())
 {
     SDL_AudioStream *result = SDL_CreateAudioStream(src_spec, dst_spec);
     if (!result)
@@ -2484,7 +2484,7 @@ inline SDL_PropertiesID GetAudioStreamProperties(SDL_AudioStream *stream)
     return SDL_GetAudioStreamProperties(stream);
 }
 
-inline bool GetAudioStreamFormat(SDL_AudioStream *stream, SDL_AudioSpec *src_spec, SDL_AudioSpec *dst_spec, std::source_location location = std::source_location::current())
+inline void GetAudioStreamFormat(SDL_AudioStream *stream, SDL_AudioSpec *src_spec, SDL_AudioSpec *dst_spec, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetAudioStreamFormat(stream, src_spec, dst_spec))
     {
@@ -2492,7 +2492,7 @@ inline bool GetAudioStreamFormat(SDL_AudioStream *stream, SDL_AudioSpec *src_spe
     }
 }
 
-inline bool SetAudioStreamFormat(SDL_AudioStream *stream, const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec, std::source_location location = std::source_location::current())
+inline void SetAudioStreamFormat(SDL_AudioStream *stream, const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAudioStreamFormat(stream, src_spec, dst_spec))
     {
@@ -2505,7 +2505,7 @@ inline float GetAudioStreamFrequencyRatio(SDL_AudioStream *stream)
     return SDL_GetAudioStreamFrequencyRatio(stream);
 }
 
-inline bool SetAudioStreamFrequencyRatio(SDL_AudioStream *stream, float ratio, std::source_location location = std::source_location::current())
+inline void SetAudioStreamFrequencyRatio(SDL_AudioStream *stream, float ratio, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAudioStreamFrequencyRatio(stream, ratio))
     {
@@ -2518,7 +2518,7 @@ inline float GetAudioStreamGain(SDL_AudioStream *stream)
     return SDL_GetAudioStreamGain(stream);
 }
 
-inline bool SetAudioStreamGain(SDL_AudioStream *stream, float gain, std::source_location location = std::source_location::current())
+inline void SetAudioStreamGain(SDL_AudioStream *stream, float gain, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAudioStreamGain(stream, gain))
     {
@@ -2526,7 +2526,7 @@ inline bool SetAudioStreamGain(SDL_AudioStream *stream, float gain, std::source_
     }
 }
 
-inline int * GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count, std::source_location location = std::source_location::current())
+inline int *GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count, std::source_location location = std::source_location::current())
 {
     int *result = SDL_GetAudioStreamInputChannelMap(stream, count);
     if (!result)
@@ -2536,7 +2536,7 @@ inline int * GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count, 
     return result;
 }
 
-inline int * GetAudioStreamOutputChannelMap(SDL_AudioStream *stream, int *count, std::source_location location = std::source_location::current())
+inline int *GetAudioStreamOutputChannelMap(SDL_AudioStream *stream, int *count, std::source_location location = std::source_location::current())
 {
     int *result = SDL_GetAudioStreamOutputChannelMap(stream, count);
     if (!result)
@@ -2546,7 +2546,7 @@ inline int * GetAudioStreamOutputChannelMap(SDL_AudioStream *stream, int *count,
     return result;
 }
 
-inline bool SetAudioStreamInputChannelMap(SDL_AudioStream *stream, const int *chmap, int count, std::source_location location = std::source_location::current())
+inline void SetAudioStreamInputChannelMap(SDL_AudioStream *stream, const int *chmap, int count, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAudioStreamInputChannelMap(stream, chmap, count))
     {
@@ -2554,7 +2554,7 @@ inline bool SetAudioStreamInputChannelMap(SDL_AudioStream *stream, const int *ch
     }
 }
 
-inline bool SetAudioStreamOutputChannelMap(SDL_AudioStream *stream, const int *chmap, int count, std::source_location location = std::source_location::current())
+inline void SetAudioStreamOutputChannelMap(SDL_AudioStream *stream, const int *chmap, int count, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAudioStreamOutputChannelMap(stream, chmap, count))
     {
@@ -2562,7 +2562,7 @@ inline bool SetAudioStreamOutputChannelMap(SDL_AudioStream *stream, const int *c
     }
 }
 
-inline bool PutAudioStreamData(SDL_AudioStream *stream, const void *buf, int len, std::source_location location = std::source_location::current())
+inline void PutAudioStreamData(SDL_AudioStream *stream, const void *buf, int len, std::source_location location = std::source_location::current())
 {
     if (!SDL_PutAudioStreamData(stream, buf, len))
     {
@@ -2585,7 +2585,7 @@ inline int GetAudioStreamQueued(SDL_AudioStream *stream)
     return SDL_GetAudioStreamQueued(stream);
 }
 
-inline bool FlushAudioStream(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
+inline void FlushAudioStream(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
 {
     if (!SDL_FlushAudioStream(stream))
     {
@@ -2593,7 +2593,7 @@ inline bool FlushAudioStream(SDL_AudioStream *stream, std::source_location locat
     }
 }
 
-inline bool ClearAudioStream(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
+inline void ClearAudioStream(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
 {
     if (!SDL_ClearAudioStream(stream))
     {
@@ -2601,7 +2601,7 @@ inline bool ClearAudioStream(SDL_AudioStream *stream, std::source_location locat
     }
 }
 
-inline bool PauseAudioStreamDevice(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
+inline void PauseAudioStreamDevice(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
 {
     if (!SDL_PauseAudioStreamDevice(stream))
     {
@@ -2609,7 +2609,7 @@ inline bool PauseAudioStreamDevice(SDL_AudioStream *stream, std::source_location
     }
 }
 
-inline bool ResumeAudioStreamDevice(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
+inline void ResumeAudioStreamDevice(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
 {
     if (!SDL_ResumeAudioStreamDevice(stream))
     {
@@ -2617,7 +2617,7 @@ inline bool ResumeAudioStreamDevice(SDL_AudioStream *stream, std::source_locatio
     }
 }
 
-inline bool AudioStreamDevicePaused(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
+inline void AudioStreamDevicePaused(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
 {
     if (!SDL_AudioStreamDevicePaused(stream))
     {
@@ -2625,7 +2625,7 @@ inline bool AudioStreamDevicePaused(SDL_AudioStream *stream, std::source_locatio
     }
 }
 
-inline bool LockAudioStream(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
+inline void LockAudioStream(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
 {
     if (!SDL_LockAudioStream(stream))
     {
@@ -2633,7 +2633,7 @@ inline bool LockAudioStream(SDL_AudioStream *stream, std::source_location locati
     }
 }
 
-inline bool UnlockAudioStream(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
+inline void UnlockAudioStream(SDL_AudioStream *stream, std::source_location location = std::source_location::current())
 {
     if (!SDL_UnlockAudioStream(stream))
     {
@@ -2641,7 +2641,7 @@ inline bool UnlockAudioStream(SDL_AudioStream *stream, std::source_location loca
     }
 }
 
-inline bool SetAudioStreamGetCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata, std::source_location location = std::source_location::current())
+inline void SetAudioStreamGetCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAudioStreamGetCallback(stream, callback, userdata))
     {
@@ -2649,7 +2649,7 @@ inline bool SetAudioStreamGetCallback(SDL_AudioStream *stream, SDL_AudioStreamCa
     }
 }
 
-inline bool SetAudioStreamPutCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata, std::source_location location = std::source_location::current())
+inline void SetAudioStreamPutCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAudioStreamPutCallback(stream, callback, userdata))
     {
@@ -2662,7 +2662,7 @@ inline void DestroyAudioStream(SDL_AudioStream *stream)
     SDL_DestroyAudioStream(stream);
 }
 
-inline SDL_AudioStream * OpenAudioDeviceStream(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec, SDL_AudioStreamCallback callback, void *userdata, std::source_location location = std::source_location::current())
+inline SDL_AudioStream *OpenAudioDeviceStream(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec, SDL_AudioStreamCallback callback, void *userdata, std::source_location location = std::source_location::current())
 {
     SDL_AudioStream *result = SDL_OpenAudioDeviceStream(devid, spec, callback, userdata);
     if (!result)
@@ -2672,7 +2672,7 @@ inline SDL_AudioStream * OpenAudioDeviceStream(SDL_AudioDeviceID devid, const SD
     return result;
 }
 
-inline bool SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void *userdata, std::source_location location = std::source_location::current())
+inline void SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAudioPostmixCallback(devid, callback, userdata))
     {
@@ -2680,7 +2680,7 @@ inline bool SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCal
     }
 }
 
-inline bool LoadWAV_IO(SDL_IOStream *src, bool closeio, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len, std::source_location location = std::source_location::current())
+inline void LoadWAV_IO(SDL_IOStream *src, bool closeio, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len, std::source_location location = std::source_location::current())
 {
     if (!SDL_LoadWAV_IO(src, closeio, spec, audio_buf, audio_len))
     {
@@ -2688,7 +2688,7 @@ inline bool LoadWAV_IO(SDL_IOStream *src, bool closeio, SDL_AudioSpec *spec, Uin
     }
 }
 
-inline bool LoadWAV(const char *path, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len, std::source_location location = std::source_location::current())
+inline void LoadWAV(const char *path, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len, std::source_location location = std::source_location::current())
 {
     if (!SDL_LoadWAV(path, spec, audio_buf, audio_len))
     {
@@ -2696,7 +2696,7 @@ inline bool LoadWAV(const char *path, SDL_AudioSpec *spec, Uint8 **audio_buf, Ui
     }
 }
 
-inline bool MixAudio(Uint8 *dst, const Uint8 *src, SDL_AudioFormat format, Uint32 len, float volume, std::source_location location = std::source_location::current())
+inline void MixAudio(Uint8 *dst, const Uint8 *src, SDL_AudioFormat format, Uint32 len, float volume, std::source_location location = std::source_location::current())
 {
     if (!SDL_MixAudio(dst, src, format, len, volume))
     {
@@ -2704,7 +2704,7 @@ inline bool MixAudio(Uint8 *dst, const Uint8 *src, SDL_AudioFormat format, Uint3
     }
 }
 
-inline bool ConvertAudioSamples(const SDL_AudioSpec *src_spec, const Uint8 *src_data, int src_len, const SDL_AudioSpec *dst_spec, Uint8 **dst_data, int *dst_len, std::source_location location = std::source_location::current())
+inline void ConvertAudioSamples(const SDL_AudioSpec *src_spec, const Uint8 *src_data, int src_len, const SDL_AudioSpec *dst_spec, Uint8 **dst_data, int *dst_len, std::source_location location = std::source_location::current())
 {
     if (!SDL_ConvertAudioSamples(src_spec, src_data, src_len, dst_spec, dst_data, dst_len))
     {
@@ -2712,7 +2712,7 @@ inline bool ConvertAudioSamples(const SDL_AudioSpec *src_spec, const Uint8 *src_
     }
 }
 
-inline const char * GetAudioFormatName(SDL_AudioFormat format, std::source_location location = std::source_location::current())
+inline const char *GetAudioFormatName(SDL_AudioFormat format, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetAudioFormatName(format);
     if (!result)
@@ -2732,7 +2732,7 @@ inline int MostSignificantBitIndex32(Uint32 x)
     return SDL_MostSignificantBitIndex32(x);
 }
 
-inline bool HasExactlyOneBitSet32(Uint32 x, std::source_location location = std::source_location::current())
+inline void HasExactlyOneBitSet32(Uint32 x, std::source_location location = std::source_location::current())
 {
     if (!SDL_HasExactlyOneBitSet32(x))
     {
@@ -2745,7 +2745,7 @@ inline SDL_BlendMode ComposeCustomBlendMode(SDL_BlendFactor srcColorFactor, SDL_
     return SDL_ComposeCustomBlendMode(srcColorFactor, dstColorFactor, colorOperation, srcAlphaFactor, dstAlphaFactor, alphaOperation);
 }
 
-inline const char * GetPixelFormatName(SDL_PixelFormat format, std::source_location location = std::source_location::current())
+inline const char *GetPixelFormatName(SDL_PixelFormat format, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetPixelFormatName(format);
     if (!result)
@@ -2755,7 +2755,7 @@ inline const char * GetPixelFormatName(SDL_PixelFormat format, std::source_locat
     return result;
 }
 
-inline bool GetMasksForPixelFormat(SDL_PixelFormat format, int *bpp, Uint32 *Rmask, Uint32 *Gmask, Uint32 *Bmask, Uint32 *Amask, std::source_location location = std::source_location::current())
+inline void GetMasksForPixelFormat(SDL_PixelFormat format, int *bpp, Uint32 *Rmask, Uint32 *Gmask, Uint32 *Bmask, Uint32 *Amask, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetMasksForPixelFormat(format, bpp, Rmask, Gmask, Bmask, Amask))
     {
@@ -2768,7 +2768,7 @@ inline SDL_PixelFormat GetPixelFormatForMasks(int bpp, Uint32 Rmask, Uint32 Gmas
     return SDL_GetPixelFormatForMasks(bpp, Rmask, Gmask, Bmask, Amask);
 }
 
-inline const SDL_PixelFormatDetails * GetPixelFormatDetails(SDL_PixelFormat format, std::source_location location = std::source_location::current())
+inline const SDL_PixelFormatDetails *GetPixelFormatDetails(SDL_PixelFormat format, std::source_location location = std::source_location::current())
 {
     const SDL_PixelFormatDetails *result = SDL_GetPixelFormatDetails(format);
     if (!result)
@@ -2778,7 +2778,7 @@ inline const SDL_PixelFormatDetails * GetPixelFormatDetails(SDL_PixelFormat form
     return result;
 }
 
-inline SDL_Palette * CreatePalette(int ncolors, std::source_location location = std::source_location::current())
+inline SDL_Palette *CreatePalette(int ncolors, std::source_location location = std::source_location::current())
 {
     SDL_Palette *result = SDL_CreatePalette(ncolors);
     if (!result)
@@ -2788,7 +2788,7 @@ inline SDL_Palette * CreatePalette(int ncolors, std::source_location location = 
     return result;
 }
 
-inline bool SetPaletteColors(SDL_Palette *palette, const SDL_Color *colors, int firstcolor, int ncolors, std::source_location location = std::source_location::current())
+inline void SetPaletteColors(SDL_Palette *palette, const SDL_Color *colors, int firstcolor, int ncolors, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetPaletteColors(palette, colors, firstcolor, ncolors))
     {
@@ -2826,7 +2826,7 @@ inline void RectToFRect(const SDL_Rect *rect, SDL_FRect *frect)
     SDL_RectToFRect(rect, frect);
 }
 
-inline bool PointInRect(const SDL_Point *p, const SDL_Rect *r, std::source_location location = std::source_location::current())
+inline void PointInRect(const SDL_Point *p, const SDL_Rect *r, std::source_location location = std::source_location::current())
 {
     if (!SDL_PointInRect(p, r))
     {
@@ -2834,7 +2834,7 @@ inline bool PointInRect(const SDL_Point *p, const SDL_Rect *r, std::source_locat
     }
 }
 
-inline bool RectEmpty(const SDL_Rect *r, std::source_location location = std::source_location::current())
+inline void RectEmpty(const SDL_Rect *r, std::source_location location = std::source_location::current())
 {
     if (!SDL_RectEmpty(r))
     {
@@ -2842,7 +2842,7 @@ inline bool RectEmpty(const SDL_Rect *r, std::source_location location = std::so
     }
 }
 
-inline bool RectsEqual(const SDL_Rect *a, const SDL_Rect *b, std::source_location location = std::source_location::current())
+inline void RectsEqual(const SDL_Rect *a, const SDL_Rect *b, std::source_location location = std::source_location::current())
 {
     if (!SDL_RectsEqual(a, b))
     {
@@ -2850,7 +2850,7 @@ inline bool RectsEqual(const SDL_Rect *a, const SDL_Rect *b, std::source_locatio
     }
 }
 
-inline bool HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B, std::source_location location = std::source_location::current())
+inline void HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B, std::source_location location = std::source_location::current())
 {
     if (!SDL_HasRectIntersection(A, B))
     {
@@ -2858,7 +2858,7 @@ inline bool HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B, std::sourc
     }
 }
 
-inline bool GetRectIntersection(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result, std::source_location location = std::source_location::current())
+inline void GetRectIntersection(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRectIntersection(A, B, result))
     {
@@ -2866,7 +2866,7 @@ inline bool GetRectIntersection(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *
     }
 }
 
-inline bool GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result, std::source_location location = std::source_location::current())
+inline void GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRectUnion(A, B, result))
     {
@@ -2874,7 +2874,7 @@ inline bool GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result,
     }
 }
 
-inline bool GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result, std::source_location location = std::source_location::current())
+inline void GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRectEnclosingPoints(points, count, clip, result))
     {
@@ -2882,7 +2882,7 @@ inline bool GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL
     }
 }
 
-inline bool GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2, std::source_location location = std::source_location::current())
+inline void GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRectAndLineIntersection(rect, X1, Y1, X2, Y2))
     {
@@ -2890,7 +2890,7 @@ inline bool GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, i
     }
 }
 
-inline bool PointInRectFloat(const SDL_FPoint *p, const SDL_FRect *r, std::source_location location = std::source_location::current())
+inline void PointInRectFloat(const SDL_FPoint *p, const SDL_FRect *r, std::source_location location = std::source_location::current())
 {
     if (!SDL_PointInRectFloat(p, r))
     {
@@ -2898,7 +2898,7 @@ inline bool PointInRectFloat(const SDL_FPoint *p, const SDL_FRect *r, std::sourc
     }
 }
 
-inline bool RectEmptyFloat(const SDL_FRect *r, std::source_location location = std::source_location::current())
+inline void RectEmptyFloat(const SDL_FRect *r, std::source_location location = std::source_location::current())
 {
     if (!SDL_RectEmptyFloat(r))
     {
@@ -2906,7 +2906,7 @@ inline bool RectEmptyFloat(const SDL_FRect *r, std::source_location location = s
     }
 }
 
-inline bool RectsEqualEpsilon(const SDL_FRect *a, const SDL_FRect *b, float epsilon, std::source_location location = std::source_location::current())
+inline void RectsEqualEpsilon(const SDL_FRect *a, const SDL_FRect *b, float epsilon, std::source_location location = std::source_location::current())
 {
     if (!SDL_RectsEqualEpsilon(a, b, epsilon))
     {
@@ -2914,7 +2914,7 @@ inline bool RectsEqualEpsilon(const SDL_FRect *a, const SDL_FRect *b, float epsi
     }
 }
 
-inline bool RectsEqualFloat(const SDL_FRect *a, const SDL_FRect *b, std::source_location location = std::source_location::current())
+inline void RectsEqualFloat(const SDL_FRect *a, const SDL_FRect *b, std::source_location location = std::source_location::current())
 {
     if (!SDL_RectsEqualFloat(a, b))
     {
@@ -2922,7 +2922,7 @@ inline bool RectsEqualFloat(const SDL_FRect *a, const SDL_FRect *b, std::source_
     }
 }
 
-inline bool HasRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B, std::source_location location = std::source_location::current())
+inline void HasRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B, std::source_location location = std::source_location::current())
 {
     if (!SDL_HasRectIntersectionFloat(A, B))
     {
@@ -2930,7 +2930,7 @@ inline bool HasRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B, std
     }
 }
 
-inline bool GetRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result, std::source_location location = std::source_location::current())
+inline void GetRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRectIntersectionFloat(A, B, result))
     {
@@ -2938,7 +2938,7 @@ inline bool GetRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL
     }
 }
 
-inline bool GetRectUnionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result, std::source_location location = std::source_location::current())
+inline void GetRectUnionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRectUnionFloat(A, B, result))
     {
@@ -2946,7 +2946,7 @@ inline bool GetRectUnionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect 
     }
 }
 
-inline bool GetRectEnclosingPointsFloat(const SDL_FPoint *points, int count, const SDL_FRect *clip, SDL_FRect *result, std::source_location location = std::source_location::current())
+inline void GetRectEnclosingPointsFloat(const SDL_FPoint *points, int count, const SDL_FRect *clip, SDL_FRect *result, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRectEnclosingPointsFloat(points, count, clip, result))
     {
@@ -2954,7 +2954,7 @@ inline bool GetRectEnclosingPointsFloat(const SDL_FPoint *points, int count, con
     }
 }
 
-inline bool GetRectAndLineIntersectionFloat(const SDL_FRect *rect, float *X1, float *Y1, float *X2, float *Y2, std::source_location location = std::source_location::current())
+inline void GetRectAndLineIntersectionFloat(const SDL_FRect *rect, float *X1, float *Y1, float *X2, float *Y2, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRectAndLineIntersectionFloat(rect, X1, Y1, X2, Y2))
     {
@@ -2962,7 +2962,7 @@ inline bool GetRectAndLineIntersectionFloat(const SDL_FRect *rect, float *X1, fl
     }
 }
 
-inline SDL_Surface * CreateSurface(int width, int height, SDL_PixelFormat format, std::source_location location = std::source_location::current())
+inline SDL_Surface *CreateSurface(int width, int height, SDL_PixelFormat format, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_CreateSurface(width, height, format);
     if (!result)
@@ -2972,7 +2972,7 @@ inline SDL_Surface * CreateSurface(int width, int height, SDL_PixelFormat format
     return result;
 }
 
-inline SDL_Surface * CreateSurfaceFrom(int width, int height, SDL_PixelFormat format, void *pixels, int pitch, std::source_location location = std::source_location::current())
+inline SDL_Surface *CreateSurfaceFrom(int width, int height, SDL_PixelFormat format, void *pixels, int pitch, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_CreateSurfaceFrom(width, height, format, pixels, pitch);
     if (!result)
@@ -2992,7 +2992,7 @@ inline SDL_PropertiesID GetSurfaceProperties(SDL_Surface *surface)
     return SDL_GetSurfaceProperties(surface);
 }
 
-inline bool SetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace colorspace, std::source_location location = std::source_location::current())
+inline void SetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace colorspace, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetSurfaceColorspace(surface, colorspace))
     {
@@ -3005,7 +3005,7 @@ inline SDL_Colorspace GetSurfaceColorspace(SDL_Surface *surface)
     return SDL_GetSurfaceColorspace(surface);
 }
 
-inline SDL_Palette * CreateSurfacePalette(SDL_Surface *surface, std::source_location location = std::source_location::current())
+inline SDL_Palette *CreateSurfacePalette(SDL_Surface *surface, std::source_location location = std::source_location::current())
 {
     SDL_Palette *result = SDL_CreateSurfacePalette(surface);
     if (!result)
@@ -3015,7 +3015,7 @@ inline SDL_Palette * CreateSurfacePalette(SDL_Surface *surface, std::source_loca
     return result;
 }
 
-inline bool SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette, std::source_location location = std::source_location::current())
+inline void SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetSurfacePalette(surface, palette))
     {
@@ -3023,7 +3023,7 @@ inline bool SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette, std::s
     }
 }
 
-inline SDL_Palette * GetSurfacePalette(SDL_Surface *surface, std::source_location location = std::source_location::current())
+inline SDL_Palette *GetSurfacePalette(SDL_Surface *surface, std::source_location location = std::source_location::current())
 {
     SDL_Palette *result = SDL_GetSurfacePalette(surface);
     if (!result)
@@ -3033,7 +3033,7 @@ inline SDL_Palette * GetSurfacePalette(SDL_Surface *surface, std::source_locatio
     return result;
 }
 
-inline bool AddSurfaceAlternateImage(SDL_Surface *surface, SDL_Surface *image, std::source_location location = std::source_location::current())
+inline void AddSurfaceAlternateImage(SDL_Surface *surface, SDL_Surface *image, std::source_location location = std::source_location::current())
 {
     if (!SDL_AddSurfaceAlternateImage(surface, image))
     {
@@ -3041,7 +3041,7 @@ inline bool AddSurfaceAlternateImage(SDL_Surface *surface, SDL_Surface *image, s
     }
 }
 
-inline bool SurfaceHasAlternateImages(SDL_Surface *surface, std::source_location location = std::source_location::current())
+inline void SurfaceHasAlternateImages(SDL_Surface *surface, std::source_location location = std::source_location::current())
 {
     if (!SDL_SurfaceHasAlternateImages(surface))
     {
@@ -3049,7 +3049,7 @@ inline bool SurfaceHasAlternateImages(SDL_Surface *surface, std::source_location
     }
 }
 
-inline SDL_Surface ** GetSurfaceImages(SDL_Surface *surface, int *count, std::source_location location = std::source_location::current())
+inline SDL_Surface **GetSurfaceImages(SDL_Surface *surface, int *count, std::source_location location = std::source_location::current())
 {
     SDL_Surface **result = SDL_GetSurfaceImages(surface, count);
     if (!result)
@@ -3064,7 +3064,7 @@ inline void RemoveSurfaceAlternateImages(SDL_Surface *surface)
     SDL_RemoveSurfaceAlternateImages(surface);
 }
 
-inline bool LockSurface(SDL_Surface *surface, std::source_location location = std::source_location::current())
+inline void LockSurface(SDL_Surface *surface, std::source_location location = std::source_location::current())
 {
     if (!SDL_LockSurface(surface))
     {
@@ -3077,7 +3077,7 @@ inline void UnlockSurface(SDL_Surface *surface)
     SDL_UnlockSurface(surface);
 }
 
-inline SDL_Surface * LoadBMP_IO(SDL_IOStream *src, bool closeio, std::source_location location = std::source_location::current())
+inline SDL_Surface *LoadBMP_IO(SDL_IOStream *src, bool closeio, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_LoadBMP_IO(src, closeio);
     if (!result)
@@ -3087,7 +3087,7 @@ inline SDL_Surface * LoadBMP_IO(SDL_IOStream *src, bool closeio, std::source_loc
     return result;
 }
 
-inline SDL_Surface * LoadBMP(const char *file, std::source_location location = std::source_location::current())
+inline SDL_Surface *LoadBMP(const char *file, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_LoadBMP(file);
     if (!result)
@@ -3097,7 +3097,7 @@ inline SDL_Surface * LoadBMP(const char *file, std::source_location location = s
     return result;
 }
 
-inline bool SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, std::source_location location = std::source_location::current())
+inline void SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, std::source_location location = std::source_location::current())
 {
     if (!SDL_SaveBMP_IO(surface, dst, closeio))
     {
@@ -3105,7 +3105,7 @@ inline bool SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, st
     }
 }
 
-inline bool SaveBMP(SDL_Surface *surface, const char *file, std::source_location location = std::source_location::current())
+inline void SaveBMP(SDL_Surface *surface, const char *file, std::source_location location = std::source_location::current())
 {
     if (!SDL_SaveBMP(surface, file))
     {
@@ -3113,7 +3113,7 @@ inline bool SaveBMP(SDL_Surface *surface, const char *file, std::source_location
     }
 }
 
-inline bool SetSurfaceRLE(SDL_Surface *surface, bool enabled, std::source_location location = std::source_location::current())
+inline void SetSurfaceRLE(SDL_Surface *surface, bool enabled, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetSurfaceRLE(surface, enabled))
     {
@@ -3121,7 +3121,7 @@ inline bool SetSurfaceRLE(SDL_Surface *surface, bool enabled, std::source_locati
     }
 }
 
-inline bool SurfaceHasRLE(SDL_Surface *surface, std::source_location location = std::source_location::current())
+inline void SurfaceHasRLE(SDL_Surface *surface, std::source_location location = std::source_location::current())
 {
     if (!SDL_SurfaceHasRLE(surface))
     {
@@ -3129,7 +3129,7 @@ inline bool SurfaceHasRLE(SDL_Surface *surface, std::source_location location = 
     }
 }
 
-inline bool SetSurfaceColorKey(SDL_Surface *surface, bool enabled, Uint32 key, std::source_location location = std::source_location::current())
+inline void SetSurfaceColorKey(SDL_Surface *surface, bool enabled, Uint32 key, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetSurfaceColorKey(surface, enabled, key))
     {
@@ -3137,7 +3137,7 @@ inline bool SetSurfaceColorKey(SDL_Surface *surface, bool enabled, Uint32 key, s
     }
 }
 
-inline bool SurfaceHasColorKey(SDL_Surface *surface, std::source_location location = std::source_location::current())
+inline void SurfaceHasColorKey(SDL_Surface *surface, std::source_location location = std::source_location::current())
 {
     if (!SDL_SurfaceHasColorKey(surface))
     {
@@ -3145,7 +3145,7 @@ inline bool SurfaceHasColorKey(SDL_Surface *surface, std::source_location locati
     }
 }
 
-inline bool GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key, std::source_location location = std::source_location::current())
+inline void GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetSurfaceColorKey(surface, key))
     {
@@ -3153,7 +3153,7 @@ inline bool GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key, std::source_lo
     }
 }
 
-inline bool SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b, std::source_location location = std::source_location::current())
+inline void SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetSurfaceColorMod(surface, r, g, b))
     {
@@ -3161,7 +3161,7 @@ inline bool SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b, 
     }
 }
 
-inline bool GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b, std::source_location location = std::source_location::current())
+inline void GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetSurfaceColorMod(surface, r, g, b))
     {
@@ -3169,7 +3169,7 @@ inline bool GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *
     }
 }
 
-inline bool SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha, std::source_location location = std::source_location::current())
+inline void SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetSurfaceAlphaMod(surface, alpha))
     {
@@ -3177,7 +3177,7 @@ inline bool SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha, std::source_lo
     }
 }
 
-inline bool GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha, std::source_location location = std::source_location::current())
+inline void GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetSurfaceAlphaMod(surface, alpha))
     {
@@ -3185,7 +3185,7 @@ inline bool GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha, std::source_l
     }
 }
 
-inline bool SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode, std::source_location location = std::source_location::current())
+inline void SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetSurfaceBlendMode(surface, blendMode))
     {
@@ -3193,7 +3193,7 @@ inline bool SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode, s
     }
 }
 
-inline bool GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode, std::source_location location = std::source_location::current())
+inline void GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetSurfaceBlendMode(surface, blendMode))
     {
@@ -3201,7 +3201,7 @@ inline bool GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode, 
     }
 }
 
-inline bool SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetSurfaceClipRect(surface, rect))
     {
@@ -3209,7 +3209,7 @@ inline bool SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect, std::
     }
 }
 
-inline bool GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetSurfaceClipRect(surface, rect))
     {
@@ -3217,7 +3217,7 @@ inline bool GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect, std::source
     }
 }
 
-inline bool FlipSurface(SDL_Surface *surface, SDL_FlipMode flip, std::source_location location = std::source_location::current())
+inline void FlipSurface(SDL_Surface *surface, SDL_FlipMode flip, std::source_location location = std::source_location::current())
 {
     if (!SDL_FlipSurface(surface, flip))
     {
@@ -3225,7 +3225,7 @@ inline bool FlipSurface(SDL_Surface *surface, SDL_FlipMode flip, std::source_loc
     }
 }
 
-inline SDL_Surface * DuplicateSurface(SDL_Surface *surface, std::source_location location = std::source_location::current())
+inline SDL_Surface *DuplicateSurface(SDL_Surface *surface, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_DuplicateSurface(surface);
     if (!result)
@@ -3235,7 +3235,7 @@ inline SDL_Surface * DuplicateSurface(SDL_Surface *surface, std::source_location
     return result;
 }
 
-inline SDL_Surface * ScaleSurface(SDL_Surface *surface, int width, int height, SDL_ScaleMode scaleMode, std::source_location location = std::source_location::current())
+inline SDL_Surface *ScaleSurface(SDL_Surface *surface, int width, int height, SDL_ScaleMode scaleMode, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_ScaleSurface(surface, width, height, scaleMode);
     if (!result)
@@ -3245,7 +3245,7 @@ inline SDL_Surface * ScaleSurface(SDL_Surface *surface, int width, int height, S
     return result;
 }
 
-inline SDL_Surface * ConvertSurface(SDL_Surface *surface, SDL_PixelFormat format, std::source_location location = std::source_location::current())
+inline SDL_Surface *ConvertSurface(SDL_Surface *surface, SDL_PixelFormat format, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_ConvertSurface(surface, format);
     if (!result)
@@ -3255,7 +3255,7 @@ inline SDL_Surface * ConvertSurface(SDL_Surface *surface, SDL_PixelFormat format
     return result;
 }
 
-inline SDL_Surface * ConvertSurfaceAndColorspace(SDL_Surface *surface, SDL_PixelFormat format, SDL_Palette *palette, SDL_Colorspace colorspace, SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline SDL_Surface *ConvertSurfaceAndColorspace(SDL_Surface *surface, SDL_PixelFormat format, SDL_Palette *palette, SDL_Colorspace colorspace, SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_ConvertSurfaceAndColorspace(surface, format, palette, colorspace, props);
     if (!result)
@@ -3265,7 +3265,7 @@ inline SDL_Surface * ConvertSurfaceAndColorspace(SDL_Surface *surface, SDL_Pixel
     return result;
 }
 
-inline bool ConvertPixels(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch, std::source_location location = std::source_location::current())
+inline void ConvertPixels(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch, std::source_location location = std::source_location::current())
 {
     if (!SDL_ConvertPixels(width, height, src_format, src, src_pitch, dst_format, dst, dst_pitch))
     {
@@ -3273,7 +3273,7 @@ inline bool ConvertPixels(int width, int height, SDL_PixelFormat src_format, con
     }
 }
 
-inline bool ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch, std::source_location location = std::source_location::current())
+inline void ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch, std::source_location location = std::source_location::current())
 {
     if (!SDL_ConvertPixelsAndColorspace(width, height, src_format, src_colorspace, src_properties, src, src_pitch, dst_format, dst_colorspace, dst_properties, dst, dst_pitch))
     {
@@ -3281,7 +3281,7 @@ inline bool ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat sr
     }
 }
 
-inline bool PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch, bool linear, std::source_location location = std::source_location::current())
+inline void PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch, bool linear, std::source_location location = std::source_location::current())
 {
     if (!SDL_PremultiplyAlpha(width, height, src_format, src, src_pitch, dst_format, dst, dst_pitch, linear))
     {
@@ -3289,7 +3289,7 @@ inline bool PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, 
     }
 }
 
-inline bool PremultiplySurfaceAlpha(SDL_Surface *surface, bool linear, std::source_location location = std::source_location::current())
+inline void PremultiplySurfaceAlpha(SDL_Surface *surface, bool linear, std::source_location location = std::source_location::current())
 {
     if (!SDL_PremultiplySurfaceAlpha(surface, linear))
     {
@@ -3297,7 +3297,7 @@ inline bool PremultiplySurfaceAlpha(SDL_Surface *surface, bool linear, std::sour
     }
 }
 
-inline bool ClearSurface(SDL_Surface *surface, float r, float g, float b, float a, std::source_location location = std::source_location::current())
+inline void ClearSurface(SDL_Surface *surface, float r, float g, float b, float a, std::source_location location = std::source_location::current())
 {
     if (!SDL_ClearSurface(surface, r, g, b, a))
     {
@@ -3305,7 +3305,7 @@ inline bool ClearSurface(SDL_Surface *surface, float r, float g, float b, float 
     }
 }
 
-inline bool FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color, std::source_location location = std::source_location::current())
+inline void FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color, std::source_location location = std::source_location::current())
 {
     if (!SDL_FillSurfaceRect(dst, rect, color))
     {
@@ -3313,7 +3313,7 @@ inline bool FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color
     }
 }
 
-inline bool FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color, std::source_location location = std::source_location::current())
+inline void FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color, std::source_location location = std::source_location::current())
 {
     if (!SDL_FillSurfaceRects(dst, rects, count, color))
     {
@@ -3321,7 +3321,7 @@ inline bool FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count,
     }
 }
 
-inline bool BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, std::source_location location = std::source_location::current())
+inline void BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, std::source_location location = std::source_location::current())
 {
     if (!SDL_BlitSurface(src, srcrect, dst, dstrect))
     {
@@ -3329,7 +3329,7 @@ inline bool BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *
     }
 }
 
-inline bool BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, std::source_location location = std::source_location::current())
+inline void BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, std::source_location location = std::source_location::current())
 {
     if (!SDL_BlitSurfaceUnchecked(src, srcrect, dst, dstrect))
     {
@@ -3337,7 +3337,7 @@ inline bool BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_
     }
 }
 
-inline bool BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode, std::source_location location = std::source_location::current())
+inline void BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_BlitSurfaceScaled(src, srcrect, dst, dstrect, scaleMode))
     {
@@ -3345,7 +3345,7 @@ inline bool BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Sur
     }
 }
 
-inline bool BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode, std::source_location location = std::source_location::current())
+inline void BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_BlitSurfaceUncheckedScaled(src, srcrect, dst, dstrect, scaleMode))
     {
@@ -3353,7 +3353,7 @@ inline bool BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect
     }
 }
 
-inline bool StretchSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode, std::source_location location = std::source_location::current())
+inline void StretchSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_StretchSurface(src, srcrect, dst, dstrect, scaleMode))
     {
@@ -3361,7 +3361,7 @@ inline bool StretchSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surfac
     }
 }
 
-inline bool BlitSurfaceTiled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, std::source_location location = std::source_location::current())
+inline void BlitSurfaceTiled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, std::source_location location = std::source_location::current())
 {
     if (!SDL_BlitSurfaceTiled(src, srcrect, dst, dstrect))
     {
@@ -3369,7 +3369,7 @@ inline bool BlitSurfaceTiled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surf
     }
 }
 
-inline bool BlitSurfaceTiledWithScale(SDL_Surface *src, const SDL_Rect *srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect, std::source_location location = std::source_location::current())
+inline void BlitSurfaceTiledWithScale(SDL_Surface *src, const SDL_Rect *srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect, std::source_location location = std::source_location::current())
 {
     if (!SDL_BlitSurfaceTiledWithScale(src, srcrect, scale, scaleMode, dst, dstrect))
     {
@@ -3377,7 +3377,7 @@ inline bool BlitSurfaceTiledWithScale(SDL_Surface *src, const SDL_Rect *srcrect,
     }
 }
 
-inline bool BlitSurface9Grid(SDL_Surface *src, const SDL_Rect *srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect, std::source_location location = std::source_location::current())
+inline void BlitSurface9Grid(SDL_Surface *src, const SDL_Rect *srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect, std::source_location location = std::source_location::current())
 {
     if (!SDL_BlitSurface9Grid(src, srcrect, left_width, right_width, top_height, bottom_height, scale, scaleMode, dst, dstrect))
     {
@@ -3395,7 +3395,7 @@ inline Uint32 MapSurfaceRGBA(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b, Ui
     return SDL_MapSurfaceRGBA(surface, r, g, b, a);
 }
 
-inline bool ReadSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a, std::source_location location = std::source_location::current())
+inline void ReadSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadSurfacePixel(surface, x, y, r, g, b, a))
     {
@@ -3403,7 +3403,7 @@ inline bool ReadSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 *r, Uint8
     }
 }
 
-inline bool ReadSurfacePixelFloat(SDL_Surface *surface, int x, int y, float *r, float *g, float *b, float *a, std::source_location location = std::source_location::current())
+inline void ReadSurfacePixelFloat(SDL_Surface *surface, int x, int y, float *r, float *g, float *b, float *a, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadSurfacePixelFloat(surface, x, y, r, g, b, a))
     {
@@ -3411,7 +3411,7 @@ inline bool ReadSurfacePixelFloat(SDL_Surface *surface, int x, int y, float *r, 
     }
 }
 
-inline bool WriteSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a, std::source_location location = std::source_location::current())
+inline void WriteSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteSurfacePixel(surface, x, y, r, g, b, a))
     {
@@ -3419,7 +3419,7 @@ inline bool WriteSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 r, Uint8
     }
 }
 
-inline bool WriteSurfacePixelFloat(SDL_Surface *surface, int x, int y, float r, float g, float b, float a, std::source_location location = std::source_location::current())
+inline void WriteSurfacePixelFloat(SDL_Surface *surface, int x, int y, float r, float g, float b, float a, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteSurfacePixelFloat(surface, x, y, r, g, b, a))
     {
@@ -3432,7 +3432,7 @@ inline int GetNumCameraDrivers()
     return SDL_GetNumCameraDrivers();
 }
 
-inline const char * GetCameraDriver(int index, std::source_location location = std::source_location::current())
+inline const char *GetCameraDriver(int index, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetCameraDriver(index);
     if (!result)
@@ -3442,7 +3442,7 @@ inline const char * GetCameraDriver(int index, std::source_location location = s
     return result;
 }
 
-inline const char * GetCurrentCameraDriver(std::source_location location = std::source_location::current())
+inline const char *GetCurrentCameraDriver(std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetCurrentCameraDriver();
     if (!result)
@@ -3452,7 +3452,7 @@ inline const char * GetCurrentCameraDriver(std::source_location location = std::
     return result;
 }
 
-inline SDL_CameraID * GetCameras(int *count, std::source_location location = std::source_location::current())
+inline SDL_CameraID *GetCameras(int *count, std::source_location location = std::source_location::current())
 {
     SDL_CameraID *result = SDL_GetCameras(count);
     if (!result)
@@ -3462,7 +3462,7 @@ inline SDL_CameraID * GetCameras(int *count, std::source_location location = std
     return result;
 }
 
-inline SDL_CameraSpec ** GetCameraSupportedFormats(SDL_CameraID instance_id, int *count, std::source_location location = std::source_location::current())
+inline SDL_CameraSpec **GetCameraSupportedFormats(SDL_CameraID instance_id, int *count, std::source_location location = std::source_location::current())
 {
     SDL_CameraSpec **result = SDL_GetCameraSupportedFormats(instance_id, count);
     if (!result)
@@ -3472,7 +3472,7 @@ inline SDL_CameraSpec ** GetCameraSupportedFormats(SDL_CameraID instance_id, int
     return result;
 }
 
-inline const char * GetCameraName(SDL_CameraID instance_id, std::source_location location = std::source_location::current())
+inline const char *GetCameraName(SDL_CameraID instance_id, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetCameraName(instance_id);
     if (!result)
@@ -3487,7 +3487,7 @@ inline SDL_CameraPosition GetCameraPosition(SDL_CameraID instance_id)
     return SDL_GetCameraPosition(instance_id);
 }
 
-inline SDL_Camera * OpenCamera(SDL_CameraID instance_id, const SDL_CameraSpec *spec, std::source_location location = std::source_location::current())
+inline SDL_Camera *OpenCamera(SDL_CameraID instance_id, const SDL_CameraSpec *spec, std::source_location location = std::source_location::current())
 {
     SDL_Camera *result = SDL_OpenCamera(instance_id, spec);
     if (!result)
@@ -3512,7 +3512,7 @@ inline SDL_PropertiesID GetCameraProperties(SDL_Camera *camera)
     return SDL_GetCameraProperties(camera);
 }
 
-inline bool GetCameraFormat(SDL_Camera *camera, SDL_CameraSpec *spec, std::source_location location = std::source_location::current())
+inline void GetCameraFormat(SDL_Camera *camera, SDL_CameraSpec *spec, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetCameraFormat(camera, spec))
     {
@@ -3520,7 +3520,7 @@ inline bool GetCameraFormat(SDL_Camera *camera, SDL_CameraSpec *spec, std::sourc
     }
 }
 
-inline SDL_Surface * AcquireCameraFrame(SDL_Camera *camera, Uint64 *timestampNS, std::source_location location = std::source_location::current())
+inline SDL_Surface *AcquireCameraFrame(SDL_Camera *camera, Uint64 *timestampNS, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_AcquireCameraFrame(camera, timestampNS);
     if (!result)
@@ -3540,7 +3540,7 @@ inline void CloseCamera(SDL_Camera *camera)
     SDL_CloseCamera(camera);
 }
 
-inline bool SetClipboardText(const char *text, std::source_location location = std::source_location::current())
+inline void SetClipboardText(const char *text, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetClipboardText(text))
     {
@@ -3548,7 +3548,7 @@ inline bool SetClipboardText(const char *text, std::source_location location = s
     }
 }
 
-inline char * GetClipboardText(std::source_location location = std::source_location::current())
+inline char *GetClipboardText(std::source_location location = std::source_location::current())
 {
     char *result = SDL_GetClipboardText();
     if (!result)
@@ -3558,7 +3558,7 @@ inline char * GetClipboardText(std::source_location location = std::source_locat
     return result;
 }
 
-inline bool HasClipboardText(std::source_location location = std::source_location::current())
+inline void HasClipboardText(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasClipboardText())
     {
@@ -3566,7 +3566,7 @@ inline bool HasClipboardText(std::source_location location = std::source_locatio
     }
 }
 
-inline bool SetPrimarySelectionText(const char *text, std::source_location location = std::source_location::current())
+inline void SetPrimarySelectionText(const char *text, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetPrimarySelectionText(text))
     {
@@ -3574,7 +3574,7 @@ inline bool SetPrimarySelectionText(const char *text, std::source_location locat
     }
 }
 
-inline char * GetPrimarySelectionText(std::source_location location = std::source_location::current())
+inline char *GetPrimarySelectionText(std::source_location location = std::source_location::current())
 {
     char *result = SDL_GetPrimarySelectionText();
     if (!result)
@@ -3584,7 +3584,7 @@ inline char * GetPrimarySelectionText(std::source_location location = std::sourc
     return result;
 }
 
-inline bool HasPrimarySelectionText(std::source_location location = std::source_location::current())
+inline void HasPrimarySelectionText(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasPrimarySelectionText())
     {
@@ -3592,7 +3592,7 @@ inline bool HasPrimarySelectionText(std::source_location location = std::source_
     }
 }
 
-inline bool SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void *userdata, const char **mime_types, size_t num_mime_types, std::source_location location = std::source_location::current())
+inline void SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void *userdata, const char **mime_types, size_t num_mime_types, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetClipboardData(callback, cleanup, userdata, mime_types, num_mime_types))
     {
@@ -3600,7 +3600,7 @@ inline bool SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCl
     }
 }
 
-inline bool ClearClipboardData(std::source_location location = std::source_location::current())
+inline void ClearClipboardData(std::source_location location = std::source_location::current())
 {
     if (!SDL_ClearClipboardData())
     {
@@ -3608,7 +3608,7 @@ inline bool ClearClipboardData(std::source_location location = std::source_locat
     }
 }
 
-inline void * GetClipboardData(const char *mime_type, size_t *size, std::source_location location = std::source_location::current())
+inline void *GetClipboardData(const char *mime_type, size_t *size, std::source_location location = std::source_location::current())
 {
     void *result = SDL_GetClipboardData(mime_type, size);
     if (!result)
@@ -3618,7 +3618,7 @@ inline void * GetClipboardData(const char *mime_type, size_t *size, std::source_
     return result;
 }
 
-inline bool HasClipboardData(const char *mime_type, std::source_location location = std::source_location::current())
+inline void HasClipboardData(const char *mime_type, std::source_location location = std::source_location::current())
 {
     if (!SDL_HasClipboardData(mime_type))
     {
@@ -3626,7 +3626,7 @@ inline bool HasClipboardData(const char *mime_type, std::source_location locatio
     }
 }
 
-inline char ** GetClipboardMimeTypes(size_t *num_mime_types, std::source_location location = std::source_location::current())
+inline char **GetClipboardMimeTypes(size_t *num_mime_types, std::source_location location = std::source_location::current())
 {
     char **result = SDL_GetClipboardMimeTypes(num_mime_types);
     if (!result)
@@ -3646,7 +3646,7 @@ inline int GetCPUCacheLineSize()
     return SDL_GetCPUCacheLineSize();
 }
 
-inline bool HasAltiVec(std::source_location location = std::source_location::current())
+inline void HasAltiVec(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasAltiVec())
     {
@@ -3654,7 +3654,7 @@ inline bool HasAltiVec(std::source_location location = std::source_location::cur
     }
 }
 
-inline bool HasMMX(std::source_location location = std::source_location::current())
+inline void HasMMX(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasMMX())
     {
@@ -3662,7 +3662,7 @@ inline bool HasMMX(std::source_location location = std::source_location::current
     }
 }
 
-inline bool HasSSE(std::source_location location = std::source_location::current())
+inline void HasSSE(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasSSE())
     {
@@ -3670,7 +3670,7 @@ inline bool HasSSE(std::source_location location = std::source_location::current
     }
 }
 
-inline bool HasSSE2(std::source_location location = std::source_location::current())
+inline void HasSSE2(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasSSE2())
     {
@@ -3678,7 +3678,7 @@ inline bool HasSSE2(std::source_location location = std::source_location::curren
     }
 }
 
-inline bool HasSSE3(std::source_location location = std::source_location::current())
+inline void HasSSE3(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasSSE3())
     {
@@ -3686,7 +3686,7 @@ inline bool HasSSE3(std::source_location location = std::source_location::curren
     }
 }
 
-inline bool HasSSE41(std::source_location location = std::source_location::current())
+inline void HasSSE41(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasSSE41())
     {
@@ -3694,7 +3694,7 @@ inline bool HasSSE41(std::source_location location = std::source_location::curre
     }
 }
 
-inline bool HasSSE42(std::source_location location = std::source_location::current())
+inline void HasSSE42(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasSSE42())
     {
@@ -3702,7 +3702,7 @@ inline bool HasSSE42(std::source_location location = std::source_location::curre
     }
 }
 
-inline bool HasAVX(std::source_location location = std::source_location::current())
+inline void HasAVX(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasAVX())
     {
@@ -3710,7 +3710,7 @@ inline bool HasAVX(std::source_location location = std::source_location::current
     }
 }
 
-inline bool HasAVX2(std::source_location location = std::source_location::current())
+inline void HasAVX2(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasAVX2())
     {
@@ -3718,7 +3718,7 @@ inline bool HasAVX2(std::source_location location = std::source_location::curren
     }
 }
 
-inline bool HasAVX512F(std::source_location location = std::source_location::current())
+inline void HasAVX512F(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasAVX512F())
     {
@@ -3726,7 +3726,7 @@ inline bool HasAVX512F(std::source_location location = std::source_location::cur
     }
 }
 
-inline bool HasARMSIMD(std::source_location location = std::source_location::current())
+inline void HasARMSIMD(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasARMSIMD())
     {
@@ -3734,7 +3734,7 @@ inline bool HasARMSIMD(std::source_location location = std::source_location::cur
     }
 }
 
-inline bool HasNEON(std::source_location location = std::source_location::current())
+inline void HasNEON(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasNEON())
     {
@@ -3742,7 +3742,7 @@ inline bool HasNEON(std::source_location location = std::source_location::curren
     }
 }
 
-inline bool HasLSX(std::source_location location = std::source_location::current())
+inline void HasLSX(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasLSX())
     {
@@ -3750,7 +3750,7 @@ inline bool HasLSX(std::source_location location = std::source_location::current
     }
 }
 
-inline bool HasLASX(std::source_location location = std::source_location::current())
+inline void HasLASX(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasLASX())
     {
@@ -3773,7 +3773,7 @@ inline int GetNumVideoDrivers()
     return SDL_GetNumVideoDrivers();
 }
 
-inline const char * GetVideoDriver(int index, std::source_location location = std::source_location::current())
+inline const char *GetVideoDriver(int index, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetVideoDriver(index);
     if (!result)
@@ -3783,7 +3783,7 @@ inline const char * GetVideoDriver(int index, std::source_location location = st
     return result;
 }
 
-inline const char * GetCurrentVideoDriver(std::source_location location = std::source_location::current())
+inline const char *GetCurrentVideoDriver(std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetCurrentVideoDriver();
     if (!result)
@@ -3798,7 +3798,7 @@ inline SDL_SystemTheme GetSystemTheme()
     return SDL_GetSystemTheme();
 }
 
-inline SDL_DisplayID * GetDisplays(int *count, std::source_location location = std::source_location::current())
+inline SDL_DisplayID *GetDisplays(int *count, std::source_location location = std::source_location::current())
 {
     SDL_DisplayID *result = SDL_GetDisplays(count);
     if (!result)
@@ -3818,7 +3818,7 @@ inline SDL_PropertiesID GetDisplayProperties(SDL_DisplayID displayID)
     return SDL_GetDisplayProperties(displayID);
 }
 
-inline const char * GetDisplayName(SDL_DisplayID displayID, std::source_location location = std::source_location::current())
+inline const char *GetDisplayName(SDL_DisplayID displayID, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetDisplayName(displayID);
     if (!result)
@@ -3828,7 +3828,7 @@ inline const char * GetDisplayName(SDL_DisplayID displayID, std::source_location
     return result;
 }
 
-inline bool GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetDisplayBounds(displayID, rect))
     {
@@ -3836,7 +3836,7 @@ inline bool GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect, std::sourc
     }
 }
 
-inline bool GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetDisplayUsableBounds(displayID, rect))
     {
@@ -3859,7 +3859,7 @@ inline float GetDisplayContentScale(SDL_DisplayID displayID)
     return SDL_GetDisplayContentScale(displayID);
 }
 
-inline SDL_DisplayMode ** GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count, std::source_location location = std::source_location::current())
+inline SDL_DisplayMode **GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count, std::source_location location = std::source_location::current())
 {
     SDL_DisplayMode **result = SDL_GetFullscreenDisplayModes(displayID, count);
     if (!result)
@@ -3869,7 +3869,7 @@ inline SDL_DisplayMode ** GetFullscreenDisplayModes(SDL_DisplayID displayID, int
     return result;
 }
 
-inline bool GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, bool include_high_density_modes, SDL_DisplayMode *closest, std::source_location location = std::source_location::current())
+inline void GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, bool include_high_density_modes, SDL_DisplayMode *closest, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetClosestFullscreenDisplayMode(displayID, w, h, refresh_rate, include_high_density_modes, closest))
     {
@@ -3877,7 +3877,7 @@ inline bool GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int 
     }
 }
 
-inline const SDL_DisplayMode * GetDesktopDisplayMode(SDL_DisplayID displayID, std::source_location location = std::source_location::current())
+inline const SDL_DisplayMode *GetDesktopDisplayMode(SDL_DisplayID displayID, std::source_location location = std::source_location::current())
 {
     const SDL_DisplayMode *result = SDL_GetDesktopDisplayMode(displayID);
     if (!result)
@@ -3887,7 +3887,7 @@ inline const SDL_DisplayMode * GetDesktopDisplayMode(SDL_DisplayID displayID, st
     return result;
 }
 
-inline const SDL_DisplayMode * GetCurrentDisplayMode(SDL_DisplayID displayID, std::source_location location = std::source_location::current())
+inline const SDL_DisplayMode *GetCurrentDisplayMode(SDL_DisplayID displayID, std::source_location location = std::source_location::current())
 {
     const SDL_DisplayMode *result = SDL_GetCurrentDisplayMode(displayID);
     if (!result)
@@ -3922,7 +3922,7 @@ inline float GetWindowDisplayScale(SDL_Window *window)
     return SDL_GetWindowDisplayScale(window);
 }
 
-inline bool SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *mode, std::source_location location = std::source_location::current())
+inline void SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *mode, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowFullscreenMode(window, mode))
     {
@@ -3930,7 +3930,7 @@ inline bool SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *m
     }
 }
 
-inline const SDL_DisplayMode * GetWindowFullscreenMode(SDL_Window *window, std::source_location location = std::source_location::current())
+inline const SDL_DisplayMode *GetWindowFullscreenMode(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     const SDL_DisplayMode *result = SDL_GetWindowFullscreenMode(window);
     if (!result)
@@ -3940,7 +3940,7 @@ inline const SDL_DisplayMode * GetWindowFullscreenMode(SDL_Window *window, std::
     return result;
 }
 
-inline void * GetWindowICCProfile(SDL_Window *window, size_t *size, std::source_location location = std::source_location::current())
+inline void *GetWindowICCProfile(SDL_Window *window, size_t *size, std::source_location location = std::source_location::current())
 {
     void *result = SDL_GetWindowICCProfile(window, size);
     if (!result)
@@ -3955,7 +3955,7 @@ inline SDL_PixelFormat GetWindowPixelFormat(SDL_Window *window)
     return SDL_GetWindowPixelFormat(window);
 }
 
-inline SDL_Window ** GetWindows(int *count, std::source_location location = std::source_location::current())
+inline SDL_Window **GetWindows(int *count, std::source_location location = std::source_location::current())
 {
     SDL_Window **result = SDL_GetWindows(count);
     if (!result)
@@ -3965,7 +3965,7 @@ inline SDL_Window ** GetWindows(int *count, std::source_location location = std:
     return result;
 }
 
-inline SDL_Window * CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags, std::source_location location = std::source_location::current())
+inline SDL_Window *CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags, std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_CreateWindow(title, w, h, flags);
     if (!result)
@@ -3975,7 +3975,7 @@ inline SDL_Window * CreateWindow(const char *title, int w, int h, SDL_WindowFlag
     return result;
 }
 
-inline SDL_Window * CreatePopupWindow(SDL_Window *parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags, std::source_location location = std::source_location::current())
+inline SDL_Window *CreatePopupWindow(SDL_Window *parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags, std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_CreatePopupWindow(parent, offset_x, offset_y, w, h, flags);
     if (!result)
@@ -3985,7 +3985,7 @@ inline SDL_Window * CreatePopupWindow(SDL_Window *parent, int offset_x, int offs
     return result;
 }
 
-inline SDL_Window * CreateWindowWithProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline SDL_Window *CreateWindowWithProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_CreateWindowWithProperties(props);
     if (!result)
@@ -4000,7 +4000,7 @@ inline SDL_WindowID GetWindowID(SDL_Window *window)
     return SDL_GetWindowID(window);
 }
 
-inline SDL_Window * GetWindowFromID(SDL_WindowID id, std::source_location location = std::source_location::current())
+inline SDL_Window *GetWindowFromID(SDL_WindowID id, std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_GetWindowFromID(id);
     if (!result)
@@ -4010,7 +4010,7 @@ inline SDL_Window * GetWindowFromID(SDL_WindowID id, std::source_location locati
     return result;
 }
 
-inline SDL_Window * GetWindowParent(SDL_Window *window, std::source_location location = std::source_location::current())
+inline SDL_Window *GetWindowParent(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_GetWindowParent(window);
     if (!result)
@@ -4030,7 +4030,7 @@ inline SDL_WindowFlags GetWindowFlags(SDL_Window *window)
     return SDL_GetWindowFlags(window);
 }
 
-inline bool SetWindowTitle(SDL_Window *window, const char *title, std::source_location location = std::source_location::current())
+inline void SetWindowTitle(SDL_Window *window, const char *title, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowTitle(window, title))
     {
@@ -4038,7 +4038,7 @@ inline bool SetWindowTitle(SDL_Window *window, const char *title, std::source_lo
     }
 }
 
-inline const char * GetWindowTitle(SDL_Window *window, std::source_location location = std::source_location::current())
+inline const char *GetWindowTitle(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetWindowTitle(window);
     if (!result)
@@ -4048,7 +4048,7 @@ inline const char * GetWindowTitle(SDL_Window *window, std::source_location loca
     return result;
 }
 
-inline bool SetWindowIcon(SDL_Window *window, SDL_Surface *icon, std::source_location location = std::source_location::current())
+inline void SetWindowIcon(SDL_Window *window, SDL_Surface *icon, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowIcon(window, icon))
     {
@@ -4056,7 +4056,7 @@ inline bool SetWindowIcon(SDL_Window *window, SDL_Surface *icon, std::source_loc
     }
 }
 
-inline bool SetWindowPosition(SDL_Window *window, int x, int y, std::source_location location = std::source_location::current())
+inline void SetWindowPosition(SDL_Window *window, int x, int y, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowPosition(window, x, y))
     {
@@ -4064,7 +4064,7 @@ inline bool SetWindowPosition(SDL_Window *window, int x, int y, std::source_loca
     }
 }
 
-inline bool GetWindowPosition(SDL_Window *window, int *x, int *y, std::source_location location = std::source_location::current())
+inline void GetWindowPosition(SDL_Window *window, int *x, int *y, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowPosition(window, x, y))
     {
@@ -4072,7 +4072,7 @@ inline bool GetWindowPosition(SDL_Window *window, int *x, int *y, std::source_lo
     }
 }
 
-inline bool SetWindowSize(SDL_Window *window, int w, int h, std::source_location location = std::source_location::current())
+inline void SetWindowSize(SDL_Window *window, int w, int h, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowSize(window, w, h))
     {
@@ -4080,7 +4080,7 @@ inline bool SetWindowSize(SDL_Window *window, int w, int h, std::source_location
     }
 }
 
-inline bool GetWindowSize(SDL_Window *window, int *w, int *h, std::source_location location = std::source_location::current())
+inline void GetWindowSize(SDL_Window *window, int *w, int *h, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowSize(window, w, h))
     {
@@ -4088,7 +4088,7 @@ inline bool GetWindowSize(SDL_Window *window, int *w, int *h, std::source_locati
     }
 }
 
-inline bool GetWindowSafeArea(SDL_Window *window, SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void GetWindowSafeArea(SDL_Window *window, SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowSafeArea(window, rect))
     {
@@ -4096,7 +4096,7 @@ inline bool GetWindowSafeArea(SDL_Window *window, SDL_Rect *rect, std::source_lo
     }
 }
 
-inline bool SetWindowAspectRatio(SDL_Window *window, float min_aspect, float max_aspect, std::source_location location = std::source_location::current())
+inline void SetWindowAspectRatio(SDL_Window *window, float min_aspect, float max_aspect, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowAspectRatio(window, min_aspect, max_aspect))
     {
@@ -4104,7 +4104,7 @@ inline bool SetWindowAspectRatio(SDL_Window *window, float min_aspect, float max
     }
 }
 
-inline bool GetWindowAspectRatio(SDL_Window *window, float *min_aspect, float *max_aspect, std::source_location location = std::source_location::current())
+inline void GetWindowAspectRatio(SDL_Window *window, float *min_aspect, float *max_aspect, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowAspectRatio(window, min_aspect, max_aspect))
     {
@@ -4112,7 +4112,7 @@ inline bool GetWindowAspectRatio(SDL_Window *window, float *min_aspect, float *m
     }
 }
 
-inline bool GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right, std::source_location location = std::source_location::current())
+inline void GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowBordersSize(window, top, left, bottom, right))
     {
@@ -4120,7 +4120,7 @@ inline bool GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *b
     }
 }
 
-inline bool GetWindowSizeInPixels(SDL_Window *window, int *w, int *h, std::source_location location = std::source_location::current())
+inline void GetWindowSizeInPixels(SDL_Window *window, int *w, int *h, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowSizeInPixels(window, w, h))
     {
@@ -4128,7 +4128,7 @@ inline bool GetWindowSizeInPixels(SDL_Window *window, int *w, int *h, std::sourc
     }
 }
 
-inline bool SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h, std::source_location location = std::source_location::current())
+inline void SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowMinimumSize(window, min_w, min_h))
     {
@@ -4136,7 +4136,7 @@ inline bool SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h, std::
     }
 }
 
-inline bool GetWindowMinimumSize(SDL_Window *window, int *w, int *h, std::source_location location = std::source_location::current())
+inline void GetWindowMinimumSize(SDL_Window *window, int *w, int *h, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowMinimumSize(window, w, h))
     {
@@ -4144,7 +4144,7 @@ inline bool GetWindowMinimumSize(SDL_Window *window, int *w, int *h, std::source
     }
 }
 
-inline bool SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h, std::source_location location = std::source_location::current())
+inline void SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowMaximumSize(window, max_w, max_h))
     {
@@ -4152,7 +4152,7 @@ inline bool SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h, std::
     }
 }
 
-inline bool GetWindowMaximumSize(SDL_Window *window, int *w, int *h, std::source_location location = std::source_location::current())
+inline void GetWindowMaximumSize(SDL_Window *window, int *w, int *h, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowMaximumSize(window, w, h))
     {
@@ -4160,7 +4160,7 @@ inline bool GetWindowMaximumSize(SDL_Window *window, int *w, int *h, std::source
     }
 }
 
-inline bool SetWindowBordered(SDL_Window *window, bool bordered, std::source_location location = std::source_location::current())
+inline void SetWindowBordered(SDL_Window *window, bool bordered, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowBordered(window, bordered))
     {
@@ -4168,7 +4168,7 @@ inline bool SetWindowBordered(SDL_Window *window, bool bordered, std::source_loc
     }
 }
 
-inline bool SetWindowResizable(SDL_Window *window, bool resizable, std::source_location location = std::source_location::current())
+inline void SetWindowResizable(SDL_Window *window, bool resizable, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowResizable(window, resizable))
     {
@@ -4176,7 +4176,7 @@ inline bool SetWindowResizable(SDL_Window *window, bool resizable, std::source_l
     }
 }
 
-inline bool SetWindowAlwaysOnTop(SDL_Window *window, bool on_top, std::source_location location = std::source_location::current())
+inline void SetWindowAlwaysOnTop(SDL_Window *window, bool on_top, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowAlwaysOnTop(window, on_top))
     {
@@ -4184,7 +4184,7 @@ inline bool SetWindowAlwaysOnTop(SDL_Window *window, bool on_top, std::source_lo
     }
 }
 
-inline bool ShowWindow(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void ShowWindow(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_ShowWindow(window))
     {
@@ -4192,7 +4192,7 @@ inline bool ShowWindow(SDL_Window *window, std::source_location location = std::
     }
 }
 
-inline bool HideWindow(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void HideWindow(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_HideWindow(window))
     {
@@ -4200,7 +4200,7 @@ inline bool HideWindow(SDL_Window *window, std::source_location location = std::
     }
 }
 
-inline bool RaiseWindow(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void RaiseWindow(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_RaiseWindow(window))
     {
@@ -4208,7 +4208,7 @@ inline bool RaiseWindow(SDL_Window *window, std::source_location location = std:
     }
 }
 
-inline bool MaximizeWindow(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void MaximizeWindow(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_MaximizeWindow(window))
     {
@@ -4216,7 +4216,7 @@ inline bool MaximizeWindow(SDL_Window *window, std::source_location location = s
     }
 }
 
-inline bool MinimizeWindow(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void MinimizeWindow(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_MinimizeWindow(window))
     {
@@ -4224,7 +4224,7 @@ inline bool MinimizeWindow(SDL_Window *window, std::source_location location = s
     }
 }
 
-inline bool RestoreWindow(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void RestoreWindow(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_RestoreWindow(window))
     {
@@ -4232,7 +4232,7 @@ inline bool RestoreWindow(SDL_Window *window, std::source_location location = st
     }
 }
 
-inline bool SetWindowFullscreen(SDL_Window *window, bool fullscreen, std::source_location location = std::source_location::current())
+inline void SetWindowFullscreen(SDL_Window *window, bool fullscreen, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowFullscreen(window, fullscreen))
     {
@@ -4240,7 +4240,7 @@ inline bool SetWindowFullscreen(SDL_Window *window, bool fullscreen, std::source
     }
 }
 
-inline bool SyncWindow(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void SyncWindow(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_SyncWindow(window))
     {
@@ -4248,7 +4248,7 @@ inline bool SyncWindow(SDL_Window *window, std::source_location location = std::
     }
 }
 
-inline bool WindowHasSurface(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void WindowHasSurface(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_WindowHasSurface(window))
     {
@@ -4256,7 +4256,7 @@ inline bool WindowHasSurface(SDL_Window *window, std::source_location location =
     }
 }
 
-inline SDL_Surface * GetWindowSurface(SDL_Window *window, std::source_location location = std::source_location::current())
+inline SDL_Surface *GetWindowSurface(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_GetWindowSurface(window);
     if (!result)
@@ -4266,7 +4266,7 @@ inline SDL_Surface * GetWindowSurface(SDL_Window *window, std::source_location l
     return result;
 }
 
-inline bool SetWindowSurfaceVSync(SDL_Window *window, int vsync, std::source_location location = std::source_location::current())
+inline void SetWindowSurfaceVSync(SDL_Window *window, int vsync, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowSurfaceVSync(window, vsync))
     {
@@ -4274,7 +4274,7 @@ inline bool SetWindowSurfaceVSync(SDL_Window *window, int vsync, std::source_loc
     }
 }
 
-inline bool GetWindowSurfaceVSync(SDL_Window *window, int *vsync, std::source_location location = std::source_location::current())
+inline void GetWindowSurfaceVSync(SDL_Window *window, int *vsync, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowSurfaceVSync(window, vsync))
     {
@@ -4282,7 +4282,7 @@ inline bool GetWindowSurfaceVSync(SDL_Window *window, int *vsync, std::source_lo
     }
 }
 
-inline bool UpdateWindowSurface(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void UpdateWindowSurface(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_UpdateWindowSurface(window))
     {
@@ -4290,7 +4290,7 @@ inline bool UpdateWindowSurface(SDL_Window *window, std::source_location locatio
     }
 }
 
-inline bool UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects, std::source_location location = std::source_location::current())
+inline void UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects, std::source_location location = std::source_location::current())
 {
     if (!SDL_UpdateWindowSurfaceRects(window, rects, numrects))
     {
@@ -4298,7 +4298,7 @@ inline bool UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, 
     }
 }
 
-inline bool DestroyWindowSurface(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void DestroyWindowSurface(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_DestroyWindowSurface(window))
     {
@@ -4306,7 +4306,7 @@ inline bool DestroyWindowSurface(SDL_Window *window, std::source_location locati
     }
 }
 
-inline bool SetWindowKeyboardGrab(SDL_Window *window, bool grabbed, std::source_location location = std::source_location::current())
+inline void SetWindowKeyboardGrab(SDL_Window *window, bool grabbed, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowKeyboardGrab(window, grabbed))
     {
@@ -4314,7 +4314,7 @@ inline bool SetWindowKeyboardGrab(SDL_Window *window, bool grabbed, std::source_
     }
 }
 
-inline bool SetWindowMouseGrab(SDL_Window *window, bool grabbed, std::source_location location = std::source_location::current())
+inline void SetWindowMouseGrab(SDL_Window *window, bool grabbed, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowMouseGrab(window, grabbed))
     {
@@ -4322,7 +4322,7 @@ inline bool SetWindowMouseGrab(SDL_Window *window, bool grabbed, std::source_loc
     }
 }
 
-inline bool GetWindowKeyboardGrab(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void GetWindowKeyboardGrab(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowKeyboardGrab(window))
     {
@@ -4330,7 +4330,7 @@ inline bool GetWindowKeyboardGrab(SDL_Window *window, std::source_location locat
     }
 }
 
-inline bool GetWindowMouseGrab(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void GetWindowMouseGrab(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowMouseGrab(window))
     {
@@ -4338,7 +4338,7 @@ inline bool GetWindowMouseGrab(SDL_Window *window, std::source_location location
     }
 }
 
-inline SDL_Window * GetGrabbedWindow(std::source_location location = std::source_location::current())
+inline SDL_Window *GetGrabbedWindow(std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_GetGrabbedWindow();
     if (!result)
@@ -4348,7 +4348,7 @@ inline SDL_Window * GetGrabbedWindow(std::source_location location = std::source
     return result;
 }
 
-inline bool SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowMouseRect(window, rect))
     {
@@ -4356,7 +4356,7 @@ inline bool SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect, std::so
     }
 }
 
-inline const SDL_Rect * GetWindowMouseRect(SDL_Window *window, std::source_location location = std::source_location::current())
+inline const SDL_Rect *GetWindowMouseRect(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     const SDL_Rect *result = SDL_GetWindowMouseRect(window);
     if (!result)
@@ -4366,7 +4366,7 @@ inline const SDL_Rect * GetWindowMouseRect(SDL_Window *window, std::source_locat
     return result;
 }
 
-inline bool SetWindowOpacity(SDL_Window *window, float opacity, std::source_location location = std::source_location::current())
+inline void SetWindowOpacity(SDL_Window *window, float opacity, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowOpacity(window, opacity))
     {
@@ -4379,7 +4379,7 @@ inline float GetWindowOpacity(SDL_Window *window)
     return SDL_GetWindowOpacity(window);
 }
 
-inline bool SetWindowParent(SDL_Window *window, SDL_Window *parent, std::source_location location = std::source_location::current())
+inline void SetWindowParent(SDL_Window *window, SDL_Window *parent, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowParent(window, parent))
     {
@@ -4387,7 +4387,7 @@ inline bool SetWindowParent(SDL_Window *window, SDL_Window *parent, std::source_
     }
 }
 
-inline bool SetWindowModal(SDL_Window *window, bool modal, std::source_location location = std::source_location::current())
+inline void SetWindowModal(SDL_Window *window, bool modal, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowModal(window, modal))
     {
@@ -4395,7 +4395,7 @@ inline bool SetWindowModal(SDL_Window *window, bool modal, std::source_location 
     }
 }
 
-inline bool SetWindowFocusable(SDL_Window *window, bool focusable, std::source_location location = std::source_location::current())
+inline void SetWindowFocusable(SDL_Window *window, bool focusable, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowFocusable(window, focusable))
     {
@@ -4403,7 +4403,7 @@ inline bool SetWindowFocusable(SDL_Window *window, bool focusable, std::source_l
     }
 }
 
-inline bool ShowWindowSystemMenu(SDL_Window *window, int x, int y, std::source_location location = std::source_location::current())
+inline void ShowWindowSystemMenu(SDL_Window *window, int x, int y, std::source_location location = std::source_location::current())
 {
     if (!SDL_ShowWindowSystemMenu(window, x, y))
     {
@@ -4411,7 +4411,7 @@ inline bool ShowWindowSystemMenu(SDL_Window *window, int x, int y, std::source_l
     }
 }
 
-inline bool SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data, std::source_location location = std::source_location::current())
+inline void SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowHitTest(window, callback, callback_data))
     {
@@ -4419,7 +4419,7 @@ inline bool SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *cal
     }
 }
 
-inline bool SetWindowShape(SDL_Window *window, SDL_Surface *shape, std::source_location location = std::source_location::current())
+inline void SetWindowShape(SDL_Window *window, SDL_Surface *shape, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowShape(window, shape))
     {
@@ -4427,7 +4427,7 @@ inline bool SetWindowShape(SDL_Window *window, SDL_Surface *shape, std::source_l
     }
 }
 
-inline bool FlashWindow(SDL_Window *window, SDL_FlashOperation operation, std::source_location location = std::source_location::current())
+inline void FlashWindow(SDL_Window *window, SDL_FlashOperation operation, std::source_location location = std::source_location::current())
 {
     if (!SDL_FlashWindow(window, operation))
     {
@@ -4440,7 +4440,7 @@ inline void DestroyWindow(SDL_Window *window)
     SDL_DestroyWindow(window);
 }
 
-inline bool ScreenSaverEnabled(std::source_location location = std::source_location::current())
+inline void ScreenSaverEnabled(std::source_location location = std::source_location::current())
 {
     if (!SDL_ScreenSaverEnabled())
     {
@@ -4448,7 +4448,7 @@ inline bool ScreenSaverEnabled(std::source_location location = std::source_locat
     }
 }
 
-inline bool EnableScreenSaver(std::source_location location = std::source_location::current())
+inline void EnableScreenSaver(std::source_location location = std::source_location::current())
 {
     if (!SDL_EnableScreenSaver())
     {
@@ -4456,7 +4456,7 @@ inline bool EnableScreenSaver(std::source_location location = std::source_locati
     }
 }
 
-inline bool DisableScreenSaver(std::source_location location = std::source_location::current())
+inline void DisableScreenSaver(std::source_location location = std::source_location::current())
 {
     if (!SDL_DisableScreenSaver())
     {
@@ -4464,7 +4464,7 @@ inline bool DisableScreenSaver(std::source_location location = std::source_locat
     }
 }
 
-inline bool GL_LoadLibrary(const char *path, std::source_location location = std::source_location::current())
+inline void GL_LoadLibrary(const char *path, std::source_location location = std::source_location::current())
 {
     if (!SDL_GL_LoadLibrary(path))
     {
@@ -4487,7 +4487,7 @@ inline void GL_UnloadLibrary()
     SDL_GL_UnloadLibrary();
 }
 
-inline bool GL_ExtensionSupported(const char *extension, std::source_location location = std::source_location::current())
+inline void GL_ExtensionSupported(const char *extension, std::source_location location = std::source_location::current())
 {
     if (!SDL_GL_ExtensionSupported(extension))
     {
@@ -4500,7 +4500,7 @@ inline void GL_ResetAttributes()
     SDL_GL_ResetAttributes();
 }
 
-inline bool GL_SetAttribute(SDL_GLAttr attr, int value, std::source_location location = std::source_location::current())
+inline void GL_SetAttribute(SDL_GLAttr attr, int value, std::source_location location = std::source_location::current())
 {
     if (!SDL_GL_SetAttribute(attr, value))
     {
@@ -4508,7 +4508,7 @@ inline bool GL_SetAttribute(SDL_GLAttr attr, int value, std::source_location loc
     }
 }
 
-inline bool GL_GetAttribute(SDL_GLAttr attr, int *value, std::source_location location = std::source_location::current())
+inline void GL_GetAttribute(SDL_GLAttr attr, int *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_GL_GetAttribute(attr, value))
     {
@@ -4521,7 +4521,7 @@ inline SDL_GLContext GL_CreateContext(SDL_Window *window)
     return SDL_GL_CreateContext(window);
 }
 
-inline bool GL_MakeCurrent(SDL_Window *window, SDL_GLContext context, std::source_location location = std::source_location::current())
+inline void GL_MakeCurrent(SDL_Window *window, SDL_GLContext context, std::source_location location = std::source_location::current())
 {
     if (!SDL_GL_MakeCurrent(window, context))
     {
@@ -4529,7 +4529,7 @@ inline bool GL_MakeCurrent(SDL_Window *window, SDL_GLContext context, std::sourc
     }
 }
 
-inline SDL_Window * GL_GetCurrentWindow(std::source_location location = std::source_location::current())
+inline SDL_Window *GL_GetCurrentWindow(std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_GL_GetCurrentWindow();
     if (!result)
@@ -4564,7 +4564,7 @@ inline void EGL_SetAttributeCallbacks(SDL_EGLAttribArrayCallback platformAttribC
     SDL_EGL_SetAttributeCallbacks(platformAttribCallback, surfaceAttribCallback, contextAttribCallback, userdata);
 }
 
-inline bool GL_SetSwapInterval(int interval, std::source_location location = std::source_location::current())
+inline void GL_SetSwapInterval(int interval, std::source_location location = std::source_location::current())
 {
     if (!SDL_GL_SetSwapInterval(interval))
     {
@@ -4572,7 +4572,7 @@ inline bool GL_SetSwapInterval(int interval, std::source_location location = std
     }
 }
 
-inline bool GL_GetSwapInterval(int *interval, std::source_location location = std::source_location::current())
+inline void GL_GetSwapInterval(int *interval, std::source_location location = std::source_location::current())
 {
     if (!SDL_GL_GetSwapInterval(interval))
     {
@@ -4580,7 +4580,7 @@ inline bool GL_GetSwapInterval(int *interval, std::source_location location = st
     }
 }
 
-inline bool GL_SwapWindow(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void GL_SwapWindow(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_GL_SwapWindow(window))
     {
@@ -4588,7 +4588,7 @@ inline bool GL_SwapWindow(SDL_Window *window, std::source_location location = st
     }
 }
 
-inline bool GL_DestroyContext(SDL_GLContext context, std::source_location location = std::source_location::current())
+inline void GL_DestroyContext(SDL_GLContext context, std::source_location location = std::source_location::current())
 {
     if (!SDL_GL_DestroyContext(context))
     {
@@ -4631,7 +4631,7 @@ inline SDL_PowerState GetPowerInfo(int *seconds, int *percent)
     return SDL_GetPowerInfo(seconds, percent);
 }
 
-inline SDL_SensorID * GetSensors(int *count, std::source_location location = std::source_location::current())
+inline SDL_SensorID *GetSensors(int *count, std::source_location location = std::source_location::current())
 {
     SDL_SensorID *result = SDL_GetSensors(count);
     if (!result)
@@ -4641,7 +4641,7 @@ inline SDL_SensorID * GetSensors(int *count, std::source_location location = std
     return result;
 }
 
-inline const char * GetSensorNameForID(SDL_SensorID instance_id, std::source_location location = std::source_location::current())
+inline const char *GetSensorNameForID(SDL_SensorID instance_id, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetSensorNameForID(instance_id);
     if (!result)
@@ -4661,7 +4661,7 @@ inline int GetSensorNonPortableTypeForID(SDL_SensorID instance_id)
     return SDL_GetSensorNonPortableTypeForID(instance_id);
 }
 
-inline SDL_Sensor * OpenSensor(SDL_SensorID instance_id, std::source_location location = std::source_location::current())
+inline SDL_Sensor *OpenSensor(SDL_SensorID instance_id, std::source_location location = std::source_location::current())
 {
     SDL_Sensor *result = SDL_OpenSensor(instance_id);
     if (!result)
@@ -4671,7 +4671,7 @@ inline SDL_Sensor * OpenSensor(SDL_SensorID instance_id, std::source_location lo
     return result;
 }
 
-inline SDL_Sensor * GetSensorFromID(SDL_SensorID instance_id, std::source_location location = std::source_location::current())
+inline SDL_Sensor *GetSensorFromID(SDL_SensorID instance_id, std::source_location location = std::source_location::current())
 {
     SDL_Sensor *result = SDL_GetSensorFromID(instance_id);
     if (!result)
@@ -4686,7 +4686,7 @@ inline SDL_PropertiesID GetSensorProperties(SDL_Sensor *sensor)
     return SDL_GetSensorProperties(sensor);
 }
 
-inline const char * GetSensorName(SDL_Sensor *sensor, std::source_location location = std::source_location::current())
+inline const char *GetSensorName(SDL_Sensor *sensor, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetSensorName(sensor);
     if (!result)
@@ -4711,7 +4711,7 @@ inline SDL_SensorID GetSensorID(SDL_Sensor *sensor)
     return SDL_GetSensorID(sensor);
 }
 
-inline bool GetSensorData(SDL_Sensor *sensor, float *data, int num_values, std::source_location location = std::source_location::current())
+inline void GetSensorData(SDL_Sensor *sensor, float *data, int num_values, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetSensorData(sensor, data, num_values))
     {
@@ -4739,7 +4739,7 @@ inline void UnlockJoysticks()
     SDL_UnlockJoysticks();
 }
 
-inline bool HasJoystick(std::source_location location = std::source_location::current())
+inline void HasJoystick(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasJoystick())
     {
@@ -4747,7 +4747,7 @@ inline bool HasJoystick(std::source_location location = std::source_location::cu
     }
 }
 
-inline SDL_JoystickID * GetJoysticks(int *count, std::source_location location = std::source_location::current())
+inline SDL_JoystickID *GetJoysticks(int *count, std::source_location location = std::source_location::current())
 {
     SDL_JoystickID *result = SDL_GetJoysticks(count);
     if (!result)
@@ -4757,7 +4757,7 @@ inline SDL_JoystickID * GetJoysticks(int *count, std::source_location location =
     return result;
 }
 
-inline const char * GetJoystickNameForID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline const char *GetJoystickNameForID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetJoystickNameForID(instance_id);
     if (!result)
@@ -4767,7 +4767,7 @@ inline const char * GetJoystickNameForID(SDL_JoystickID instance_id, std::source
     return result;
 }
 
-inline const char * GetJoystickPathForID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline const char *GetJoystickPathForID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetJoystickPathForID(instance_id);
     if (!result)
@@ -4807,7 +4807,7 @@ inline SDL_JoystickType GetJoystickTypeForID(SDL_JoystickID instance_id)
     return SDL_GetJoystickTypeForID(instance_id);
 }
 
-inline SDL_Joystick * OpenJoystick(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline SDL_Joystick *OpenJoystick(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     SDL_Joystick *result = SDL_OpenJoystick(instance_id);
     if (!result)
@@ -4817,7 +4817,7 @@ inline SDL_Joystick * OpenJoystick(SDL_JoystickID instance_id, std::source_locat
     return result;
 }
 
-inline SDL_Joystick * GetJoystickFromID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline SDL_Joystick *GetJoystickFromID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     SDL_Joystick *result = SDL_GetJoystickFromID(instance_id);
     if (!result)
@@ -4827,7 +4827,7 @@ inline SDL_Joystick * GetJoystickFromID(SDL_JoystickID instance_id, std::source_
     return result;
 }
 
-inline SDL_Joystick * GetJoystickFromPlayerIndex(int player_index, std::source_location location = std::source_location::current())
+inline SDL_Joystick *GetJoystickFromPlayerIndex(int player_index, std::source_location location = std::source_location::current())
 {
     SDL_Joystick *result = SDL_GetJoystickFromPlayerIndex(player_index);
     if (!result)
@@ -4842,7 +4842,7 @@ inline SDL_JoystickID AttachVirtualJoystick(const SDL_VirtualJoystickDesc *desc)
     return SDL_AttachVirtualJoystick(desc);
 }
 
-inline bool DetachVirtualJoystick(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline void DetachVirtualJoystick(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     if (!SDL_DetachVirtualJoystick(instance_id))
     {
@@ -4850,7 +4850,7 @@ inline bool DetachVirtualJoystick(SDL_JoystickID instance_id, std::source_locati
     }
 }
 
-inline bool IsJoystickVirtual(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline void IsJoystickVirtual(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     if (!SDL_IsJoystickVirtual(instance_id))
     {
@@ -4858,7 +4858,7 @@ inline bool IsJoystickVirtual(SDL_JoystickID instance_id, std::source_location l
     }
 }
 
-inline bool SetJoystickVirtualAxis(SDL_Joystick *joystick, int axis, Sint16 value, std::source_location location = std::source_location::current())
+inline void SetJoystickVirtualAxis(SDL_Joystick *joystick, int axis, Sint16 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetJoystickVirtualAxis(joystick, axis, value))
     {
@@ -4866,7 +4866,7 @@ inline bool SetJoystickVirtualAxis(SDL_Joystick *joystick, int axis, Sint16 valu
     }
 }
 
-inline bool SetJoystickVirtualBall(SDL_Joystick *joystick, int ball, Sint16 xrel, Sint16 yrel, std::source_location location = std::source_location::current())
+inline void SetJoystickVirtualBall(SDL_Joystick *joystick, int ball, Sint16 xrel, Sint16 yrel, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetJoystickVirtualBall(joystick, ball, xrel, yrel))
     {
@@ -4874,7 +4874,7 @@ inline bool SetJoystickVirtualBall(SDL_Joystick *joystick, int ball, Sint16 xrel
     }
 }
 
-inline bool SetJoystickVirtualButton(SDL_Joystick *joystick, int button, bool down, std::source_location location = std::source_location::current())
+inline void SetJoystickVirtualButton(SDL_Joystick *joystick, int button, bool down, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetJoystickVirtualButton(joystick, button, down))
     {
@@ -4882,7 +4882,7 @@ inline bool SetJoystickVirtualButton(SDL_Joystick *joystick, int button, bool do
     }
 }
 
-inline bool SetJoystickVirtualHat(SDL_Joystick *joystick, int hat, Uint8 value, std::source_location location = std::source_location::current())
+inline void SetJoystickVirtualHat(SDL_Joystick *joystick, int hat, Uint8 value, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetJoystickVirtualHat(joystick, hat, value))
     {
@@ -4890,7 +4890,7 @@ inline bool SetJoystickVirtualHat(SDL_Joystick *joystick, int hat, Uint8 value, 
     }
 }
 
-inline bool SetJoystickVirtualTouchpad(SDL_Joystick *joystick, int touchpad, int finger, bool down, float x, float y, float pressure, std::source_location location = std::source_location::current())
+inline void SetJoystickVirtualTouchpad(SDL_Joystick *joystick, int touchpad, int finger, bool down, float x, float y, float pressure, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetJoystickVirtualTouchpad(joystick, touchpad, finger, down, x, y, pressure))
     {
@@ -4898,7 +4898,7 @@ inline bool SetJoystickVirtualTouchpad(SDL_Joystick *joystick, int touchpad, int
     }
 }
 
-inline bool SendJoystickVirtualSensorData(SDL_Joystick *joystick, SDL_SensorType type, Uint64 sensor_timestamp, const float *data, int num_values, std::source_location location = std::source_location::current())
+inline void SendJoystickVirtualSensorData(SDL_Joystick *joystick, SDL_SensorType type, Uint64 sensor_timestamp, const float *data, int num_values, std::source_location location = std::source_location::current())
 {
     if (!SDL_SendJoystickVirtualSensorData(joystick, type, sensor_timestamp, data, num_values))
     {
@@ -4911,7 +4911,7 @@ inline SDL_PropertiesID GetJoystickProperties(SDL_Joystick *joystick)
     return SDL_GetJoystickProperties(joystick);
 }
 
-inline const char * GetJoystickName(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
+inline const char *GetJoystickName(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetJoystickName(joystick);
     if (!result)
@@ -4921,7 +4921,7 @@ inline const char * GetJoystickName(SDL_Joystick *joystick, std::source_location
     return result;
 }
 
-inline const char * GetJoystickPath(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
+inline const char *GetJoystickPath(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetJoystickPath(joystick);
     if (!result)
@@ -4936,7 +4936,7 @@ inline int GetJoystickPlayerIndex(SDL_Joystick *joystick)
     return SDL_GetJoystickPlayerIndex(joystick);
 }
 
-inline bool SetJoystickPlayerIndex(SDL_Joystick *joystick, int player_index, std::source_location location = std::source_location::current())
+inline void SetJoystickPlayerIndex(SDL_Joystick *joystick, int player_index, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetJoystickPlayerIndex(joystick, player_index))
     {
@@ -4969,7 +4969,7 @@ inline Uint16 GetJoystickFirmwareVersion(SDL_Joystick *joystick)
     return SDL_GetJoystickFirmwareVersion(joystick);
 }
 
-inline const char * GetJoystickSerial(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
+inline const char *GetJoystickSerial(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetJoystickSerial(joystick);
     if (!result)
@@ -4989,7 +4989,7 @@ inline void GetJoystickGUIDInfo(SDL_GUID guid, Uint16 *vendor, Uint16 *product, 
     SDL_GetJoystickGUIDInfo(guid, vendor, product, version, crc16);
 }
 
-inline bool JoystickConnected(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
+inline void JoystickConnected(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
 {
     if (!SDL_JoystickConnected(joystick))
     {
@@ -5027,7 +5027,7 @@ inline void SetJoystickEventsEnabled(bool enabled)
     SDL_SetJoystickEventsEnabled(enabled);
 }
 
-inline bool JoystickEventsEnabled(std::source_location location = std::source_location::current())
+inline void JoystickEventsEnabled(std::source_location location = std::source_location::current())
 {
     if (!SDL_JoystickEventsEnabled())
     {
@@ -5045,7 +5045,7 @@ inline Sint16 GetJoystickAxis(SDL_Joystick *joystick, int axis)
     return SDL_GetJoystickAxis(joystick, axis);
 }
 
-inline bool GetJoystickAxisInitialState(SDL_Joystick *joystick, int axis, Sint16 *state, std::source_location location = std::source_location::current())
+inline void GetJoystickAxisInitialState(SDL_Joystick *joystick, int axis, Sint16 *state, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetJoystickAxisInitialState(joystick, axis, state))
     {
@@ -5053,7 +5053,7 @@ inline bool GetJoystickAxisInitialState(SDL_Joystick *joystick, int axis, Sint16
     }
 }
 
-inline bool GetJoystickBall(SDL_Joystick *joystick, int ball, int *dx, int *dy, std::source_location location = std::source_location::current())
+inline void GetJoystickBall(SDL_Joystick *joystick, int ball, int *dx, int *dy, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetJoystickBall(joystick, ball, dx, dy))
     {
@@ -5066,7 +5066,7 @@ inline Uint8 GetJoystickHat(SDL_Joystick *joystick, int hat)
     return SDL_GetJoystickHat(joystick, hat);
 }
 
-inline bool GetJoystickButton(SDL_Joystick *joystick, int button, std::source_location location = std::source_location::current())
+inline void GetJoystickButton(SDL_Joystick *joystick, int button, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetJoystickButton(joystick, button))
     {
@@ -5074,7 +5074,7 @@ inline bool GetJoystickButton(SDL_Joystick *joystick, int button, std::source_lo
     }
 }
 
-inline bool RumbleJoystick(SDL_Joystick *joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms, std::source_location location = std::source_location::current())
+inline void RumbleJoystick(SDL_Joystick *joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms, std::source_location location = std::source_location::current())
 {
     if (!SDL_RumbleJoystick(joystick, low_frequency_rumble, high_frequency_rumble, duration_ms))
     {
@@ -5082,7 +5082,7 @@ inline bool RumbleJoystick(SDL_Joystick *joystick, Uint16 low_frequency_rumble, 
     }
 }
 
-inline bool RumbleJoystickTriggers(SDL_Joystick *joystick, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms, std::source_location location = std::source_location::current())
+inline void RumbleJoystickTriggers(SDL_Joystick *joystick, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms, std::source_location location = std::source_location::current())
 {
     if (!SDL_RumbleJoystickTriggers(joystick, left_rumble, right_rumble, duration_ms))
     {
@@ -5090,7 +5090,7 @@ inline bool RumbleJoystickTriggers(SDL_Joystick *joystick, Uint16 left_rumble, U
     }
 }
 
-inline bool SetJoystickLED(SDL_Joystick *joystick, Uint8 red, Uint8 green, Uint8 blue, std::source_location location = std::source_location::current())
+inline void SetJoystickLED(SDL_Joystick *joystick, Uint8 red, Uint8 green, Uint8 blue, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetJoystickLED(joystick, red, green, blue))
     {
@@ -5098,7 +5098,7 @@ inline bool SetJoystickLED(SDL_Joystick *joystick, Uint8 red, Uint8 green, Uint8
     }
 }
 
-inline bool SendJoystickEffect(SDL_Joystick *joystick, const void *data, int size, std::source_location location = std::source_location::current())
+inline void SendJoystickEffect(SDL_Joystick *joystick, const void *data, int size, std::source_location location = std::source_location::current())
 {
     if (!SDL_SendJoystickEffect(joystick, data, size))
     {
@@ -5136,7 +5136,7 @@ inline int AddGamepadMappingsFromFile(const char *file)
     return SDL_AddGamepadMappingsFromFile(file);
 }
 
-inline bool ReloadGamepadMappings(std::source_location location = std::source_location::current())
+inline void ReloadGamepadMappings(std::source_location location = std::source_location::current())
 {
     if (!SDL_ReloadGamepadMappings())
     {
@@ -5144,7 +5144,7 @@ inline bool ReloadGamepadMappings(std::source_location location = std::source_lo
     }
 }
 
-inline char ** GetGamepadMappings(int *count, std::source_location location = std::source_location::current())
+inline char **GetGamepadMappings(int *count, std::source_location location = std::source_location::current())
 {
     char **result = SDL_GetGamepadMappings(count);
     if (!result)
@@ -5154,7 +5154,7 @@ inline char ** GetGamepadMappings(int *count, std::source_location location = st
     return result;
 }
 
-inline char * GetGamepadMappingForGUID(SDL_GUID guid, std::source_location location = std::source_location::current())
+inline char *GetGamepadMappingForGUID(SDL_GUID guid, std::source_location location = std::source_location::current())
 {
     char *result = SDL_GetGamepadMappingForGUID(guid);
     if (!result)
@@ -5164,7 +5164,7 @@ inline char * GetGamepadMappingForGUID(SDL_GUID guid, std::source_location locat
     return result;
 }
 
-inline char * GetGamepadMapping(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
+inline char *GetGamepadMapping(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
 {
     char *result = SDL_GetGamepadMapping(gamepad);
     if (!result)
@@ -5174,7 +5174,7 @@ inline char * GetGamepadMapping(SDL_Gamepad *gamepad, std::source_location locat
     return result;
 }
 
-inline bool SetGamepadMapping(SDL_JoystickID instance_id, const char *mapping, std::source_location location = std::source_location::current())
+inline void SetGamepadMapping(SDL_JoystickID instance_id, const char *mapping, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetGamepadMapping(instance_id, mapping))
     {
@@ -5182,7 +5182,7 @@ inline bool SetGamepadMapping(SDL_JoystickID instance_id, const char *mapping, s
     }
 }
 
-inline bool HasGamepad(std::source_location location = std::source_location::current())
+inline void HasGamepad(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasGamepad())
     {
@@ -5190,7 +5190,7 @@ inline bool HasGamepad(std::source_location location = std::source_location::cur
     }
 }
 
-inline SDL_JoystickID * GetGamepads(int *count, std::source_location location = std::source_location::current())
+inline SDL_JoystickID *GetGamepads(int *count, std::source_location location = std::source_location::current())
 {
     SDL_JoystickID *result = SDL_GetGamepads(count);
     if (!result)
@@ -5200,7 +5200,7 @@ inline SDL_JoystickID * GetGamepads(int *count, std::source_location location = 
     return result;
 }
 
-inline bool IsGamepad(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline void IsGamepad(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     if (!SDL_IsGamepad(instance_id))
     {
@@ -5208,7 +5208,7 @@ inline bool IsGamepad(SDL_JoystickID instance_id, std::source_location location 
     }
 }
 
-inline const char * GetGamepadNameForID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline const char *GetGamepadNameForID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGamepadNameForID(instance_id);
     if (!result)
@@ -5218,7 +5218,7 @@ inline const char * GetGamepadNameForID(SDL_JoystickID instance_id, std::source_
     return result;
 }
 
-inline const char * GetGamepadPathForID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline const char *GetGamepadPathForID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGamepadPathForID(instance_id);
     if (!result)
@@ -5263,7 +5263,7 @@ inline SDL_GamepadType GetRealGamepadTypeForID(SDL_JoystickID instance_id)
     return SDL_GetRealGamepadTypeForID(instance_id);
 }
 
-inline char * GetGamepadMappingForID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline char *GetGamepadMappingForID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     char *result = SDL_GetGamepadMappingForID(instance_id);
     if (!result)
@@ -5273,7 +5273,7 @@ inline char * GetGamepadMappingForID(SDL_JoystickID instance_id, std::source_loc
     return result;
 }
 
-inline SDL_Gamepad * OpenGamepad(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline SDL_Gamepad *OpenGamepad(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     SDL_Gamepad *result = SDL_OpenGamepad(instance_id);
     if (!result)
@@ -5283,7 +5283,7 @@ inline SDL_Gamepad * OpenGamepad(SDL_JoystickID instance_id, std::source_locatio
     return result;
 }
 
-inline SDL_Gamepad * GetGamepadFromID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
+inline SDL_Gamepad *GetGamepadFromID(SDL_JoystickID instance_id, std::source_location location = std::source_location::current())
 {
     SDL_Gamepad *result = SDL_GetGamepadFromID(instance_id);
     if (!result)
@@ -5293,7 +5293,7 @@ inline SDL_Gamepad * GetGamepadFromID(SDL_JoystickID instance_id, std::source_lo
     return result;
 }
 
-inline SDL_Gamepad * GetGamepadFromPlayerIndex(int player_index, std::source_location location = std::source_location::current())
+inline SDL_Gamepad *GetGamepadFromPlayerIndex(int player_index, std::source_location location = std::source_location::current())
 {
     SDL_Gamepad *result = SDL_GetGamepadFromPlayerIndex(player_index);
     if (!result)
@@ -5313,7 +5313,7 @@ inline SDL_JoystickID GetGamepadID(SDL_Gamepad *gamepad)
     return SDL_GetGamepadID(gamepad);
 }
 
-inline const char * GetGamepadName(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
+inline const char *GetGamepadName(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGamepadName(gamepad);
     if (!result)
@@ -5323,7 +5323,7 @@ inline const char * GetGamepadName(SDL_Gamepad *gamepad, std::source_location lo
     return result;
 }
 
-inline const char * GetGamepadPath(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
+inline const char *GetGamepadPath(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGamepadPath(gamepad);
     if (!result)
@@ -5348,7 +5348,7 @@ inline int GetGamepadPlayerIndex(SDL_Gamepad *gamepad)
     return SDL_GetGamepadPlayerIndex(gamepad);
 }
 
-inline bool SetGamepadPlayerIndex(SDL_Gamepad *gamepad, int player_index, std::source_location location = std::source_location::current())
+inline void SetGamepadPlayerIndex(SDL_Gamepad *gamepad, int player_index, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetGamepadPlayerIndex(gamepad, player_index))
     {
@@ -5376,7 +5376,7 @@ inline Uint16 GetGamepadFirmwareVersion(SDL_Gamepad *gamepad)
     return SDL_GetGamepadFirmwareVersion(gamepad);
 }
 
-inline const char * GetGamepadSerial(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
+inline const char *GetGamepadSerial(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGamepadSerial(gamepad);
     if (!result)
@@ -5401,7 +5401,7 @@ inline SDL_PowerState GetGamepadPowerInfo(SDL_Gamepad *gamepad, int *percent)
     return SDL_GetGamepadPowerInfo(gamepad, percent);
 }
 
-inline bool GamepadConnected(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
+inline void GamepadConnected(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
 {
     if (!SDL_GamepadConnected(gamepad))
     {
@@ -5409,7 +5409,7 @@ inline bool GamepadConnected(SDL_Gamepad *gamepad, std::source_location location
     }
 }
 
-inline SDL_Joystick * GetGamepadJoystick(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
+inline SDL_Joystick *GetGamepadJoystick(SDL_Gamepad *gamepad, std::source_location location = std::source_location::current())
 {
     SDL_Joystick *result = SDL_GetGamepadJoystick(gamepad);
     if (!result)
@@ -5424,7 +5424,7 @@ inline void SetGamepadEventsEnabled(bool enabled)
     SDL_SetGamepadEventsEnabled(enabled);
 }
 
-inline bool GamepadEventsEnabled(std::source_location location = std::source_location::current())
+inline void GamepadEventsEnabled(std::source_location location = std::source_location::current())
 {
     if (!SDL_GamepadEventsEnabled())
     {
@@ -5432,7 +5432,7 @@ inline bool GamepadEventsEnabled(std::source_location location = std::source_loc
     }
 }
 
-inline SDL_GamepadBinding ** GetGamepadBindings(SDL_Gamepad *gamepad, int *count, std::source_location location = std::source_location::current())
+inline SDL_GamepadBinding **GetGamepadBindings(SDL_Gamepad *gamepad, int *count, std::source_location location = std::source_location::current())
 {
     SDL_GamepadBinding **result = SDL_GetGamepadBindings(gamepad, count);
     if (!result)
@@ -5452,7 +5452,7 @@ inline SDL_GamepadType GetGamepadTypeFromString(const char *str)
     return SDL_GetGamepadTypeFromString(str);
 }
 
-inline const char * GetGamepadStringForType(SDL_GamepadType type, std::source_location location = std::source_location::current())
+inline const char *GetGamepadStringForType(SDL_GamepadType type, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGamepadStringForType(type);
     if (!result)
@@ -5467,7 +5467,7 @@ inline SDL_GamepadAxis GetGamepadAxisFromString(const char *str)
     return SDL_GetGamepadAxisFromString(str);
 }
 
-inline const char * GetGamepadStringForAxis(SDL_GamepadAxis axis, std::source_location location = std::source_location::current())
+inline const char *GetGamepadStringForAxis(SDL_GamepadAxis axis, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGamepadStringForAxis(axis);
     if (!result)
@@ -5477,7 +5477,7 @@ inline const char * GetGamepadStringForAxis(SDL_GamepadAxis axis, std::source_lo
     return result;
 }
 
-inline bool GamepadHasAxis(SDL_Gamepad *gamepad, SDL_GamepadAxis axis, std::source_location location = std::source_location::current())
+inline void GamepadHasAxis(SDL_Gamepad *gamepad, SDL_GamepadAxis axis, std::source_location location = std::source_location::current())
 {
     if (!SDL_GamepadHasAxis(gamepad, axis))
     {
@@ -5495,7 +5495,7 @@ inline SDL_GamepadButton GetGamepadButtonFromString(const char *str)
     return SDL_GetGamepadButtonFromString(str);
 }
 
-inline const char * GetGamepadStringForButton(SDL_GamepadButton button, std::source_location location = std::source_location::current())
+inline const char *GetGamepadStringForButton(SDL_GamepadButton button, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGamepadStringForButton(button);
     if (!result)
@@ -5505,7 +5505,7 @@ inline const char * GetGamepadStringForButton(SDL_GamepadButton button, std::sou
     return result;
 }
 
-inline bool GamepadHasButton(SDL_Gamepad *gamepad, SDL_GamepadButton button, std::source_location location = std::source_location::current())
+inline void GamepadHasButton(SDL_Gamepad *gamepad, SDL_GamepadButton button, std::source_location location = std::source_location::current())
 {
     if (!SDL_GamepadHasButton(gamepad, button))
     {
@@ -5513,7 +5513,7 @@ inline bool GamepadHasButton(SDL_Gamepad *gamepad, SDL_GamepadButton button, std
     }
 }
 
-inline bool GetGamepadButton(SDL_Gamepad *gamepad, SDL_GamepadButton button, std::source_location location = std::source_location::current())
+inline void GetGamepadButton(SDL_Gamepad *gamepad, SDL_GamepadButton button, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetGamepadButton(gamepad, button))
     {
@@ -5541,7 +5541,7 @@ inline int GetNumGamepadTouchpadFingers(SDL_Gamepad *gamepad, int touchpad)
     return SDL_GetNumGamepadTouchpadFingers(gamepad, touchpad);
 }
 
-inline bool GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, bool *down, float *x, float *y, float *pressure, std::source_location location = std::source_location::current())
+inline void GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, bool *down, float *x, float *y, float *pressure, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetGamepadTouchpadFinger(gamepad, touchpad, finger, down, x, y, pressure))
     {
@@ -5549,7 +5549,7 @@ inline bool GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int fin
     }
 }
 
-inline bool GamepadHasSensor(SDL_Gamepad *gamepad, SDL_SensorType type, std::source_location location = std::source_location::current())
+inline void GamepadHasSensor(SDL_Gamepad *gamepad, SDL_SensorType type, std::source_location location = std::source_location::current())
 {
     if (!SDL_GamepadHasSensor(gamepad, type))
     {
@@ -5557,7 +5557,7 @@ inline bool GamepadHasSensor(SDL_Gamepad *gamepad, SDL_SensorType type, std::sou
     }
 }
 
-inline bool SetGamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type, bool enabled, std::source_location location = std::source_location::current())
+inline void SetGamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type, bool enabled, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetGamepadSensorEnabled(gamepad, type, enabled))
     {
@@ -5565,7 +5565,7 @@ inline bool SetGamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type, b
     }
 }
 
-inline bool GamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type, std::source_location location = std::source_location::current())
+inline void GamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type, std::source_location location = std::source_location::current())
 {
     if (!SDL_GamepadSensorEnabled(gamepad, type))
     {
@@ -5578,7 +5578,7 @@ inline float GetGamepadSensorDataRate(SDL_Gamepad *gamepad, SDL_SensorType type)
     return SDL_GetGamepadSensorDataRate(gamepad, type);
 }
 
-inline bool GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, float *data, int num_values, std::source_location location = std::source_location::current())
+inline void GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, float *data, int num_values, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetGamepadSensorData(gamepad, type, data, num_values))
     {
@@ -5586,7 +5586,7 @@ inline bool GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, floa
     }
 }
 
-inline bool RumbleGamepad(SDL_Gamepad *gamepad, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms, std::source_location location = std::source_location::current())
+inline void RumbleGamepad(SDL_Gamepad *gamepad, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms, std::source_location location = std::source_location::current())
 {
     if (!SDL_RumbleGamepad(gamepad, low_frequency_rumble, high_frequency_rumble, duration_ms))
     {
@@ -5594,7 +5594,7 @@ inline bool RumbleGamepad(SDL_Gamepad *gamepad, Uint16 low_frequency_rumble, Uin
     }
 }
 
-inline bool RumbleGamepadTriggers(SDL_Gamepad *gamepad, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms, std::source_location location = std::source_location::current())
+inline void RumbleGamepadTriggers(SDL_Gamepad *gamepad, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms, std::source_location location = std::source_location::current())
 {
     if (!SDL_RumbleGamepadTriggers(gamepad, left_rumble, right_rumble, duration_ms))
     {
@@ -5602,7 +5602,7 @@ inline bool RumbleGamepadTriggers(SDL_Gamepad *gamepad, Uint16 left_rumble, Uint
     }
 }
 
-inline bool SetGamepadLED(SDL_Gamepad *gamepad, Uint8 red, Uint8 green, Uint8 blue, std::source_location location = std::source_location::current())
+inline void SetGamepadLED(SDL_Gamepad *gamepad, Uint8 red, Uint8 green, Uint8 blue, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetGamepadLED(gamepad, red, green, blue))
     {
@@ -5610,7 +5610,7 @@ inline bool SetGamepadLED(SDL_Gamepad *gamepad, Uint8 red, Uint8 green, Uint8 bl
     }
 }
 
-inline bool SendGamepadEffect(SDL_Gamepad *gamepad, const void *data, int size, std::source_location location = std::source_location::current())
+inline void SendGamepadEffect(SDL_Gamepad *gamepad, const void *data, int size, std::source_location location = std::source_location::current())
 {
     if (!SDL_SendGamepadEffect(gamepad, data, size))
     {
@@ -5623,7 +5623,7 @@ inline void CloseGamepad(SDL_Gamepad *gamepad)
     SDL_CloseGamepad(gamepad);
 }
 
-inline const char * GetGamepadAppleSFSymbolsNameForButton(SDL_Gamepad *gamepad, SDL_GamepadButton button, std::source_location location = std::source_location::current())
+inline const char *GetGamepadAppleSFSymbolsNameForButton(SDL_Gamepad *gamepad, SDL_GamepadButton button, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGamepadAppleSFSymbolsNameForButton(gamepad, button);
     if (!result)
@@ -5633,7 +5633,7 @@ inline const char * GetGamepadAppleSFSymbolsNameForButton(SDL_Gamepad *gamepad, 
     return result;
 }
 
-inline const char * GetGamepadAppleSFSymbolsNameForAxis(SDL_Gamepad *gamepad, SDL_GamepadAxis axis, std::source_location location = std::source_location::current())
+inline const char *GetGamepadAppleSFSymbolsNameForAxis(SDL_Gamepad *gamepad, SDL_GamepadAxis axis, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGamepadAppleSFSymbolsNameForAxis(gamepad, axis);
     if (!result)
@@ -5643,7 +5643,7 @@ inline const char * GetGamepadAppleSFSymbolsNameForAxis(SDL_Gamepad *gamepad, SD
     return result;
 }
 
-inline bool HasKeyboard(std::source_location location = std::source_location::current())
+inline void HasKeyboard(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasKeyboard())
     {
@@ -5651,7 +5651,7 @@ inline bool HasKeyboard(std::source_location location = std::source_location::cu
     }
 }
 
-inline SDL_KeyboardID * GetKeyboards(int *count, std::source_location location = std::source_location::current())
+inline SDL_KeyboardID *GetKeyboards(int *count, std::source_location location = std::source_location::current())
 {
     SDL_KeyboardID *result = SDL_GetKeyboards(count);
     if (!result)
@@ -5661,7 +5661,7 @@ inline SDL_KeyboardID * GetKeyboards(int *count, std::source_location location =
     return result;
 }
 
-inline const char * GetKeyboardNameForID(SDL_KeyboardID instance_id, std::source_location location = std::source_location::current())
+inline const char *GetKeyboardNameForID(SDL_KeyboardID instance_id, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetKeyboardNameForID(instance_id);
     if (!result)
@@ -5671,7 +5671,7 @@ inline const char * GetKeyboardNameForID(SDL_KeyboardID instance_id, std::source
     return result;
 }
 
-inline SDL_Window * GetKeyboardFocus(std::source_location location = std::source_location::current())
+inline SDL_Window *GetKeyboardFocus(std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_GetKeyboardFocus();
     if (!result)
@@ -5681,7 +5681,7 @@ inline SDL_Window * GetKeyboardFocus(std::source_location location = std::source
     return result;
 }
 
-inline const bool * GetKeyboardState(int *numkeys, std::source_location location = std::source_location::current())
+inline const bool *GetKeyboardState(int *numkeys, std::source_location location = std::source_location::current())
 {
     const bool *result = SDL_GetKeyboardState(numkeys);
     if (!result)
@@ -5716,7 +5716,7 @@ inline SDL_Scancode GetScancodeFromKey(SDL_Keycode key, SDL_Keymod *modstate)
     return SDL_GetScancodeFromKey(key, modstate);
 }
 
-inline bool SetScancodeName(SDL_Scancode scancode, const char *name, std::source_location location = std::source_location::current())
+inline void SetScancodeName(SDL_Scancode scancode, const char *name, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetScancodeName(scancode, name))
     {
@@ -5724,7 +5724,7 @@ inline bool SetScancodeName(SDL_Scancode scancode, const char *name, std::source
     }
 }
 
-inline const char * GetScancodeName(SDL_Scancode scancode, std::source_location location = std::source_location::current())
+inline const char *GetScancodeName(SDL_Scancode scancode, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetScancodeName(scancode);
     if (!result)
@@ -5739,7 +5739,7 @@ inline SDL_Scancode GetScancodeFromName(const char *name)
     return SDL_GetScancodeFromName(name);
 }
 
-inline const char * GetKeyName(SDL_Keycode key, std::source_location location = std::source_location::current())
+inline const char *GetKeyName(SDL_Keycode key, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetKeyName(key);
     if (!result)
@@ -5754,7 +5754,7 @@ inline SDL_Keycode GetKeyFromName(const char *name)
     return SDL_GetKeyFromName(name);
 }
 
-inline bool StartTextInput(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void StartTextInput(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_StartTextInput(window))
     {
@@ -5762,7 +5762,7 @@ inline bool StartTextInput(SDL_Window *window, std::source_location location = s
     }
 }
 
-inline bool StartTextInputWithProperties(SDL_Window *window, SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline void StartTextInputWithProperties(SDL_Window *window, SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     if (!SDL_StartTextInputWithProperties(window, props))
     {
@@ -5770,7 +5770,7 @@ inline bool StartTextInputWithProperties(SDL_Window *window, SDL_PropertiesID pr
     }
 }
 
-inline bool TextInputActive(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void TextInputActive(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_TextInputActive(window))
     {
@@ -5778,7 +5778,7 @@ inline bool TextInputActive(SDL_Window *window, std::source_location location = 
     }
 }
 
-inline bool StopTextInput(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void StopTextInput(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_StopTextInput(window))
     {
@@ -5786,7 +5786,7 @@ inline bool StopTextInput(SDL_Window *window, std::source_location location = st
     }
 }
 
-inline bool ClearComposition(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void ClearComposition(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_ClearComposition(window))
     {
@@ -5794,7 +5794,7 @@ inline bool ClearComposition(SDL_Window *window, std::source_location location =
     }
 }
 
-inline bool SetTextInputArea(SDL_Window *window, const SDL_Rect *rect, int cursor, std::source_location location = std::source_location::current())
+inline void SetTextInputArea(SDL_Window *window, const SDL_Rect *rect, int cursor, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetTextInputArea(window, rect, cursor))
     {
@@ -5802,7 +5802,7 @@ inline bool SetTextInputArea(SDL_Window *window, const SDL_Rect *rect, int curso
     }
 }
 
-inline bool GetTextInputArea(SDL_Window *window, SDL_Rect *rect, int *cursor, std::source_location location = std::source_location::current())
+inline void GetTextInputArea(SDL_Window *window, SDL_Rect *rect, int *cursor, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetTextInputArea(window, rect, cursor))
     {
@@ -5810,7 +5810,7 @@ inline bool GetTextInputArea(SDL_Window *window, SDL_Rect *rect, int *cursor, st
     }
 }
 
-inline bool HasScreenKeyboardSupport(std::source_location location = std::source_location::current())
+inline void HasScreenKeyboardSupport(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasScreenKeyboardSupport())
     {
@@ -5818,7 +5818,7 @@ inline bool HasScreenKeyboardSupport(std::source_location location = std::source
     }
 }
 
-inline bool ScreenKeyboardShown(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void ScreenKeyboardShown(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_ScreenKeyboardShown(window))
     {
@@ -5826,7 +5826,7 @@ inline bool ScreenKeyboardShown(SDL_Window *window, std::source_location locatio
     }
 }
 
-inline bool HasMouse(std::source_location location = std::source_location::current())
+inline void HasMouse(std::source_location location = std::source_location::current())
 {
     if (!SDL_HasMouse())
     {
@@ -5834,7 +5834,7 @@ inline bool HasMouse(std::source_location location = std::source_location::curre
     }
 }
 
-inline SDL_MouseID * GetMice(int *count, std::source_location location = std::source_location::current())
+inline SDL_MouseID *GetMice(int *count, std::source_location location = std::source_location::current())
 {
     SDL_MouseID *result = SDL_GetMice(count);
     if (!result)
@@ -5844,7 +5844,7 @@ inline SDL_MouseID * GetMice(int *count, std::source_location location = std::so
     return result;
 }
 
-inline const char * GetMouseNameForID(SDL_MouseID instance_id, std::source_location location = std::source_location::current())
+inline const char *GetMouseNameForID(SDL_MouseID instance_id, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetMouseNameForID(instance_id);
     if (!result)
@@ -5854,7 +5854,7 @@ inline const char * GetMouseNameForID(SDL_MouseID instance_id, std::source_locat
     return result;
 }
 
-inline SDL_Window * GetMouseFocus(std::source_location location = std::source_location::current())
+inline SDL_Window *GetMouseFocus(std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_GetMouseFocus();
     if (!result)
@@ -5884,7 +5884,7 @@ inline void WarpMouseInWindow(SDL_Window *window, float x, float y)
     SDL_WarpMouseInWindow(window, x, y);
 }
 
-inline bool WarpMouseGlobal(float x, float y, std::source_location location = std::source_location::current())
+inline void WarpMouseGlobal(float x, float y, std::source_location location = std::source_location::current())
 {
     if (!SDL_WarpMouseGlobal(x, y))
     {
@@ -5892,7 +5892,7 @@ inline bool WarpMouseGlobal(float x, float y, std::source_location location = st
     }
 }
 
-inline bool SetWindowRelativeMouseMode(SDL_Window *window, bool enabled, std::source_location location = std::source_location::current())
+inline void SetWindowRelativeMouseMode(SDL_Window *window, bool enabled, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetWindowRelativeMouseMode(window, enabled))
     {
@@ -5900,7 +5900,7 @@ inline bool SetWindowRelativeMouseMode(SDL_Window *window, bool enabled, std::so
     }
 }
 
-inline bool GetWindowRelativeMouseMode(SDL_Window *window, std::source_location location = std::source_location::current())
+inline void GetWindowRelativeMouseMode(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetWindowRelativeMouseMode(window))
     {
@@ -5908,7 +5908,7 @@ inline bool GetWindowRelativeMouseMode(SDL_Window *window, std::source_location 
     }
 }
 
-inline bool CaptureMouse(bool enabled, std::source_location location = std::source_location::current())
+inline void CaptureMouse(bool enabled, std::source_location location = std::source_location::current())
 {
     if (!SDL_CaptureMouse(enabled))
     {
@@ -5916,7 +5916,7 @@ inline bool CaptureMouse(bool enabled, std::source_location location = std::sour
     }
 }
 
-inline SDL_Cursor * CreateCursor(const Uint8 *data, const Uint8 *mask, int w, int h, int hot_x, int hot_y, std::source_location location = std::source_location::current())
+inline SDL_Cursor *CreateCursor(const Uint8 *data, const Uint8 *mask, int w, int h, int hot_x, int hot_y, std::source_location location = std::source_location::current())
 {
     SDL_Cursor *result = SDL_CreateCursor(data, mask, w, h, hot_x, hot_y);
     if (!result)
@@ -5926,7 +5926,7 @@ inline SDL_Cursor * CreateCursor(const Uint8 *data, const Uint8 *mask, int w, in
     return result;
 }
 
-inline SDL_Cursor * CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y, std::source_location location = std::source_location::current())
+inline SDL_Cursor *CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y, std::source_location location = std::source_location::current())
 {
     SDL_Cursor *result = SDL_CreateColorCursor(surface, hot_x, hot_y);
     if (!result)
@@ -5936,7 +5936,7 @@ inline SDL_Cursor * CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y
     return result;
 }
 
-inline SDL_Cursor * CreateSystemCursor(SDL_SystemCursor id, std::source_location location = std::source_location::current())
+inline SDL_Cursor *CreateSystemCursor(SDL_SystemCursor id, std::source_location location = std::source_location::current())
 {
     SDL_Cursor *result = SDL_CreateSystemCursor(id);
     if (!result)
@@ -5946,7 +5946,7 @@ inline SDL_Cursor * CreateSystemCursor(SDL_SystemCursor id, std::source_location
     return result;
 }
 
-inline bool SetCursor(SDL_Cursor *cursor, std::source_location location = std::source_location::current())
+inline void SetCursor(SDL_Cursor *cursor, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetCursor(cursor))
     {
@@ -5954,7 +5954,7 @@ inline bool SetCursor(SDL_Cursor *cursor, std::source_location location = std::s
     }
 }
 
-inline SDL_Cursor * GetCursor(std::source_location location = std::source_location::current())
+inline SDL_Cursor *GetCursor(std::source_location location = std::source_location::current())
 {
     SDL_Cursor *result = SDL_GetCursor();
     if (!result)
@@ -5964,7 +5964,7 @@ inline SDL_Cursor * GetCursor(std::source_location location = std::source_locati
     return result;
 }
 
-inline SDL_Cursor * GetDefaultCursor(std::source_location location = std::source_location::current())
+inline SDL_Cursor *GetDefaultCursor(std::source_location location = std::source_location::current())
 {
     SDL_Cursor *result = SDL_GetDefaultCursor();
     if (!result)
@@ -5979,7 +5979,7 @@ inline void DestroyCursor(SDL_Cursor *cursor)
     SDL_DestroyCursor(cursor);
 }
 
-inline bool ShowCursor(std::source_location location = std::source_location::current())
+inline void ShowCursor(std::source_location location = std::source_location::current())
 {
     if (!SDL_ShowCursor())
     {
@@ -5987,7 +5987,7 @@ inline bool ShowCursor(std::source_location location = std::source_location::cur
     }
 }
 
-inline bool HideCursor(std::source_location location = std::source_location::current())
+inline void HideCursor(std::source_location location = std::source_location::current())
 {
     if (!SDL_HideCursor())
     {
@@ -5995,7 +5995,7 @@ inline bool HideCursor(std::source_location location = std::source_location::cur
     }
 }
 
-inline bool CursorVisible(std::source_location location = std::source_location::current())
+inline void CursorVisible(std::source_location location = std::source_location::current())
 {
     if (!SDL_CursorVisible())
     {
@@ -6003,7 +6003,7 @@ inline bool CursorVisible(std::source_location location = std::source_location::
     }
 }
 
-inline SDL_TouchID * GetTouchDevices(int *count, std::source_location location = std::source_location::current())
+inline SDL_TouchID *GetTouchDevices(int *count, std::source_location location = std::source_location::current())
 {
     SDL_TouchID *result = SDL_GetTouchDevices(count);
     if (!result)
@@ -6013,7 +6013,7 @@ inline SDL_TouchID * GetTouchDevices(int *count, std::source_location location =
     return result;
 }
 
-inline const char * GetTouchDeviceName(SDL_TouchID touchID, std::source_location location = std::source_location::current())
+inline const char *GetTouchDeviceName(SDL_TouchID touchID, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetTouchDeviceName(touchID);
     if (!result)
@@ -6028,7 +6028,7 @@ inline SDL_TouchDeviceType GetTouchDeviceType(SDL_TouchID touchID)
     return SDL_GetTouchDeviceType(touchID);
 }
 
-inline SDL_Finger ** GetTouchFingers(SDL_TouchID touchID, int *count, std::source_location location = std::source_location::current())
+inline SDL_Finger **GetTouchFingers(SDL_TouchID touchID, int *count, std::source_location location = std::source_location::current())
 {
     SDL_Finger **result = SDL_GetTouchFingers(touchID, count);
     if (!result)
@@ -6048,7 +6048,7 @@ inline int PeepEvents(SDL_Event *events, int numevents, SDL_EventAction action, 
     return SDL_PeepEvents(events, numevents, action, minType, maxType);
 }
 
-inline bool HasEvent(Uint32 type, std::source_location location = std::source_location::current())
+inline void HasEvent(Uint32 type, std::source_location location = std::source_location::current())
 {
     if (!SDL_HasEvent(type))
     {
@@ -6056,7 +6056,7 @@ inline bool HasEvent(Uint32 type, std::source_location location = std::source_lo
     }
 }
 
-inline bool HasEvents(Uint32 minType, Uint32 maxType, std::source_location location = std::source_location::current())
+inline void HasEvents(Uint32 minType, Uint32 maxType, std::source_location location = std::source_location::current())
 {
     if (!SDL_HasEvents(minType, maxType))
     {
@@ -6074,7 +6074,7 @@ inline void FlushEvents(Uint32 minType, Uint32 maxType)
     SDL_FlushEvents(minType, maxType);
 }
 
-inline bool PollEvent(SDL_Event *event, std::source_location location = std::source_location::current())
+inline void PollEvent(SDL_Event *event, std::source_location location = std::source_location::current())
 {
     if (!SDL_PollEvent(event))
     {
@@ -6082,7 +6082,7 @@ inline bool PollEvent(SDL_Event *event, std::source_location location = std::sou
     }
 }
 
-inline bool WaitEvent(SDL_Event *event, std::source_location location = std::source_location::current())
+inline void WaitEvent(SDL_Event *event, std::source_location location = std::source_location::current())
 {
     if (!SDL_WaitEvent(event))
     {
@@ -6090,7 +6090,7 @@ inline bool WaitEvent(SDL_Event *event, std::source_location location = std::sou
     }
 }
 
-inline bool WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS, std::source_location location = std::source_location::current())
+inline void WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS, std::source_location location = std::source_location::current())
 {
     if (!SDL_WaitEventTimeout(event, timeoutMS))
     {
@@ -6098,7 +6098,7 @@ inline bool WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS, std::source_loc
     }
 }
 
-inline bool PushEvent(SDL_Event *event, std::source_location location = std::source_location::current())
+inline void PushEvent(SDL_Event *event, std::source_location location = std::source_location::current())
 {
     if (!SDL_PushEvent(event))
     {
@@ -6111,7 +6111,7 @@ inline void SetEventFilter(SDL_EventFilter filter, void *userdata)
     SDL_SetEventFilter(filter, userdata);
 }
 
-inline bool GetEventFilter(SDL_EventFilter *filter, void **userdata, std::source_location location = std::source_location::current())
+inline void GetEventFilter(SDL_EventFilter *filter, void **userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetEventFilter(filter, userdata))
     {
@@ -6119,7 +6119,7 @@ inline bool GetEventFilter(SDL_EventFilter *filter, void **userdata, std::source
     }
 }
 
-inline bool AddEventWatch(SDL_EventFilter filter, void *userdata, std::source_location location = std::source_location::current())
+inline void AddEventWatch(SDL_EventFilter filter, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_AddEventWatch(filter, userdata))
     {
@@ -6142,7 +6142,7 @@ inline void SetEventEnabled(Uint32 type, bool enabled)
     SDL_SetEventEnabled(type, enabled);
 }
 
-inline bool EventEnabled(Uint32 type, std::source_location location = std::source_location::current())
+inline void EventEnabled(Uint32 type, std::source_location location = std::source_location::current())
 {
     if (!SDL_EventEnabled(type))
     {
@@ -6155,7 +6155,7 @@ inline Uint32 RegisterEvents(int numevents)
     return SDL_RegisterEvents(numevents);
 }
 
-inline SDL_Window * GetWindowFromEvent(const SDL_Event *event, std::source_location location = std::source_location::current())
+inline SDL_Window *GetWindowFromEvent(const SDL_Event *event, std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_GetWindowFromEvent(event);
     if (!result)
@@ -6165,7 +6165,7 @@ inline SDL_Window * GetWindowFromEvent(const SDL_Event *event, std::source_locat
     return result;
 }
 
-inline const char * GetBasePath(std::source_location location = std::source_location::current())
+inline const char *GetBasePath(std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetBasePath();
     if (!result)
@@ -6175,7 +6175,7 @@ inline const char * GetBasePath(std::source_location location = std::source_loca
     return result;
 }
 
-inline char * GetPrefPath(const char *org, const char *app, std::source_location location = std::source_location::current())
+inline char *GetPrefPath(const char *org, const char *app, std::source_location location = std::source_location::current())
 {
     char *result = SDL_GetPrefPath(org, app);
     if (!result)
@@ -6185,7 +6185,7 @@ inline char * GetPrefPath(const char *org, const char *app, std::source_location
     return result;
 }
 
-inline const char * GetUserFolder(SDL_Folder folder, std::source_location location = std::source_location::current())
+inline const char *GetUserFolder(SDL_Folder folder, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetUserFolder(folder);
     if (!result)
@@ -6195,7 +6195,7 @@ inline const char * GetUserFolder(SDL_Folder folder, std::source_location locati
     return result;
 }
 
-inline bool CreateDirectory(const char *path, std::source_location location = std::source_location::current())
+inline void CreateDirectory(const char *path, std::source_location location = std::source_location::current())
 {
     if (!SDL_CreateDirectory(path))
     {
@@ -6203,7 +6203,7 @@ inline bool CreateDirectory(const char *path, std::source_location location = st
     }
 }
 
-inline bool EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata, std::source_location location = std::source_location::current())
+inline void EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_EnumerateDirectory(path, callback, userdata))
     {
@@ -6211,7 +6211,7 @@ inline bool EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback 
     }
 }
 
-inline bool RemovePath(const char *path, std::source_location location = std::source_location::current())
+inline void RemovePath(const char *path, std::source_location location = std::source_location::current())
 {
     if (!SDL_RemovePath(path))
     {
@@ -6219,7 +6219,7 @@ inline bool RemovePath(const char *path, std::source_location location = std::so
     }
 }
 
-inline bool RenamePath(const char *oldpath, const char *newpath, std::source_location location = std::source_location::current())
+inline void RenamePath(const char *oldpath, const char *newpath, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenamePath(oldpath, newpath))
     {
@@ -6227,7 +6227,7 @@ inline bool RenamePath(const char *oldpath, const char *newpath, std::source_loc
     }
 }
 
-inline bool CopyFile(const char *oldpath, const char *newpath, std::source_location location = std::source_location::current())
+inline void CopyFile(const char *oldpath, const char *newpath, std::source_location location = std::source_location::current())
 {
     if (!SDL_CopyFile(oldpath, newpath))
     {
@@ -6235,7 +6235,7 @@ inline bool CopyFile(const char *oldpath, const char *newpath, std::source_locat
     }
 }
 
-inline bool GetPathInfo(const char *path, SDL_PathInfo *info, std::source_location location = std::source_location::current())
+inline void GetPathInfo(const char *path, SDL_PathInfo *info, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetPathInfo(path, info))
     {
@@ -6243,7 +6243,7 @@ inline bool GetPathInfo(const char *path, SDL_PathInfo *info, std::source_locati
     }
 }
 
-inline char ** GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count, std::source_location location = std::source_location::current())
+inline char **GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count, std::source_location location = std::source_location::current())
 {
     char **result = SDL_GlobDirectory(path, pattern, flags, count);
     if (!result)
@@ -6253,7 +6253,7 @@ inline char ** GlobDirectory(const char *path, const char *pattern, SDL_GlobFlag
     return result;
 }
 
-inline char * GetCurrentDirectory(std::source_location location = std::source_location::current())
+inline char *GetCurrentDirectory(std::source_location location = std::source_location::current())
 {
     char *result = SDL_GetCurrentDirectory();
     if (!result)
@@ -6263,7 +6263,7 @@ inline char * GetCurrentDirectory(std::source_location location = std::source_lo
     return result;
 }
 
-inline bool GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, const char *name, std::source_location location = std::source_location::current())
+inline void GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, const char *name, std::source_location location = std::source_location::current())
 {
     if (!SDL_GPUSupportsShaderFormats(format_flags, name))
     {
@@ -6271,7 +6271,7 @@ inline bool GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, const cha
     }
 }
 
-inline bool GPUSupportsProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline void GPUSupportsProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     if (!SDL_GPUSupportsProperties(props))
     {
@@ -6279,7 +6279,7 @@ inline bool GPUSupportsProperties(SDL_PropertiesID props, std::source_location l
     }
 }
 
-inline SDL_GPUDevice * CreateGPUDevice(SDL_GPUShaderFormat format_flags, bool debug_mode, const char *name, std::source_location location = std::source_location::current())
+inline SDL_GPUDevice *CreateGPUDevice(SDL_GPUShaderFormat format_flags, bool debug_mode, const char *name, std::source_location location = std::source_location::current())
 {
     SDL_GPUDevice *result = SDL_CreateGPUDevice(format_flags, debug_mode, name);
     if (!result)
@@ -6289,7 +6289,7 @@ inline SDL_GPUDevice * CreateGPUDevice(SDL_GPUShaderFormat format_flags, bool de
     return result;
 }
 
-inline SDL_GPUDevice * CreateGPUDeviceWithProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline SDL_GPUDevice *CreateGPUDeviceWithProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     SDL_GPUDevice *result = SDL_CreateGPUDeviceWithProperties(props);
     if (!result)
@@ -6309,7 +6309,7 @@ inline int GetNumGPUDrivers()
     return SDL_GetNumGPUDrivers();
 }
 
-inline const char * GetGPUDriver(int index, std::source_location location = std::source_location::current())
+inline const char *GetGPUDriver(int index, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGPUDriver(index);
     if (!result)
@@ -6319,7 +6319,7 @@ inline const char * GetGPUDriver(int index, std::source_location location = std:
     return result;
 }
 
-inline const char * GetGPUDeviceDriver(SDL_GPUDevice *device, std::source_location location = std::source_location::current())
+inline const char *GetGPUDeviceDriver(SDL_GPUDevice *device, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetGPUDeviceDriver(device);
     if (!result)
@@ -6334,7 +6334,7 @@ inline SDL_GPUShaderFormat GetGPUShaderFormats(SDL_GPUDevice *device)
     return SDL_GetGPUShaderFormats(device);
 }
 
-inline SDL_GPUComputePipeline * CreateGPUComputePipeline(SDL_GPUDevice *device, const SDL_GPUComputePipelineCreateInfo *createinfo, std::source_location location = std::source_location::current())
+inline SDL_GPUComputePipeline *CreateGPUComputePipeline(SDL_GPUDevice *device, const SDL_GPUComputePipelineCreateInfo *createinfo, std::source_location location = std::source_location::current())
 {
     SDL_GPUComputePipeline *result = SDL_CreateGPUComputePipeline(device, createinfo);
     if (!result)
@@ -6344,7 +6344,7 @@ inline SDL_GPUComputePipeline * CreateGPUComputePipeline(SDL_GPUDevice *device, 
     return result;
 }
 
-inline SDL_GPUGraphicsPipeline * CreateGPUGraphicsPipeline(SDL_GPUDevice *device, const SDL_GPUGraphicsPipelineCreateInfo *createinfo, std::source_location location = std::source_location::current())
+inline SDL_GPUGraphicsPipeline *CreateGPUGraphicsPipeline(SDL_GPUDevice *device, const SDL_GPUGraphicsPipelineCreateInfo *createinfo, std::source_location location = std::source_location::current())
 {
     SDL_GPUGraphicsPipeline *result = SDL_CreateGPUGraphicsPipeline(device, createinfo);
     if (!result)
@@ -6354,7 +6354,7 @@ inline SDL_GPUGraphicsPipeline * CreateGPUGraphicsPipeline(SDL_GPUDevice *device
     return result;
 }
 
-inline SDL_GPUSampler * CreateGPUSampler(SDL_GPUDevice *device, const SDL_GPUSamplerCreateInfo *createinfo, std::source_location location = std::source_location::current())
+inline SDL_GPUSampler *CreateGPUSampler(SDL_GPUDevice *device, const SDL_GPUSamplerCreateInfo *createinfo, std::source_location location = std::source_location::current())
 {
     SDL_GPUSampler *result = SDL_CreateGPUSampler(device, createinfo);
     if (!result)
@@ -6364,7 +6364,7 @@ inline SDL_GPUSampler * CreateGPUSampler(SDL_GPUDevice *device, const SDL_GPUSam
     return result;
 }
 
-inline SDL_GPUShader * CreateGPUShader(SDL_GPUDevice *device, const SDL_GPUShaderCreateInfo *createinfo, std::source_location location = std::source_location::current())
+inline SDL_GPUShader *CreateGPUShader(SDL_GPUDevice *device, const SDL_GPUShaderCreateInfo *createinfo, std::source_location location = std::source_location::current())
 {
     SDL_GPUShader *result = SDL_CreateGPUShader(device, createinfo);
     if (!result)
@@ -6374,7 +6374,7 @@ inline SDL_GPUShader * CreateGPUShader(SDL_GPUDevice *device, const SDL_GPUShade
     return result;
 }
 
-inline SDL_GPUTexture * CreateGPUTexture(SDL_GPUDevice *device, const SDL_GPUTextureCreateInfo *createinfo, std::source_location location = std::source_location::current())
+inline SDL_GPUTexture *CreateGPUTexture(SDL_GPUDevice *device, const SDL_GPUTextureCreateInfo *createinfo, std::source_location location = std::source_location::current())
 {
     SDL_GPUTexture *result = SDL_CreateGPUTexture(device, createinfo);
     if (!result)
@@ -6384,7 +6384,7 @@ inline SDL_GPUTexture * CreateGPUTexture(SDL_GPUDevice *device, const SDL_GPUTex
     return result;
 }
 
-inline SDL_GPUBuffer * CreateGPUBuffer(SDL_GPUDevice *device, const SDL_GPUBufferCreateInfo *createinfo, std::source_location location = std::source_location::current())
+inline SDL_GPUBuffer *CreateGPUBuffer(SDL_GPUDevice *device, const SDL_GPUBufferCreateInfo *createinfo, std::source_location location = std::source_location::current())
 {
     SDL_GPUBuffer *result = SDL_CreateGPUBuffer(device, createinfo);
     if (!result)
@@ -6394,7 +6394,7 @@ inline SDL_GPUBuffer * CreateGPUBuffer(SDL_GPUDevice *device, const SDL_GPUBuffe
     return result;
 }
 
-inline SDL_GPUTransferBuffer * CreateGPUTransferBuffer(SDL_GPUDevice *device, const SDL_GPUTransferBufferCreateInfo *createinfo, std::source_location location = std::source_location::current())
+inline SDL_GPUTransferBuffer *CreateGPUTransferBuffer(SDL_GPUDevice *device, const SDL_GPUTransferBufferCreateInfo *createinfo, std::source_location location = std::source_location::current())
 {
     SDL_GPUTransferBuffer *result = SDL_CreateGPUTransferBuffer(device, createinfo);
     if (!result)
@@ -6464,7 +6464,7 @@ inline void ReleaseGPUGraphicsPipeline(SDL_GPUDevice *device, SDL_GPUGraphicsPip
     SDL_ReleaseGPUGraphicsPipeline(device, graphics_pipeline);
 }
 
-inline SDL_GPUCommandBuffer * AcquireGPUCommandBuffer(SDL_GPUDevice *device, std::source_location location = std::source_location::current())
+inline SDL_GPUCommandBuffer *AcquireGPUCommandBuffer(SDL_GPUDevice *device, std::source_location location = std::source_location::current())
 {
     SDL_GPUCommandBuffer *result = SDL_AcquireGPUCommandBuffer(device);
     if (!result)
@@ -6489,7 +6489,7 @@ inline void PushGPUComputeUniformData(SDL_GPUCommandBuffer *command_buffer, Uint
     SDL_PushGPUComputeUniformData(command_buffer, slot_index, data, length);
 }
 
-inline SDL_GPURenderPass * BeginGPURenderPass(SDL_GPUCommandBuffer *command_buffer, const SDL_GPUColorTargetInfo *color_target_infos, Uint32 num_color_targets, const SDL_GPUDepthStencilTargetInfo *depth_stencil_target_info, std::source_location location = std::source_location::current())
+inline SDL_GPURenderPass *BeginGPURenderPass(SDL_GPUCommandBuffer *command_buffer, const SDL_GPUColorTargetInfo *color_target_infos, Uint32 num_color_targets, const SDL_GPUDepthStencilTargetInfo *depth_stencil_target_info, std::source_location location = std::source_location::current())
 {
     SDL_GPURenderPass *result = SDL_BeginGPURenderPass(command_buffer, color_target_infos, num_color_targets, depth_stencil_target_info);
     if (!result)
@@ -6589,7 +6589,7 @@ inline void EndGPURenderPass(SDL_GPURenderPass *render_pass)
     SDL_EndGPURenderPass(render_pass);
 }
 
-inline SDL_GPUComputePass * BeginGPUComputePass(SDL_GPUCommandBuffer *command_buffer, const SDL_GPUStorageTextureReadWriteBinding *storage_texture_bindings, Uint32 num_storage_texture_bindings, const SDL_GPUStorageBufferReadWriteBinding *storage_buffer_bindings, Uint32 num_storage_buffer_bindings, std::source_location location = std::source_location::current())
+inline SDL_GPUComputePass *BeginGPUComputePass(SDL_GPUCommandBuffer *command_buffer, const SDL_GPUStorageTextureReadWriteBinding *storage_texture_bindings, Uint32 num_storage_texture_bindings, const SDL_GPUStorageBufferReadWriteBinding *storage_buffer_bindings, Uint32 num_storage_buffer_bindings, std::source_location location = std::source_location::current())
 {
     SDL_GPUComputePass *result = SDL_BeginGPUComputePass(command_buffer, storage_texture_bindings, num_storage_texture_bindings, storage_buffer_bindings, num_storage_buffer_bindings);
     if (!result)
@@ -6634,7 +6634,7 @@ inline void EndGPUComputePass(SDL_GPUComputePass *compute_pass)
     SDL_EndGPUComputePass(compute_pass);
 }
 
-inline void * MapGPUTransferBuffer(SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer, bool cycle, std::source_location location = std::source_location::current())
+inline void *MapGPUTransferBuffer(SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer, bool cycle, std::source_location location = std::source_location::current())
 {
     void *result = SDL_MapGPUTransferBuffer(device, transfer_buffer, cycle);
     if (!result)
@@ -6649,7 +6649,7 @@ inline void UnmapGPUTransferBuffer(SDL_GPUDevice *device, SDL_GPUTransferBuffer 
     SDL_UnmapGPUTransferBuffer(device, transfer_buffer);
 }
 
-inline SDL_GPUCopyPass * BeginGPUCopyPass(SDL_GPUCommandBuffer *command_buffer, std::source_location location = std::source_location::current())
+inline SDL_GPUCopyPass *BeginGPUCopyPass(SDL_GPUCommandBuffer *command_buffer, std::source_location location = std::source_location::current())
 {
     SDL_GPUCopyPass *result = SDL_BeginGPUCopyPass(command_buffer);
     if (!result)
@@ -6704,7 +6704,7 @@ inline void BlitGPUTexture(SDL_GPUCommandBuffer *command_buffer, const SDL_GPUBl
     SDL_BlitGPUTexture(command_buffer, info);
 }
 
-inline bool WindowSupportsGPUSwapchainComposition(SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition, std::source_location location = std::source_location::current())
+inline void WindowSupportsGPUSwapchainComposition(SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition, std::source_location location = std::source_location::current())
 {
     if (!SDL_WindowSupportsGPUSwapchainComposition(device, window, swapchain_composition))
     {
@@ -6712,7 +6712,7 @@ inline bool WindowSupportsGPUSwapchainComposition(SDL_GPUDevice *device, SDL_Win
     }
 }
 
-inline bool WindowSupportsGPUPresentMode(SDL_GPUDevice *device, SDL_Window *window, SDL_GPUPresentMode present_mode, std::source_location location = std::source_location::current())
+inline void WindowSupportsGPUPresentMode(SDL_GPUDevice *device, SDL_Window *window, SDL_GPUPresentMode present_mode, std::source_location location = std::source_location::current())
 {
     if (!SDL_WindowSupportsGPUPresentMode(device, window, present_mode))
     {
@@ -6720,7 +6720,7 @@ inline bool WindowSupportsGPUPresentMode(SDL_GPUDevice *device, SDL_Window *wind
     }
 }
 
-inline bool ClaimWindowForGPUDevice(SDL_GPUDevice *device, SDL_Window *window, std::source_location location = std::source_location::current())
+inline void ClaimWindowForGPUDevice(SDL_GPUDevice *device, SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_ClaimWindowForGPUDevice(device, window))
     {
@@ -6733,7 +6733,7 @@ inline void ReleaseWindowFromGPUDevice(SDL_GPUDevice *device, SDL_Window *window
     SDL_ReleaseWindowFromGPUDevice(device, window);
 }
 
-inline bool SetGPUSwapchainParameters(SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode, std::source_location location = std::source_location::current())
+inline void SetGPUSwapchainParameters(SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetGPUSwapchainParameters(device, window, swapchain_composition, present_mode))
     {
@@ -6741,7 +6741,7 @@ inline bool SetGPUSwapchainParameters(SDL_GPUDevice *device, SDL_Window *window,
     }
 }
 
-inline bool SetGPUAllowedFramesInFlight(SDL_GPUDevice *device, Uint32 allowed_frames_in_flight, std::source_location location = std::source_location::current())
+inline void SetGPUAllowedFramesInFlight(SDL_GPUDevice *device, Uint32 allowed_frames_in_flight, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetGPUAllowedFramesInFlight(device, allowed_frames_in_flight))
     {
@@ -6754,7 +6754,7 @@ inline SDL_GPUTextureFormat GetGPUSwapchainTextureFormat(SDL_GPUDevice *device, 
     return SDL_GetGPUSwapchainTextureFormat(device, window);
 }
 
-inline bool AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height, std::source_location location = std::source_location::current())
+inline void AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height, std::source_location location = std::source_location::current())
 {
     if (!SDL_AcquireGPUSwapchainTexture(command_buffer, window, swapchain_texture, swapchain_texture_width, swapchain_texture_height))
     {
@@ -6762,7 +6762,7 @@ inline bool AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer *command_buffer, SDL
     }
 }
 
-inline bool WaitForGPUSwapchain(SDL_GPUDevice *device, SDL_Window *window, std::source_location location = std::source_location::current())
+inline void WaitForGPUSwapchain(SDL_GPUDevice *device, SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_WaitForGPUSwapchain(device, window))
     {
@@ -6770,7 +6770,7 @@ inline bool WaitForGPUSwapchain(SDL_GPUDevice *device, SDL_Window *window, std::
     }
 }
 
-inline bool WaitAndAcquireGPUSwapchainTexture(SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height, std::source_location location = std::source_location::current())
+inline void WaitAndAcquireGPUSwapchainTexture(SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height, std::source_location location = std::source_location::current())
 {
     if (!SDL_WaitAndAcquireGPUSwapchainTexture(command_buffer, window, swapchain_texture, swapchain_texture_width, swapchain_texture_height))
     {
@@ -6778,7 +6778,7 @@ inline bool WaitAndAcquireGPUSwapchainTexture(SDL_GPUCommandBuffer *command_buff
     }
 }
 
-inline bool SubmitGPUCommandBuffer(SDL_GPUCommandBuffer *command_buffer, std::source_location location = std::source_location::current())
+inline void SubmitGPUCommandBuffer(SDL_GPUCommandBuffer *command_buffer, std::source_location location = std::source_location::current())
 {
     if (!SDL_SubmitGPUCommandBuffer(command_buffer))
     {
@@ -6786,7 +6786,7 @@ inline bool SubmitGPUCommandBuffer(SDL_GPUCommandBuffer *command_buffer, std::so
     }
 }
 
-inline SDL_GPUFence * SubmitGPUCommandBufferAndAcquireFence(SDL_GPUCommandBuffer *command_buffer, std::source_location location = std::source_location::current())
+inline SDL_GPUFence *SubmitGPUCommandBufferAndAcquireFence(SDL_GPUCommandBuffer *command_buffer, std::source_location location = std::source_location::current())
 {
     SDL_GPUFence *result = SDL_SubmitGPUCommandBufferAndAcquireFence(command_buffer);
     if (!result)
@@ -6796,7 +6796,7 @@ inline SDL_GPUFence * SubmitGPUCommandBufferAndAcquireFence(SDL_GPUCommandBuffer
     return result;
 }
 
-inline bool CancelGPUCommandBuffer(SDL_GPUCommandBuffer *command_buffer, std::source_location location = std::source_location::current())
+inline void CancelGPUCommandBuffer(SDL_GPUCommandBuffer *command_buffer, std::source_location location = std::source_location::current())
 {
     if (!SDL_CancelGPUCommandBuffer(command_buffer))
     {
@@ -6804,7 +6804,7 @@ inline bool CancelGPUCommandBuffer(SDL_GPUCommandBuffer *command_buffer, std::so
     }
 }
 
-inline bool WaitForGPUIdle(SDL_GPUDevice *device, std::source_location location = std::source_location::current())
+inline void WaitForGPUIdle(SDL_GPUDevice *device, std::source_location location = std::source_location::current())
 {
     if (!SDL_WaitForGPUIdle(device))
     {
@@ -6812,7 +6812,7 @@ inline bool WaitForGPUIdle(SDL_GPUDevice *device, std::source_location location 
     }
 }
 
-inline bool WaitForGPUFences(SDL_GPUDevice *device, bool wait_all, SDL_GPUFence *const *fences, Uint32 num_fences, std::source_location location = std::source_location::current())
+inline void WaitForGPUFences(SDL_GPUDevice *device, bool wait_all, SDL_GPUFence *const *fences, Uint32 num_fences, std::source_location location = std::source_location::current())
 {
     if (!SDL_WaitForGPUFences(device, wait_all, fences, num_fences))
     {
@@ -6820,7 +6820,7 @@ inline bool WaitForGPUFences(SDL_GPUDevice *device, bool wait_all, SDL_GPUFence 
     }
 }
 
-inline bool QueryGPUFence(SDL_GPUDevice *device, SDL_GPUFence *fence, std::source_location location = std::source_location::current())
+inline void QueryGPUFence(SDL_GPUDevice *device, SDL_GPUFence *fence, std::source_location location = std::source_location::current())
 {
     if (!SDL_QueryGPUFence(device, fence))
     {
@@ -6838,7 +6838,7 @@ inline Uint32 GPUTextureFormatTexelBlockSize(SDL_GPUTextureFormat format)
     return SDL_GPUTextureFormatTexelBlockSize(format);
 }
 
-inline bool GPUTextureSupportsFormat(SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage, std::source_location location = std::source_location::current())
+inline void GPUTextureSupportsFormat(SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage, std::source_location location = std::source_location::current())
 {
     if (!SDL_GPUTextureSupportsFormat(device, format, type, usage))
     {
@@ -6846,7 +6846,7 @@ inline bool GPUTextureSupportsFormat(SDL_GPUDevice *device, SDL_GPUTextureFormat
     }
 }
 
-inline bool GPUTextureSupportsSampleCount(SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count, std::source_location location = std::source_location::current())
+inline void GPUTextureSupportsSampleCount(SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count, std::source_location location = std::source_location::current())
 {
     if (!SDL_GPUTextureSupportsSampleCount(device, format, sample_count))
     {
@@ -6859,7 +6859,7 @@ inline Uint32 CalculateGPUTextureFormatSize(SDL_GPUTextureFormat format, Uint32 
     return SDL_CalculateGPUTextureFormatSize(format, width, height, depth_or_layer_count);
 }
 
-inline SDL_HapticID * GetHaptics(int *count, std::source_location location = std::source_location::current())
+inline SDL_HapticID *GetHaptics(int *count, std::source_location location = std::source_location::current())
 {
     SDL_HapticID *result = SDL_GetHaptics(count);
     if (!result)
@@ -6869,7 +6869,7 @@ inline SDL_HapticID * GetHaptics(int *count, std::source_location location = std
     return result;
 }
 
-inline const char * GetHapticNameForID(SDL_HapticID instance_id, std::source_location location = std::source_location::current())
+inline const char *GetHapticNameForID(SDL_HapticID instance_id, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetHapticNameForID(instance_id);
     if (!result)
@@ -6879,7 +6879,7 @@ inline const char * GetHapticNameForID(SDL_HapticID instance_id, std::source_loc
     return result;
 }
 
-inline SDL_Haptic * OpenHaptic(SDL_HapticID instance_id, std::source_location location = std::source_location::current())
+inline SDL_Haptic *OpenHaptic(SDL_HapticID instance_id, std::source_location location = std::source_location::current())
 {
     SDL_Haptic *result = SDL_OpenHaptic(instance_id);
     if (!result)
@@ -6889,7 +6889,7 @@ inline SDL_Haptic * OpenHaptic(SDL_HapticID instance_id, std::source_location lo
     return result;
 }
 
-inline SDL_Haptic * GetHapticFromID(SDL_HapticID instance_id, std::source_location location = std::source_location::current())
+inline SDL_Haptic *GetHapticFromID(SDL_HapticID instance_id, std::source_location location = std::source_location::current())
 {
     SDL_Haptic *result = SDL_GetHapticFromID(instance_id);
     if (!result)
@@ -6904,7 +6904,7 @@ inline SDL_HapticID GetHapticID(SDL_Haptic *haptic)
     return SDL_GetHapticID(haptic);
 }
 
-inline const char * GetHapticName(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
+inline const char *GetHapticName(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetHapticName(haptic);
     if (!result)
@@ -6914,7 +6914,7 @@ inline const char * GetHapticName(SDL_Haptic *haptic, std::source_location locat
     return result;
 }
 
-inline bool IsMouseHaptic(std::source_location location = std::source_location::current())
+inline void IsMouseHaptic(std::source_location location = std::source_location::current())
 {
     if (!SDL_IsMouseHaptic())
     {
@@ -6922,7 +6922,7 @@ inline bool IsMouseHaptic(std::source_location location = std::source_location::
     }
 }
 
-inline SDL_Haptic * OpenHapticFromMouse(std::source_location location = std::source_location::current())
+inline SDL_Haptic *OpenHapticFromMouse(std::source_location location = std::source_location::current())
 {
     SDL_Haptic *result = SDL_OpenHapticFromMouse();
     if (!result)
@@ -6932,7 +6932,7 @@ inline SDL_Haptic * OpenHapticFromMouse(std::source_location location = std::sou
     return result;
 }
 
-inline bool IsJoystickHaptic(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
+inline void IsJoystickHaptic(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
 {
     if (!SDL_IsJoystickHaptic(joystick))
     {
@@ -6940,7 +6940,7 @@ inline bool IsJoystickHaptic(SDL_Joystick *joystick, std::source_location locati
     }
 }
 
-inline SDL_Haptic * OpenHapticFromJoystick(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
+inline SDL_Haptic *OpenHapticFromJoystick(SDL_Joystick *joystick, std::source_location location = std::source_location::current())
 {
     SDL_Haptic *result = SDL_OpenHapticFromJoystick(joystick);
     if (!result)
@@ -6975,7 +6975,7 @@ inline int GetNumHapticAxes(SDL_Haptic *haptic)
     return SDL_GetNumHapticAxes(haptic);
 }
 
-inline bool HapticEffectSupported(SDL_Haptic *haptic, const SDL_HapticEffect *effect, std::source_location location = std::source_location::current())
+inline void HapticEffectSupported(SDL_Haptic *haptic, const SDL_HapticEffect *effect, std::source_location location = std::source_location::current())
 {
     if (!SDL_HapticEffectSupported(haptic, effect))
     {
@@ -6988,7 +6988,7 @@ inline int CreateHapticEffect(SDL_Haptic *haptic, const SDL_HapticEffect *effect
     return SDL_CreateHapticEffect(haptic, effect);
 }
 
-inline bool UpdateHapticEffect(SDL_Haptic *haptic, int effect, const SDL_HapticEffect *data, std::source_location location = std::source_location::current())
+inline void UpdateHapticEffect(SDL_Haptic *haptic, int effect, const SDL_HapticEffect *data, std::source_location location = std::source_location::current())
 {
     if (!SDL_UpdateHapticEffect(haptic, effect, data))
     {
@@ -6996,7 +6996,7 @@ inline bool UpdateHapticEffect(SDL_Haptic *haptic, int effect, const SDL_HapticE
     }
 }
 
-inline bool RunHapticEffect(SDL_Haptic *haptic, int effect, Uint32 iterations, std::source_location location = std::source_location::current())
+inline void RunHapticEffect(SDL_Haptic *haptic, int effect, Uint32 iterations, std::source_location location = std::source_location::current())
 {
     if (!SDL_RunHapticEffect(haptic, effect, iterations))
     {
@@ -7004,7 +7004,7 @@ inline bool RunHapticEffect(SDL_Haptic *haptic, int effect, Uint32 iterations, s
     }
 }
 
-inline bool StopHapticEffect(SDL_Haptic *haptic, int effect, std::source_location location = std::source_location::current())
+inline void StopHapticEffect(SDL_Haptic *haptic, int effect, std::source_location location = std::source_location::current())
 {
     if (!SDL_StopHapticEffect(haptic, effect))
     {
@@ -7017,7 +7017,7 @@ inline void DestroyHapticEffect(SDL_Haptic *haptic, int effect)
     SDL_DestroyHapticEffect(haptic, effect);
 }
 
-inline bool GetHapticEffectStatus(SDL_Haptic *haptic, int effect, std::source_location location = std::source_location::current())
+inline void GetHapticEffectStatus(SDL_Haptic *haptic, int effect, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetHapticEffectStatus(haptic, effect))
     {
@@ -7025,7 +7025,7 @@ inline bool GetHapticEffectStatus(SDL_Haptic *haptic, int effect, std::source_lo
     }
 }
 
-inline bool SetHapticGain(SDL_Haptic *haptic, int gain, std::source_location location = std::source_location::current())
+inline void SetHapticGain(SDL_Haptic *haptic, int gain, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetHapticGain(haptic, gain))
     {
@@ -7033,7 +7033,7 @@ inline bool SetHapticGain(SDL_Haptic *haptic, int gain, std::source_location loc
     }
 }
 
-inline bool SetHapticAutocenter(SDL_Haptic *haptic, int autocenter, std::source_location location = std::source_location::current())
+inline void SetHapticAutocenter(SDL_Haptic *haptic, int autocenter, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetHapticAutocenter(haptic, autocenter))
     {
@@ -7041,7 +7041,7 @@ inline bool SetHapticAutocenter(SDL_Haptic *haptic, int autocenter, std::source_
     }
 }
 
-inline bool PauseHaptic(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
+inline void PauseHaptic(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
 {
     if (!SDL_PauseHaptic(haptic))
     {
@@ -7049,7 +7049,7 @@ inline bool PauseHaptic(SDL_Haptic *haptic, std::source_location location = std:
     }
 }
 
-inline bool ResumeHaptic(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
+inline void ResumeHaptic(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
 {
     if (!SDL_ResumeHaptic(haptic))
     {
@@ -7057,7 +7057,7 @@ inline bool ResumeHaptic(SDL_Haptic *haptic, std::source_location location = std
     }
 }
 
-inline bool StopHapticEffects(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
+inline void StopHapticEffects(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
 {
     if (!SDL_StopHapticEffects(haptic))
     {
@@ -7065,7 +7065,7 @@ inline bool StopHapticEffects(SDL_Haptic *haptic, std::source_location location 
     }
 }
 
-inline bool HapticRumbleSupported(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
+inline void HapticRumbleSupported(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
 {
     if (!SDL_HapticRumbleSupported(haptic))
     {
@@ -7073,7 +7073,7 @@ inline bool HapticRumbleSupported(SDL_Haptic *haptic, std::source_location locat
     }
 }
 
-inline bool InitHapticRumble(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
+inline void InitHapticRumble(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
 {
     if (!SDL_InitHapticRumble(haptic))
     {
@@ -7081,7 +7081,7 @@ inline bool InitHapticRumble(SDL_Haptic *haptic, std::source_location location =
     }
 }
 
-inline bool PlayHapticRumble(SDL_Haptic *haptic, float strength, Uint32 length, std::source_location location = std::source_location::current())
+inline void PlayHapticRumble(SDL_Haptic *haptic, float strength, Uint32 length, std::source_location location = std::source_location::current())
 {
     if (!SDL_PlayHapticRumble(haptic, strength, length))
     {
@@ -7089,7 +7089,7 @@ inline bool PlayHapticRumble(SDL_Haptic *haptic, float strength, Uint32 length, 
     }
 }
 
-inline bool StopHapticRumble(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
+inline void StopHapticRumble(SDL_Haptic *haptic, std::source_location location = std::source_location::current())
 {
     if (!SDL_StopHapticRumble(haptic))
     {
@@ -7112,7 +7112,7 @@ inline Uint32 hid_device_change_count()
     return SDL_hid_device_change_count();
 }
 
-inline SDL_hid_device_info * hid_enumerate(unsigned short vendor_id, unsigned short product_id, std::source_location location = std::source_location::current())
+inline SDL_hid_device_info *hid_enumerate(unsigned short vendor_id, unsigned short product_id, std::source_location location = std::source_location::current())
 {
     SDL_hid_device_info *result = SDL_hid_enumerate(vendor_id, product_id);
     if (!result)
@@ -7127,7 +7127,7 @@ inline void hid_free_enumeration(SDL_hid_device_info *devs)
     SDL_hid_free_enumeration(devs);
 }
 
-inline SDL_hid_device * hid_open(unsigned short vendor_id, unsigned short product_id, const wchar_t *serial_number, std::source_location location = std::source_location::current())
+inline SDL_hid_device *hid_open(unsigned short vendor_id, unsigned short product_id, const wchar_t *serial_number, std::source_location location = std::source_location::current())
 {
     SDL_hid_device *result = SDL_hid_open(vendor_id, product_id, serial_number);
     if (!result)
@@ -7137,7 +7137,7 @@ inline SDL_hid_device * hid_open(unsigned short vendor_id, unsigned short produc
     return result;
 }
 
-inline SDL_hid_device * hid_open_path(const char *path, std::source_location location = std::source_location::current())
+inline SDL_hid_device *hid_open_path(const char *path, std::source_location location = std::source_location::current())
 {
     SDL_hid_device *result = SDL_hid_open_path(path);
     if (!result)
@@ -7207,7 +7207,7 @@ inline int hid_get_indexed_string(SDL_hid_device *dev, int string_index, wchar_t
     return SDL_hid_get_indexed_string(dev, string_index, string, maxlen);
 }
 
-inline SDL_hid_device_info * hid_get_device_info(SDL_hid_device *dev, std::source_location location = std::source_location::current())
+inline SDL_hid_device_info *hid_get_device_info(SDL_hid_device *dev, std::source_location location = std::source_location::current())
 {
     SDL_hid_device_info *result = SDL_hid_get_device_info(dev);
     if (!result)
@@ -7227,7 +7227,7 @@ inline void hid_ble_scan(bool active)
     SDL_hid_ble_scan(active);
 }
 
-inline bool SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority, std::source_location location = std::source_location::current())
+inline void SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetHintWithPriority(name, value, priority))
     {
@@ -7235,7 +7235,7 @@ inline bool SetHintWithPriority(const char *name, const char *value, SDL_HintPri
     }
 }
 
-inline bool SetHint(const char *name, const char *value, std::source_location location = std::source_location::current())
+inline void SetHint(const char *name, const char *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetHint(name, value))
     {
@@ -7243,7 +7243,7 @@ inline bool SetHint(const char *name, const char *value, std::source_location lo
     }
 }
 
-inline bool ResetHint(const char *name, std::source_location location = std::source_location::current())
+inline void ResetHint(const char *name, std::source_location location = std::source_location::current())
 {
     if (!SDL_ResetHint(name))
     {
@@ -7256,7 +7256,7 @@ inline void ResetHints()
     SDL_ResetHints();
 }
 
-inline const char * GetHint(const char *name, std::source_location location = std::source_location::current())
+inline const char *GetHint(const char *name, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetHint(name);
     if (!result)
@@ -7266,7 +7266,7 @@ inline const char * GetHint(const char *name, std::source_location location = st
     return result;
 }
 
-inline bool GetHintBoolean(const char *name, bool default_value, std::source_location location = std::source_location::current())
+inline void GetHintBoolean(const char *name, bool default_value, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetHintBoolean(name, default_value))
     {
@@ -7274,7 +7274,7 @@ inline bool GetHintBoolean(const char *name, bool default_value, std::source_loc
     }
 }
 
-inline bool AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata, std::source_location location = std::source_location::current())
+inline void AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_AddHintCallback(name, callback, userdata))
     {
@@ -7287,7 +7287,7 @@ inline void RemoveHintCallback(const char *name, SDL_HintCallback callback, void
     SDL_RemoveHintCallback(name, callback, userdata);
 }
 
-inline bool Init(SDL_InitFlags flags, std::source_location location = std::source_location::current())
+inline void Init(SDL_InitFlags flags, std::source_location location = std::source_location::current())
 {
     if (!SDL_Init(flags))
     {
@@ -7295,7 +7295,7 @@ inline bool Init(SDL_InitFlags flags, std::source_location location = std::sourc
     }
 }
 
-inline bool InitSubSystem(SDL_InitFlags flags, std::source_location location = std::source_location::current())
+inline void InitSubSystem(SDL_InitFlags flags, std::source_location location = std::source_location::current())
 {
     if (!SDL_InitSubSystem(flags))
     {
@@ -7318,7 +7318,7 @@ inline void Quit()
     SDL_Quit();
 }
 
-inline bool IsMainThread(std::source_location location = std::source_location::current())
+inline void IsMainThread(std::source_location location = std::source_location::current())
 {
     if (!SDL_IsMainThread())
     {
@@ -7326,7 +7326,7 @@ inline bool IsMainThread(std::source_location location = std::source_location::c
     }
 }
 
-inline bool RunOnMainThread(SDL_MainThreadCallback callback, void *userdata, bool wait_complete, std::source_location location = std::source_location::current())
+inline void RunOnMainThread(SDL_MainThreadCallback callback, void *userdata, bool wait_complete, std::source_location location = std::source_location::current())
 {
     if (!SDL_RunOnMainThread(callback, userdata, wait_complete))
     {
@@ -7334,7 +7334,7 @@ inline bool RunOnMainThread(SDL_MainThreadCallback callback, void *userdata, boo
     }
 }
 
-inline bool SetAppMetadata(const char *appname, const char *appversion, const char *appidentifier, std::source_location location = std::source_location::current())
+inline void SetAppMetadata(const char *appname, const char *appversion, const char *appidentifier, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAppMetadata(appname, appversion, appidentifier))
     {
@@ -7342,7 +7342,7 @@ inline bool SetAppMetadata(const char *appname, const char *appversion, const ch
     }
 }
 
-inline bool SetAppMetadataProperty(const char *name, const char *value, std::source_location location = std::source_location::current())
+inline void SetAppMetadataProperty(const char *name, const char *value, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetAppMetadataProperty(name, value))
     {
@@ -7350,7 +7350,7 @@ inline bool SetAppMetadataProperty(const char *name, const char *value, std::sou
     }
 }
 
-inline const char * GetAppMetadataProperty(const char *name, std::source_location location = std::source_location::current())
+inline const char *GetAppMetadataProperty(const char *name, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetAppMetadataProperty(name);
     if (!result)
@@ -7360,7 +7360,7 @@ inline const char * GetAppMetadataProperty(const char *name, std::source_locatio
     return result;
 }
 
-inline SDL_SharedObject * LoadObject(const char *sofile, std::source_location location = std::source_location::current())
+inline SDL_SharedObject *LoadObject(const char *sofile, std::source_location location = std::source_location::current())
 {
     SDL_SharedObject *result = SDL_LoadObject(sofile);
     if (!result)
@@ -7380,7 +7380,7 @@ inline void UnloadObject(SDL_SharedObject *handle)
     SDL_UnloadObject(handle);
 }
 
-inline SDL_Locale ** GetPreferredLocales(int *count, std::source_location location = std::source_location::current())
+inline SDL_Locale **GetPreferredLocales(int *count, std::source_location location = std::source_location::current())
 {
     SDL_Locale **result = SDL_GetPreferredLocales(count);
     if (!result)
@@ -7410,7 +7410,7 @@ inline void ResetLogPriorities()
     SDL_ResetLogPriorities();
 }
 
-inline bool SetLogPriorityPrefix(SDL_LogPriority priority, const char *prefix, std::source_location location = std::source_location::current())
+inline void SetLogPriorityPrefix(SDL_LogPriority priority, const char *prefix, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetLogPriorityPrefix(priority, prefix))
     {
@@ -7483,7 +7483,7 @@ inline void SetLogOutputFunction(SDL_LogOutputFunction callback, void *userdata)
     SDL_SetLogOutputFunction(callback, userdata);
 }
 
-inline bool ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid, std::source_location location = std::source_location::current())
+inline void ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid, std::source_location location = std::source_location::current())
 {
     if (!SDL_ShowMessageBox(messageboxdata, buttonid))
     {
@@ -7491,7 +7491,7 @@ inline bool ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *button
     }
 }
 
-inline bool ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window, std::source_location location = std::source_location::current())
+inline void ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window, std::source_location location = std::source_location::current())
 {
     if (!SDL_ShowSimpleMessageBox(flags, title, message, window))
     {
@@ -7509,7 +7509,7 @@ inline void Metal_DestroyView(SDL_MetalView view)
     SDL_Metal_DestroyView(view);
 }
 
-inline void * Metal_GetLayer(SDL_MetalView view, std::source_location location = std::source_location::current())
+inline void *Metal_GetLayer(SDL_MetalView view, std::source_location location = std::source_location::current())
 {
     void *result = SDL_Metal_GetLayer(view);
     if (!result)
@@ -7519,7 +7519,7 @@ inline void * Metal_GetLayer(SDL_MetalView view, std::source_location location =
     return result;
 }
 
-inline bool OpenURL(const char *url, std::source_location location = std::source_location::current())
+inline void OpenURL(const char *url, std::source_location location = std::source_location::current())
 {
     if (!SDL_OpenURL(url))
     {
@@ -7527,7 +7527,7 @@ inline bool OpenURL(const char *url, std::source_location location = std::source
     }
 }
 
-inline const char * GetPlatform(std::source_location location = std::source_location::current())
+inline const char *GetPlatform(std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetPlatform();
     if (!result)
@@ -7537,7 +7537,7 @@ inline const char * GetPlatform(std::source_location location = std::source_loca
     return result;
 }
 
-inline SDL_Process * CreateProcess(const char *const *args, bool pipe_stdio, std::source_location location = std::source_location::current())
+inline SDL_Process *CreateProcess(const char *const *args, bool pipe_stdio, std::source_location location = std::source_location::current())
 {
     SDL_Process *result = SDL_CreateProcess(args, pipe_stdio);
     if (!result)
@@ -7547,7 +7547,7 @@ inline SDL_Process * CreateProcess(const char *const *args, bool pipe_stdio, std
     return result;
 }
 
-inline SDL_Process * CreateProcessWithProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline SDL_Process *CreateProcessWithProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     SDL_Process *result = SDL_CreateProcessWithProperties(props);
     if (!result)
@@ -7562,7 +7562,7 @@ inline SDL_PropertiesID GetProcessProperties(SDL_Process *process)
     return SDL_GetProcessProperties(process);
 }
 
-inline void * ReadProcess(SDL_Process *process, size_t *datasize, int *exitcode, std::source_location location = std::source_location::current())
+inline void *ReadProcess(SDL_Process *process, size_t *datasize, int *exitcode, std::source_location location = std::source_location::current())
 {
     void *result = SDL_ReadProcess(process, datasize, exitcode);
     if (!result)
@@ -7572,7 +7572,7 @@ inline void * ReadProcess(SDL_Process *process, size_t *datasize, int *exitcode,
     return result;
 }
 
-inline SDL_IOStream * GetProcessInput(SDL_Process *process, std::source_location location = std::source_location::current())
+inline SDL_IOStream *GetProcessInput(SDL_Process *process, std::source_location location = std::source_location::current())
 {
     SDL_IOStream *result = SDL_GetProcessInput(process);
     if (!result)
@@ -7582,7 +7582,7 @@ inline SDL_IOStream * GetProcessInput(SDL_Process *process, std::source_location
     return result;
 }
 
-inline SDL_IOStream * GetProcessOutput(SDL_Process *process, std::source_location location = std::source_location::current())
+inline SDL_IOStream *GetProcessOutput(SDL_Process *process, std::source_location location = std::source_location::current())
 {
     SDL_IOStream *result = SDL_GetProcessOutput(process);
     if (!result)
@@ -7592,7 +7592,7 @@ inline SDL_IOStream * GetProcessOutput(SDL_Process *process, std::source_locatio
     return result;
 }
 
-inline bool KillProcess(SDL_Process *process, bool force, std::source_location location = std::source_location::current())
+inline void KillProcess(SDL_Process *process, bool force, std::source_location location = std::source_location::current())
 {
     if (!SDL_KillProcess(process, force))
     {
@@ -7600,7 +7600,7 @@ inline bool KillProcess(SDL_Process *process, bool force, std::source_location l
     }
 }
 
-inline bool WaitProcess(SDL_Process *process, bool block, int *exitcode, std::source_location location = std::source_location::current())
+inline void WaitProcess(SDL_Process *process, bool block, int *exitcode, std::source_location location = std::source_location::current())
 {
     if (!SDL_WaitProcess(process, block, exitcode))
     {
@@ -7618,7 +7618,7 @@ inline int GetNumRenderDrivers()
     return SDL_GetNumRenderDrivers();
 }
 
-inline const char * GetRenderDriver(int index, std::source_location location = std::source_location::current())
+inline const char *GetRenderDriver(int index, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetRenderDriver(index);
     if (!result)
@@ -7628,7 +7628,7 @@ inline const char * GetRenderDriver(int index, std::source_location location = s
     return result;
 }
 
-inline bool CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer, std::source_location location = std::source_location::current())
+inline void CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer, std::source_location location = std::source_location::current())
 {
     if (!SDL_CreateWindowAndRenderer(title, width, height, window_flags, window, renderer))
     {
@@ -7636,7 +7636,7 @@ inline bool CreateWindowAndRenderer(const char *title, int width, int height, SD
     }
 }
 
-inline SDL_Renderer * CreateRenderer(SDL_Window *window, const char *name, std::source_location location = std::source_location::current())
+inline SDL_Renderer *CreateRenderer(SDL_Window *window, const char *name, std::source_location location = std::source_location::current())
 {
     SDL_Renderer *result = SDL_CreateRenderer(window, name);
     if (!result)
@@ -7646,7 +7646,7 @@ inline SDL_Renderer * CreateRenderer(SDL_Window *window, const char *name, std::
     return result;
 }
 
-inline SDL_Renderer * CreateRendererWithProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline SDL_Renderer *CreateRendererWithProperties(SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     SDL_Renderer *result = SDL_CreateRendererWithProperties(props);
     if (!result)
@@ -7656,7 +7656,7 @@ inline SDL_Renderer * CreateRendererWithProperties(SDL_PropertiesID props, std::
     return result;
 }
 
-inline SDL_Renderer * CreateSoftwareRenderer(SDL_Surface *surface, std::source_location location = std::source_location::current())
+inline SDL_Renderer *CreateSoftwareRenderer(SDL_Surface *surface, std::source_location location = std::source_location::current())
 {
     SDL_Renderer *result = SDL_CreateSoftwareRenderer(surface);
     if (!result)
@@ -7666,7 +7666,7 @@ inline SDL_Renderer * CreateSoftwareRenderer(SDL_Surface *surface, std::source_l
     return result;
 }
 
-inline SDL_Renderer * GetRenderer(SDL_Window *window, std::source_location location = std::source_location::current())
+inline SDL_Renderer *GetRenderer(SDL_Window *window, std::source_location location = std::source_location::current())
 {
     SDL_Renderer *result = SDL_GetRenderer(window);
     if (!result)
@@ -7676,7 +7676,7 @@ inline SDL_Renderer * GetRenderer(SDL_Window *window, std::source_location locat
     return result;
 }
 
-inline SDL_Window * GetRenderWindow(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
+inline SDL_Window *GetRenderWindow(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
 {
     SDL_Window *result = SDL_GetRenderWindow(renderer);
     if (!result)
@@ -7686,7 +7686,7 @@ inline SDL_Window * GetRenderWindow(SDL_Renderer *renderer, std::source_location
     return result;
 }
 
-inline const char * GetRendererName(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
+inline const char *GetRendererName(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetRendererName(renderer);
     if (!result)
@@ -7701,7 +7701,7 @@ inline SDL_PropertiesID GetRendererProperties(SDL_Renderer *renderer)
     return SDL_GetRendererProperties(renderer);
 }
 
-inline bool GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h, std::source_location location = std::source_location::current())
+inline void GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderOutputSize(renderer, w, h))
     {
@@ -7709,7 +7709,7 @@ inline bool GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h, std::sou
     }
 }
 
-inline bool GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h, std::source_location location = std::source_location::current())
+inline void GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetCurrentRenderOutputSize(renderer, w, h))
     {
@@ -7717,7 +7717,7 @@ inline bool GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h, s
     }
 }
 
-inline SDL_Texture * CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, SDL_TextureAccess access, int w, int h, std::source_location location = std::source_location::current())
+inline SDL_Texture *CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, SDL_TextureAccess access, int w, int h, std::source_location location = std::source_location::current())
 {
     SDL_Texture *result = SDL_CreateTexture(renderer, format, access, w, h);
     if (!result)
@@ -7727,7 +7727,7 @@ inline SDL_Texture * CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat forma
     return result;
 }
 
-inline SDL_Texture * CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface, std::source_location location = std::source_location::current())
+inline SDL_Texture *CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface, std::source_location location = std::source_location::current())
 {
     SDL_Texture *result = SDL_CreateTextureFromSurface(renderer, surface);
     if (!result)
@@ -7737,7 +7737,7 @@ inline SDL_Texture * CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surfac
     return result;
 }
 
-inline SDL_Texture * CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline SDL_Texture *CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     SDL_Texture *result = SDL_CreateTextureWithProperties(renderer, props);
     if (!result)
@@ -7752,7 +7752,7 @@ inline SDL_PropertiesID GetTextureProperties(SDL_Texture *texture)
     return SDL_GetTextureProperties(texture);
 }
 
-inline SDL_Renderer * GetRendererFromTexture(SDL_Texture *texture, std::source_location location = std::source_location::current())
+inline SDL_Renderer *GetRendererFromTexture(SDL_Texture *texture, std::source_location location = std::source_location::current())
 {
     SDL_Renderer *result = SDL_GetRendererFromTexture(texture);
     if (!result)
@@ -7762,7 +7762,7 @@ inline SDL_Renderer * GetRendererFromTexture(SDL_Texture *texture, std::source_l
     return result;
 }
 
-inline bool GetTextureSize(SDL_Texture *texture, float *w, float *h, std::source_location location = std::source_location::current())
+inline void GetTextureSize(SDL_Texture *texture, float *w, float *h, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetTextureSize(texture, w, h))
     {
@@ -7770,7 +7770,7 @@ inline bool GetTextureSize(SDL_Texture *texture, float *w, float *h, std::source
     }
 }
 
-inline bool SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b, std::source_location location = std::source_location::current())
+inline void SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetTextureColorMod(texture, r, g, b))
     {
@@ -7778,7 +7778,7 @@ inline bool SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b, 
     }
 }
 
-inline bool SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b, std::source_location location = std::source_location::current())
+inline void SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetTextureColorModFloat(texture, r, g, b))
     {
@@ -7786,7 +7786,7 @@ inline bool SetTextureColorModFloat(SDL_Texture *texture, float r, float g, floa
     }
 }
 
-inline bool GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b, std::source_location location = std::source_location::current())
+inline void GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetTextureColorMod(texture, r, g, b))
     {
@@ -7794,7 +7794,7 @@ inline bool GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *
     }
 }
 
-inline bool GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b, std::source_location location = std::source_location::current())
+inline void GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetTextureColorModFloat(texture, r, g, b))
     {
@@ -7802,7 +7802,7 @@ inline bool GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, fl
     }
 }
 
-inline bool SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha, std::source_location location = std::source_location::current())
+inline void SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetTextureAlphaMod(texture, alpha))
     {
@@ -7810,7 +7810,7 @@ inline bool SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha, std::source_lo
     }
 }
 
-inline bool SetTextureAlphaModFloat(SDL_Texture *texture, float alpha, std::source_location location = std::source_location::current())
+inline void SetTextureAlphaModFloat(SDL_Texture *texture, float alpha, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetTextureAlphaModFloat(texture, alpha))
     {
@@ -7818,7 +7818,7 @@ inline bool SetTextureAlphaModFloat(SDL_Texture *texture, float alpha, std::sour
     }
 }
 
-inline bool GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha, std::source_location location = std::source_location::current())
+inline void GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetTextureAlphaMod(texture, alpha))
     {
@@ -7826,7 +7826,7 @@ inline bool GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha, std::source_l
     }
 }
 
-inline bool GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha, std::source_location location = std::source_location::current())
+inline void GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetTextureAlphaModFloat(texture, alpha))
     {
@@ -7834,7 +7834,7 @@ inline bool GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha, std::sou
     }
 }
 
-inline bool SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode, std::source_location location = std::source_location::current())
+inline void SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetTextureBlendMode(texture, blendMode))
     {
@@ -7842,7 +7842,7 @@ inline bool SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode, s
     }
 }
 
-inline bool GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode, std::source_location location = std::source_location::current())
+inline void GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetTextureBlendMode(texture, blendMode))
     {
@@ -7850,7 +7850,7 @@ inline bool GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode, 
     }
 }
 
-inline bool SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode, std::source_location location = std::source_location::current())
+inline void SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetTextureScaleMode(texture, scaleMode))
     {
@@ -7858,7 +7858,7 @@ inline bool SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode, s
     }
 }
 
-inline bool GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode, std::source_location location = std::source_location::current())
+inline void GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetTextureScaleMode(texture, scaleMode))
     {
@@ -7866,7 +7866,7 @@ inline bool GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode, 
     }
 }
 
-inline bool UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch, std::source_location location = std::source_location::current())
+inline void UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch, std::source_location location = std::source_location::current())
 {
     if (!SDL_UpdateTexture(texture, rect, pixels, pitch))
     {
@@ -7874,7 +7874,7 @@ inline bool UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void
     }
 }
 
-inline bool UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch, std::source_location location = std::source_location::current())
+inline void UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch, std::source_location location = std::source_location::current())
 {
     if (!SDL_UpdateYUVTexture(texture, rect, Yplane, Ypitch, Uplane, Upitch, Vplane, Vpitch))
     {
@@ -7882,7 +7882,7 @@ inline bool UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const U
     }
 }
 
-inline bool UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch, std::source_location location = std::source_location::current())
+inline void UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch, std::source_location location = std::source_location::current())
 {
     if (!SDL_UpdateNVTexture(texture, rect, Yplane, Ypitch, UVplane, UVpitch))
     {
@@ -7890,7 +7890,7 @@ inline bool UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Ui
     }
 }
 
-inline bool LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch, std::source_location location = std::source_location::current())
+inline void LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch, std::source_location location = std::source_location::current())
 {
     if (!SDL_LockTexture(texture, rect, pixels, pitch))
     {
@@ -7898,7 +7898,7 @@ inline bool LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixel
     }
 }
 
-inline bool LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface, std::source_location location = std::source_location::current())
+inline void LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface, std::source_location location = std::source_location::current())
 {
     if (!SDL_LockTextureToSurface(texture, rect, surface))
     {
@@ -7911,7 +7911,7 @@ inline void UnlockTexture(SDL_Texture *texture)
     SDL_UnlockTexture(texture);
 }
 
-inline bool SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture, std::source_location location = std::source_location::current())
+inline void SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetRenderTarget(renderer, texture))
     {
@@ -7919,7 +7919,7 @@ inline bool SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture, std::s
     }
 }
 
-inline SDL_Texture * GetRenderTarget(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
+inline SDL_Texture *GetRenderTarget(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
 {
     SDL_Texture *result = SDL_GetRenderTarget(renderer);
     if (!result)
@@ -7929,7 +7929,7 @@ inline SDL_Texture * GetRenderTarget(SDL_Renderer *renderer, std::source_locatio
     return result;
 }
 
-inline bool SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, std::source_location location = std::source_location::current())
+inline void SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetRenderLogicalPresentation(renderer, w, h, mode))
     {
@@ -7937,7 +7937,7 @@ inline bool SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, S
     }
 }
 
-inline bool GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, std::source_location location = std::source_location::current())
+inline void GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderLogicalPresentation(renderer, w, h, mode))
     {
@@ -7945,7 +7945,7 @@ inline bool GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h,
     }
 }
 
-inline bool GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *rect, std::source_location location = std::source_location::current())
+inline void GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderLogicalPresentationRect(renderer, rect))
     {
@@ -7953,7 +7953,7 @@ inline bool GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *
     }
 }
 
-inline bool RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y, std::source_location location = std::source_location::current())
+inline void RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderCoordinatesFromWindow(renderer, window_x, window_y, x, y))
     {
@@ -7961,7 +7961,7 @@ inline bool RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, 
     }
 }
 
-inline bool RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y, std::source_location location = std::source_location::current())
+inline void RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderCoordinatesToWindow(renderer, x, y, window_x, window_y))
     {
@@ -7969,7 +7969,7 @@ inline bool RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, 
     }
 }
 
-inline bool ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event, std::source_location location = std::source_location::current())
+inline void ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event, std::source_location location = std::source_location::current())
 {
     if (!SDL_ConvertEventToRenderCoordinates(renderer, event))
     {
@@ -7977,7 +7977,7 @@ inline bool ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *e
     }
 }
 
-inline bool SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetRenderViewport(renderer, rect))
     {
@@ -7985,7 +7985,7 @@ inline bool SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect, std:
     }
 }
 
-inline bool GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderViewport(renderer, rect))
     {
@@ -7993,7 +7993,7 @@ inline bool GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect, std::sourc
     }
 }
 
-inline bool RenderViewportSet(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
+inline void RenderViewportSet(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderViewportSet(renderer))
     {
@@ -8001,7 +8001,7 @@ inline bool RenderViewportSet(SDL_Renderer *renderer, std::source_location locat
     }
 }
 
-inline bool GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderSafeArea(renderer, rect))
     {
@@ -8009,7 +8009,7 @@ inline bool GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect, std::sourc
     }
 }
 
-inline bool SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetRenderClipRect(renderer, rect))
     {
@@ -8017,7 +8017,7 @@ inline bool SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect, std:
     }
 }
 
-inline bool GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline void GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderClipRect(renderer, rect))
     {
@@ -8025,7 +8025,7 @@ inline bool GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect, std::sourc
     }
 }
 
-inline bool RenderClipEnabled(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
+inline void RenderClipEnabled(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderClipEnabled(renderer))
     {
@@ -8033,7 +8033,7 @@ inline bool RenderClipEnabled(SDL_Renderer *renderer, std::source_location locat
     }
 }
 
-inline bool SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY, std::source_location location = std::source_location::current())
+inline void SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetRenderScale(renderer, scaleX, scaleY))
     {
@@ -8041,7 +8041,7 @@ inline bool SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY, s
     }
 }
 
-inline bool GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY, std::source_location location = std::source_location::current())
+inline void GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderScale(renderer, scaleX, scaleY))
     {
@@ -8049,7 +8049,7 @@ inline bool GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY,
     }
 }
 
-inline bool SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a, std::source_location location = std::source_location::current())
+inline void SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetRenderDrawColor(renderer, r, g, b, a))
     {
@@ -8057,7 +8057,7 @@ inline bool SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b
     }
 }
 
-inline bool SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a, std::source_location location = std::source_location::current())
+inline void SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetRenderDrawColorFloat(renderer, r, g, b, a))
     {
@@ -8065,7 +8065,7 @@ inline bool SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, fl
     }
 }
 
-inline bool GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a, std::source_location location = std::source_location::current())
+inline void GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderDrawColor(renderer, r, g, b, a))
     {
@@ -8073,7 +8073,7 @@ inline bool GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8
     }
 }
 
-inline bool GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a, std::source_location location = std::source_location::current())
+inline void GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderDrawColorFloat(renderer, r, g, b, a))
     {
@@ -8081,7 +8081,7 @@ inline bool GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, 
     }
 }
 
-inline bool SetRenderColorScale(SDL_Renderer *renderer, float scale, std::source_location location = std::source_location::current())
+inline void SetRenderColorScale(SDL_Renderer *renderer, float scale, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetRenderColorScale(renderer, scale))
     {
@@ -8089,7 +8089,7 @@ inline bool SetRenderColorScale(SDL_Renderer *renderer, float scale, std::source
     }
 }
 
-inline bool GetRenderColorScale(SDL_Renderer *renderer, float *scale, std::source_location location = std::source_location::current())
+inline void GetRenderColorScale(SDL_Renderer *renderer, float *scale, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderColorScale(renderer, scale))
     {
@@ -8097,7 +8097,7 @@ inline bool GetRenderColorScale(SDL_Renderer *renderer, float *scale, std::sourc
     }
 }
 
-inline bool SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode, std::source_location location = std::source_location::current())
+inline void SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetRenderDrawBlendMode(renderer, blendMode))
     {
@@ -8105,7 +8105,7 @@ inline bool SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMo
     }
 }
 
-inline bool GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode, std::source_location location = std::source_location::current())
+inline void GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderDrawBlendMode(renderer, blendMode))
     {
@@ -8113,7 +8113,7 @@ inline bool GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendM
     }
 }
 
-inline bool RenderClear(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
+inline void RenderClear(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderClear(renderer))
     {
@@ -8121,7 +8121,7 @@ inline bool RenderClear(SDL_Renderer *renderer, std::source_location location = 
     }
 }
 
-inline bool RenderPoint(SDL_Renderer *renderer, float x, float y, std::source_location location = std::source_location::current())
+inline void RenderPoint(SDL_Renderer *renderer, float x, float y, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderPoint(renderer, x, y))
     {
@@ -8129,7 +8129,7 @@ inline bool RenderPoint(SDL_Renderer *renderer, float x, float y, std::source_lo
     }
 }
 
-inline bool RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count, std::source_location location = std::source_location::current())
+inline void RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderPoints(renderer, points, count))
     {
@@ -8137,7 +8137,7 @@ inline bool RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int c
     }
 }
 
-inline bool RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2, std::source_location location = std::source_location::current())
+inline void RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderLine(renderer, x1, y1, x2, y2))
     {
@@ -8145,7 +8145,7 @@ inline bool RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, flo
     }
 }
 
-inline bool RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count, std::source_location location = std::source_location::current())
+inline void RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderLines(renderer, points, count))
     {
@@ -8153,7 +8153,7 @@ inline bool RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int co
     }
 }
 
-inline bool RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect, std::source_location location = std::source_location::current())
+inline void RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderRect(renderer, rect))
     {
@@ -8161,7 +8161,7 @@ inline bool RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect, std::sourc
     }
 }
 
-inline bool RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count, std::source_location location = std::source_location::current())
+inline void RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderRects(renderer, rects, count))
     {
@@ -8169,7 +8169,7 @@ inline bool RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int coun
     }
 }
 
-inline bool RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect, std::source_location location = std::source_location::current())
+inline void RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderFillRect(renderer, rect))
     {
@@ -8177,7 +8177,7 @@ inline bool RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect, std::s
     }
 }
 
-inline bool RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count, std::source_location location = std::source_location::current())
+inline void RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderFillRects(renderer, rects, count))
     {
@@ -8185,7 +8185,7 @@ inline bool RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int 
     }
 }
 
-inline bool RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, std::source_location location = std::source_location::current())
+inline void RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderTexture(renderer, texture, srcrect, dstrect))
     {
@@ -8193,7 +8193,7 @@ inline bool RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SD
     }
 }
 
-inline bool RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, double angle, const SDL_FPoint *center, SDL_FlipMode flip, std::source_location location = std::source_location::current())
+inline void RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, double angle, const SDL_FPoint *center, SDL_FlipMode flip, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderTextureRotated(renderer, texture, srcrect, dstrect, angle, center, flip))
     {
@@ -8201,7 +8201,7 @@ inline bool RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, c
     }
 }
 
-inline bool RenderTextureAffine(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FPoint *origin, const SDL_FPoint *right, const SDL_FPoint *down, std::source_location location = std::source_location::current())
+inline void RenderTextureAffine(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FPoint *origin, const SDL_FPoint *right, const SDL_FPoint *down, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderTextureAffine(renderer, texture, srcrect, origin, right, down))
     {
@@ -8209,7 +8209,7 @@ inline bool RenderTextureAffine(SDL_Renderer *renderer, SDL_Texture *texture, co
     }
 }
 
-inline bool RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect, std::source_location location = std::source_location::current())
+inline void RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderTextureTiled(renderer, texture, srcrect, scale, dstrect))
     {
@@ -8217,7 +8217,7 @@ inline bool RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, con
     }
 }
 
-inline bool RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect, std::source_location location = std::source_location::current())
+inline void RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderTexture9Grid(renderer, texture, srcrect, left_width, right_width, top_height, bottom_height, scale, dstrect))
     {
@@ -8225,7 +8225,7 @@ inline bool RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, con
     }
 }
 
-inline bool RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices, std::source_location location = std::source_location::current())
+inline void RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderGeometry(renderer, texture, vertices, num_vertices, indices, num_indices))
     {
@@ -8233,7 +8233,7 @@ inline bool RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const S
     }
 }
 
-inline bool RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices, std::source_location location = std::source_location::current())
+inline void RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderGeometryRaw(renderer, texture, xy, xy_stride, color, color_stride, uv, uv_stride, num_vertices, indices, num_indices, size_indices))
     {
@@ -8241,7 +8241,7 @@ inline bool RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, cons
     }
 }
 
-inline SDL_Surface * RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect, std::source_location location = std::source_location::current())
+inline SDL_Surface *RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect, std::source_location location = std::source_location::current())
 {
     SDL_Surface *result = SDL_RenderReadPixels(renderer, rect);
     if (!result)
@@ -8251,7 +8251,7 @@ inline SDL_Surface * RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *re
     return result;
 }
 
-inline bool RenderPresent(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
+inline void RenderPresent(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderPresent(renderer))
     {
@@ -8269,7 +8269,7 @@ inline void DestroyRenderer(SDL_Renderer *renderer)
     SDL_DestroyRenderer(renderer);
 }
 
-inline bool FlushRenderer(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
+inline void FlushRenderer(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
 {
     if (!SDL_FlushRenderer(renderer))
     {
@@ -8277,7 +8277,7 @@ inline bool FlushRenderer(SDL_Renderer *renderer, std::source_location location 
     }
 }
 
-inline void * GetRenderMetalLayer(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
+inline void *GetRenderMetalLayer(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
 {
     void *result = SDL_GetRenderMetalLayer(renderer);
     if (!result)
@@ -8287,7 +8287,7 @@ inline void * GetRenderMetalLayer(SDL_Renderer *renderer, std::source_location l
     return result;
 }
 
-inline void * GetRenderMetalCommandEncoder(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
+inline void *GetRenderMetalCommandEncoder(SDL_Renderer *renderer, std::source_location location = std::source_location::current())
 {
     void *result = SDL_GetRenderMetalCommandEncoder(renderer);
     if (!result)
@@ -8297,7 +8297,7 @@ inline void * GetRenderMetalCommandEncoder(SDL_Renderer *renderer, std::source_l
     return result;
 }
 
-inline bool AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore, std::source_location location = std::source_location::current())
+inline void AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore, std::source_location location = std::source_location::current())
 {
     if (!SDL_AddVulkanRenderSemaphores(renderer, wait_stage_mask, wait_semaphore, signal_semaphore))
     {
@@ -8305,7 +8305,7 @@ inline bool AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_
     }
 }
 
-inline bool SetRenderVSync(SDL_Renderer *renderer, int vsync, std::source_location location = std::source_location::current())
+inline void SetRenderVSync(SDL_Renderer *renderer, int vsync, std::source_location location = std::source_location::current())
 {
     if (!SDL_SetRenderVSync(renderer, vsync))
     {
@@ -8313,7 +8313,7 @@ inline bool SetRenderVSync(SDL_Renderer *renderer, int vsync, std::source_locati
     }
 }
 
-inline bool GetRenderVSync(SDL_Renderer *renderer, int *vsync, std::source_location location = std::source_location::current())
+inline void GetRenderVSync(SDL_Renderer *renderer, int *vsync, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetRenderVSync(renderer, vsync))
     {
@@ -8321,7 +8321,7 @@ inline bool GetRenderVSync(SDL_Renderer *renderer, int *vsync, std::source_locat
     }
 }
 
-inline bool RenderDebugText(SDL_Renderer *renderer, float x, float y, const char *str, std::source_location location = std::source_location::current())
+inline void RenderDebugText(SDL_Renderer *renderer, float x, float y, const char *str, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderDebugText(renderer, x, y, str))
     {
@@ -8329,7 +8329,7 @@ inline bool RenderDebugText(SDL_Renderer *renderer, float x, float y, const char
     }
 }
 
-inline bool RenderDebugTextFormat(SDL_Renderer *renderer, float x, float y, const char *fmt, std::source_location location = std::source_location::current())
+inline void RenderDebugTextFormat(SDL_Renderer *renderer, float x, float y, const char *fmt, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderDebugTextFormat(renderer, x, y, fmt))
     {
@@ -8337,7 +8337,7 @@ inline bool RenderDebugTextFormat(SDL_Renderer *renderer, float x, float y, cons
     }
 }
 
-inline SDL_Storage * OpenTitleStorage(const char *override, SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline SDL_Storage *OpenTitleStorage(const char *override, SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     SDL_Storage *result = SDL_OpenTitleStorage(override, props);
     if (!result)
@@ -8347,7 +8347,7 @@ inline SDL_Storage * OpenTitleStorage(const char *override, SDL_PropertiesID pro
     return result;
 }
 
-inline SDL_Storage * OpenUserStorage(const char *org, const char *app, SDL_PropertiesID props, std::source_location location = std::source_location::current())
+inline SDL_Storage *OpenUserStorage(const char *org, const char *app, SDL_PropertiesID props, std::source_location location = std::source_location::current())
 {
     SDL_Storage *result = SDL_OpenUserStorage(org, app, props);
     if (!result)
@@ -8357,7 +8357,7 @@ inline SDL_Storage * OpenUserStorage(const char *org, const char *app, SDL_Prope
     return result;
 }
 
-inline SDL_Storage * OpenFileStorage(const char *path, std::source_location location = std::source_location::current())
+inline SDL_Storage *OpenFileStorage(const char *path, std::source_location location = std::source_location::current())
 {
     SDL_Storage *result = SDL_OpenFileStorage(path);
     if (!result)
@@ -8367,7 +8367,7 @@ inline SDL_Storage * OpenFileStorage(const char *path, std::source_location loca
     return result;
 }
 
-inline SDL_Storage * OpenStorage(const SDL_StorageInterface *iface, void *userdata, std::source_location location = std::source_location::current())
+inline SDL_Storage *OpenStorage(const SDL_StorageInterface *iface, void *userdata, std::source_location location = std::source_location::current())
 {
     SDL_Storage *result = SDL_OpenStorage(iface, userdata);
     if (!result)
@@ -8377,7 +8377,7 @@ inline SDL_Storage * OpenStorage(const SDL_StorageInterface *iface, void *userda
     return result;
 }
 
-inline bool CloseStorage(SDL_Storage *storage, std::source_location location = std::source_location::current())
+inline void CloseStorage(SDL_Storage *storage, std::source_location location = std::source_location::current())
 {
     if (!SDL_CloseStorage(storage))
     {
@@ -8385,7 +8385,7 @@ inline bool CloseStorage(SDL_Storage *storage, std::source_location location = s
     }
 }
 
-inline bool StorageReady(SDL_Storage *storage, std::source_location location = std::source_location::current())
+inline void StorageReady(SDL_Storage *storage, std::source_location location = std::source_location::current())
 {
     if (!SDL_StorageReady(storage))
     {
@@ -8393,7 +8393,7 @@ inline bool StorageReady(SDL_Storage *storage, std::source_location location = s
     }
 }
 
-inline bool GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *length, std::source_location location = std::source_location::current())
+inline void GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *length, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetStorageFileSize(storage, path, length))
     {
@@ -8401,7 +8401,7 @@ inline bool GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *l
     }
 }
 
-inline bool ReadStorageFile(SDL_Storage *storage, const char *path, void *destination, Uint64 length, std::source_location location = std::source_location::current())
+inline void ReadStorageFile(SDL_Storage *storage, const char *path, void *destination, Uint64 length, std::source_location location = std::source_location::current())
 {
     if (!SDL_ReadStorageFile(storage, path, destination, length))
     {
@@ -8409,7 +8409,7 @@ inline bool ReadStorageFile(SDL_Storage *storage, const char *path, void *destin
     }
 }
 
-inline bool WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length, std::source_location location = std::source_location::current())
+inline void WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length, std::source_location location = std::source_location::current())
 {
     if (!SDL_WriteStorageFile(storage, path, source, length))
     {
@@ -8417,7 +8417,7 @@ inline bool WriteStorageFile(SDL_Storage *storage, const char *path, const void 
     }
 }
 
-inline bool CreateStorageDirectory(SDL_Storage *storage, const char *path, std::source_location location = std::source_location::current())
+inline void CreateStorageDirectory(SDL_Storage *storage, const char *path, std::source_location location = std::source_location::current())
 {
     if (!SDL_CreateStorageDirectory(storage, path))
     {
@@ -8425,7 +8425,7 @@ inline bool CreateStorageDirectory(SDL_Storage *storage, const char *path, std::
     }
 }
 
-inline bool EnumerateStorageDirectory(SDL_Storage *storage, const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata, std::source_location location = std::source_location::current())
+inline void EnumerateStorageDirectory(SDL_Storage *storage, const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata, std::source_location location = std::source_location::current())
 {
     if (!SDL_EnumerateStorageDirectory(storage, path, callback, userdata))
     {
@@ -8433,7 +8433,7 @@ inline bool EnumerateStorageDirectory(SDL_Storage *storage, const char *path, SD
     }
 }
 
-inline bool RemoveStoragePath(SDL_Storage *storage, const char *path, std::source_location location = std::source_location::current())
+inline void RemoveStoragePath(SDL_Storage *storage, const char *path, std::source_location location = std::source_location::current())
 {
     if (!SDL_RemoveStoragePath(storage, path))
     {
@@ -8441,7 +8441,7 @@ inline bool RemoveStoragePath(SDL_Storage *storage, const char *path, std::sourc
     }
 }
 
-inline bool RenameStoragePath(SDL_Storage *storage, const char *oldpath, const char *newpath, std::source_location location = std::source_location::current())
+inline void RenameStoragePath(SDL_Storage *storage, const char *oldpath, const char *newpath, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenameStoragePath(storage, oldpath, newpath))
     {
@@ -8449,7 +8449,7 @@ inline bool RenameStoragePath(SDL_Storage *storage, const char *oldpath, const c
     }
 }
 
-inline bool CopyStorageFile(SDL_Storage *storage, const char *oldpath, const char *newpath, std::source_location location = std::source_location::current())
+inline void CopyStorageFile(SDL_Storage *storage, const char *oldpath, const char *newpath, std::source_location location = std::source_location::current())
 {
     if (!SDL_CopyStorageFile(storage, oldpath, newpath))
     {
@@ -8457,7 +8457,7 @@ inline bool CopyStorageFile(SDL_Storage *storage, const char *oldpath, const cha
     }
 }
 
-inline bool GetStoragePathInfo(SDL_Storage *storage, const char *path, SDL_PathInfo *info, std::source_location location = std::source_location::current())
+inline void GetStoragePathInfo(SDL_Storage *storage, const char *path, SDL_PathInfo *info, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetStoragePathInfo(storage, path, info))
     {
@@ -8470,7 +8470,7 @@ inline Uint64 GetStorageSpaceRemaining(SDL_Storage *storage)
     return SDL_GetStorageSpaceRemaining(storage);
 }
 
-inline char ** GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count, std::source_location location = std::source_location::current())
+inline char **GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count, std::source_location location = std::source_location::current())
 {
     char **result = SDL_GlobStorageDirectory(storage, path, pattern, flags, count);
     if (!result)
@@ -8490,7 +8490,7 @@ inline int GetDirect3D9AdapterIndex(SDL_DisplayID displayID)
     return SDL_GetDirect3D9AdapterIndex(displayID);
 }
 
-inline bool GetDXGIOutputInfo(SDL_DisplayID displayID, int *adapterIndex, int *outputIndex, std::source_location location = std::source_location::current())
+inline void GetDXGIOutputInfo(SDL_DisplayID displayID, int *adapterIndex, int *outputIndex, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetDXGIOutputInfo(displayID, adapterIndex, outputIndex))
     {
@@ -8503,7 +8503,7 @@ inline void SetX11EventHook(SDL_X11EventHook callback, void *userdata)
     SDL_SetX11EventHook(callback, userdata);
 }
 
-inline bool IsTablet(std::source_location location = std::source_location::current())
+inline void IsTablet(std::source_location location = std::source_location::current())
 {
     if (!SDL_IsTablet())
     {
@@ -8511,7 +8511,7 @@ inline bool IsTablet(std::source_location location = std::source_location::curre
     }
 }
 
-inline bool IsTV(std::source_location location = std::source_location::current())
+inline void IsTV(std::source_location location = std::source_location::current())
 {
     if (!SDL_IsTV())
     {
@@ -8554,7 +8554,7 @@ inline void OnApplicationDidEnterForeground()
     SDL_OnApplicationDidEnterForeground();
 }
 
-inline bool GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat, std::source_location location = std::source_location::current())
+inline void GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetDateTimeLocalePreferences(dateFormat, timeFormat))
     {
@@ -8562,7 +8562,7 @@ inline bool GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFor
     }
 }
 
-inline bool GetCurrentTime(SDL_Time *ticks, std::source_location location = std::source_location::current())
+inline void GetCurrentTime(SDL_Time *ticks, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetCurrentTime(ticks))
     {
@@ -8570,7 +8570,7 @@ inline bool GetCurrentTime(SDL_Time *ticks, std::source_location location = std:
     }
 }
 
-inline bool TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, bool localTime, std::source_location location = std::source_location::current())
+inline void TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, bool localTime, std::source_location location = std::source_location::current())
 {
     if (!SDL_TimeToDateTime(ticks, dt, localTime))
     {
@@ -8578,7 +8578,7 @@ inline bool TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, bool localTime, std
     }
 }
 
-inline bool DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks, std::source_location location = std::source_location::current())
+inline void DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks, std::source_location location = std::source_location::current())
 {
     if (!SDL_DateTimeToTime(dt, ticks))
     {
@@ -8656,7 +8656,7 @@ inline SDL_TimerID AddTimerNS(Uint64 interval, SDL_NSTimerCallback callback, voi
     return SDL_AddTimerNS(interval, callback, userdata);
 }
 
-inline bool RemoveTimer(SDL_TimerID id, std::source_location location = std::source_location::current())
+inline void RemoveTimer(SDL_TimerID id, std::source_location location = std::source_location::current())
 {
     if (!SDL_RemoveTimer(id))
     {
@@ -8664,7 +8664,7 @@ inline bool RemoveTimer(SDL_TimerID id, std::source_location location = std::sou
     }
 }
 
-inline SDL_Tray * CreateTray(SDL_Surface *icon, const char *tooltip, std::source_location location = std::source_location::current())
+inline SDL_Tray *CreateTray(SDL_Surface *icon, const char *tooltip, std::source_location location = std::source_location::current())
 {
     SDL_Tray *result = SDL_CreateTray(icon, tooltip);
     if (!result)
@@ -8684,7 +8684,7 @@ inline void SetTrayTooltip(SDL_Tray *tray, const char *tooltip)
     SDL_SetTrayTooltip(tray, tooltip);
 }
 
-inline SDL_TrayMenu * CreateTrayMenu(SDL_Tray *tray, std::source_location location = std::source_location::current())
+inline SDL_TrayMenu *CreateTrayMenu(SDL_Tray *tray, std::source_location location = std::source_location::current())
 {
     SDL_TrayMenu *result = SDL_CreateTrayMenu(tray);
     if (!result)
@@ -8694,7 +8694,7 @@ inline SDL_TrayMenu * CreateTrayMenu(SDL_Tray *tray, std::source_location locati
     return result;
 }
 
-inline SDL_TrayMenu * CreateTraySubmenu(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
+inline SDL_TrayMenu *CreateTraySubmenu(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
 {
     SDL_TrayMenu *result = SDL_CreateTraySubmenu(entry);
     if (!result)
@@ -8704,7 +8704,7 @@ inline SDL_TrayMenu * CreateTraySubmenu(SDL_TrayEntry *entry, std::source_locati
     return result;
 }
 
-inline SDL_TrayMenu * GetTrayMenu(SDL_Tray *tray, std::source_location location = std::source_location::current())
+inline SDL_TrayMenu *GetTrayMenu(SDL_Tray *tray, std::source_location location = std::source_location::current())
 {
     SDL_TrayMenu *result = SDL_GetTrayMenu(tray);
     if (!result)
@@ -8714,7 +8714,7 @@ inline SDL_TrayMenu * GetTrayMenu(SDL_Tray *tray, std::source_location location 
     return result;
 }
 
-inline SDL_TrayMenu * GetTraySubmenu(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
+inline SDL_TrayMenu *GetTraySubmenu(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
 {
     SDL_TrayMenu *result = SDL_GetTraySubmenu(entry);
     if (!result)
@@ -8724,7 +8724,7 @@ inline SDL_TrayMenu * GetTraySubmenu(SDL_TrayEntry *entry, std::source_location 
     return result;
 }
 
-inline const SDL_TrayEntry ** GetTrayEntries(SDL_TrayMenu *menu, int *count, std::source_location location = std::source_location::current())
+inline const SDL_TrayEntry **GetTrayEntries(SDL_TrayMenu *menu, int *count, std::source_location location = std::source_location::current())
 {
     const SDL_TrayEntry **result = SDL_GetTrayEntries(menu, count);
     if (!result)
@@ -8739,7 +8739,7 @@ inline void RemoveTrayEntry(SDL_TrayEntry *entry)
     SDL_RemoveTrayEntry(entry);
 }
 
-inline SDL_TrayEntry * InsertTrayEntryAt(SDL_TrayMenu *menu, int pos, const char *label, SDL_TrayEntryFlags flags, std::source_location location = std::source_location::current())
+inline SDL_TrayEntry *InsertTrayEntryAt(SDL_TrayMenu *menu, int pos, const char *label, SDL_TrayEntryFlags flags, std::source_location location = std::source_location::current())
 {
     SDL_TrayEntry *result = SDL_InsertTrayEntryAt(menu, pos, label, flags);
     if (!result)
@@ -8754,7 +8754,7 @@ inline void SetTrayEntryLabel(SDL_TrayEntry *entry, const char *label)
     SDL_SetTrayEntryLabel(entry, label);
 }
 
-inline const char * GetTrayEntryLabel(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
+inline const char *GetTrayEntryLabel(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetTrayEntryLabel(entry);
     if (!result)
@@ -8769,7 +8769,7 @@ inline void SetTrayEntryChecked(SDL_TrayEntry *entry, bool checked)
     SDL_SetTrayEntryChecked(entry, checked);
 }
 
-inline bool GetTrayEntryChecked(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
+inline void GetTrayEntryChecked(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetTrayEntryChecked(entry))
     {
@@ -8782,7 +8782,7 @@ inline void SetTrayEntryEnabled(SDL_TrayEntry *entry, bool enabled)
     SDL_SetTrayEntryEnabled(entry, enabled);
 }
 
-inline bool GetTrayEntryEnabled(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
+inline void GetTrayEntryEnabled(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
 {
     if (!SDL_GetTrayEntryEnabled(entry))
     {
@@ -8805,7 +8805,7 @@ inline void DestroyTray(SDL_Tray *tray)
     SDL_DestroyTray(tray);
 }
 
-inline SDL_TrayMenu * GetTrayEntryParent(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
+inline SDL_TrayMenu *GetTrayEntryParent(SDL_TrayEntry *entry, std::source_location location = std::source_location::current())
 {
     SDL_TrayMenu *result = SDL_GetTrayEntryParent(entry);
     if (!result)
@@ -8815,7 +8815,7 @@ inline SDL_TrayMenu * GetTrayEntryParent(SDL_TrayEntry *entry, std::source_locat
     return result;
 }
 
-inline SDL_TrayEntry * GetTrayMenuParentEntry(SDL_TrayMenu *menu, std::source_location location = std::source_location::current())
+inline SDL_TrayEntry *GetTrayMenuParentEntry(SDL_TrayMenu *menu, std::source_location location = std::source_location::current())
 {
     SDL_TrayEntry *result = SDL_GetTrayMenuParentEntry(menu);
     if (!result)
@@ -8825,7 +8825,7 @@ inline SDL_TrayEntry * GetTrayMenuParentEntry(SDL_TrayMenu *menu, std::source_lo
     return result;
 }
 
-inline SDL_Tray * GetTrayMenuParentTray(SDL_TrayMenu *menu, std::source_location location = std::source_location::current())
+inline SDL_Tray *GetTrayMenuParentTray(SDL_TrayMenu *menu, std::source_location location = std::source_location::current())
 {
     SDL_Tray *result = SDL_GetTrayMenuParentTray(menu);
     if (!result)
@@ -8845,7 +8845,7 @@ inline int GetVersion()
     return SDL_GetVersion();
 }
 
-inline const char * GetRevision(std::source_location location = std::source_location::current())
+inline const char *GetRevision(std::source_location location = std::source_location::current())
 {
     const char *result = SDL_GetRevision();
     if (!result)

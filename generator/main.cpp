@@ -156,7 +156,10 @@ static void OutputFunctions(std::ostream &out, const std::vector<Function> funct
     {
         if (fn.HasSDLPrefix() && !functionsToSkip.contains(fn.Name()))
         {
-            out << "inline " << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
+            std::string returnType = fn.ReturnsBool() ? "void" : fn.ReturnTypeString();
+            std::string space = fn.ReturnsPointer() ? "" : " ";
+
+            out << "inline " << returnType << space << fn.NamespacedName() << "(";
             OutputFunctionArguments(out, fn, false);
 
             if (!fn.IsUnchecked())
