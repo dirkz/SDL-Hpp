@@ -69,6 +69,108 @@ template <class T> struct UniquePointer
   private:
     T *m_object = nullptr;
 };
+template<>
+void Release<SDL_Environment>(SDL_Environment *env)
+{
+    SDL_DestroyEnvironment(env);
+}
+
+template<>
+void Release<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
+{
+    SDL_DestroyAsyncIOQueue(queue);
+}
+
+template<>
+void Release<SDL_Mutex>(SDL_Mutex *mutex)
+{
+    SDL_DestroyMutex(mutex);
+}
+
+template<>
+void Release<SDL_RWLock>(SDL_RWLock *rwlock)
+{
+    SDL_DestroyRWLock(rwlock);
+}
+
+template<>
+void Release<SDL_Semaphore>(SDL_Semaphore *sem)
+{
+    SDL_DestroySemaphore(sem);
+}
+
+template<>
+void Release<SDL_Condition>(SDL_Condition *cond)
+{
+    SDL_DestroyCondition(cond);
+}
+
+template<>
+void Release<SDL_AudioStream>(SDL_AudioStream *stream)
+{
+    SDL_DestroyAudioStream(stream);
+}
+
+template<>
+void Release<SDL_Palette>(SDL_Palette *palette)
+{
+    SDL_DestroyPalette(palette);
+}
+
+template<>
+void Release<SDL_Surface>(SDL_Surface *surface)
+{
+    SDL_DestroySurface(surface);
+}
+
+template<>
+void Release<SDL_Window>(SDL_Window *window)
+{
+    SDL_DestroyWindowSurface(window);
+}
+
+template<>
+void Release<SDL_Window>(SDL_Window *window)
+{
+    SDL_DestroyWindow(window);
+}
+
+template<>
+void Release<SDL_Cursor>(SDL_Cursor *cursor)
+{
+    SDL_DestroyCursor(cursor);
+}
+
+template<>
+void Release<SDL_GPUDevice>(SDL_GPUDevice *device)
+{
+    SDL_DestroyGPUDevice(device);
+}
+
+template<>
+void Release<SDL_Process>(SDL_Process *process)
+{
+    SDL_DestroyProcess(process);
+}
+
+template<>
+void Release<SDL_Texture>(SDL_Texture *texture)
+{
+    SDL_DestroyTexture(texture);
+}
+
+template<>
+void Release<SDL_Renderer>(SDL_Renderer *renderer)
+{
+    SDL_DestroyRenderer(renderer);
+}
+
+template<>
+void Release<SDL_Tray>(SDL_Tray *tray)
+{
+    SDL_DestroyTray(tray);
+}
+
 inline void * malloc(size_t size, std::source_location location = std::source_location::current())
 {
     void *result = SDL_malloc(size);

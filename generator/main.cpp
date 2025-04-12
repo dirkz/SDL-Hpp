@@ -126,11 +126,12 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                 const Argument &arg = fn.Arguments()[0];
                 if (arg.IsPointer())
                 {
-                    cout << "Destructor: " << fn.Name() << "\n";
-                    for (const Argument &arg : fn.Arguments())
-                    {
-                        cout << "    arg: " << arg.PointeeTypeString() << "\n";
-                    }
+                    out << "template<>\n";
+                    out << "void Release<" << arg.PointeeTypeString() << ">(" << arg.Declaration()
+                        << ")\n";
+                    out << "{\n";
+                    out << "    " << fn.Name() << "(" << arg.Name() << ");\n";
+                    out << "}\n\n";
                 }
             }
         }
