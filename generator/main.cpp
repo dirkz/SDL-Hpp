@@ -178,7 +178,12 @@ using namespace zlang;
 int main()
 {
     auto location = source_location::current();
+    auto locationPath = fs::path{location.file_name()};
     auto outputDirectory = fs::path{location.file_name()}.parent_path().parent_path();
+
+    auto outputFile = outputDirectory / "SDL.hpp";
+    auto prologueFile = locationPath / "Prologue.h";
+    auto epilogueFile = locationPath / "Epilogue.h";
 
     auto sdlIncludePath =
         fs::path{location.file_name()}.parent_path().parent_path() / "SDL" / "include";
