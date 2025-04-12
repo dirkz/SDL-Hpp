@@ -180,6 +180,11 @@ static void output(const std::vector<Function> functions, std::ostream &out)
                 out << "        SDLThrow(location);\n";
                 out << "    }\n";
             }
+            else if (fn.ReturnsPointer())
+            {
+                out << "    " << fn.ReturnTypeString() << "result = " << fn.Name() << "(";
+                out << ")\n";
+            }
 
             out << "}\n";
             out << "\n";
