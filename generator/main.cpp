@@ -92,7 +92,7 @@ static std::vector<Function> ParseHeader(const fs::path &path,
     return functions;
 }
 
-static void OutputArguments(std::ostream &out, const Function &fn, bool namesOnly)
+static void OutputFunctionArguments(std::ostream &out, const Function &fn, bool namesOnly)
 {
     bool haveOutputAtLeastOneFunctionArgument = false;
     for (const Argument &arg : fn.Arguments())
@@ -113,14 +113,14 @@ static void OutputArguments(std::ostream &out, const Function &fn, bool namesOnl
     }
 }
 
-static void Output(std::ostream &out, const std::vector<Function> functions)
+static void OutputFunctions(std::ostream &out, const std::vector<Function> functions)
 {
     for (const Function &fn : functions)
     {
         if (fn.HasSDLPrefix())
         {
             out << "inline " << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
-            OutputArguments(out, fn, false);
+            OutputFunctionArguments(out, fn, false);
 
             if (!fn.IsUnchecked())
             {
@@ -146,13 +146,13 @@ static void Output(std::ostream &out, const std::vector<Function> functions)
                     out << "    ";
                 }
                 out << fn.Name() << "(";
-                OutputArguments(out, fn, true);
+                OutputFunctionArguments(out, fn, true);
                 out << ");\n";
             }
             else if (fn.ReturnsBool())
             {
                 out << "    if (!" << fn.Name() << "(";
-                OutputArguments(out, fn, true);
+                OutputFunctionArguments(out, fn, true);
                 out << "))\n" << "    {\n";
                 out << "        SDLThrow(location);\n";
                 out << "    }\n";
@@ -160,7 +160,7 @@ static void Output(std::ostream &out, const std::vector<Function> functions)
             else if (fn.ReturnsPointer())
             {
                 out << "    " << fn.ReturnTypeString() << "result = " << fn.Name() << "(";
-                OutputArguments(out, fn, true);
+                OutputFunctionArguments(out, fn, true);
                 out << ");\n";
                 out << "    if (!result)\n    {\n        SDLThrow(location);\n    }\n";
                 out << "    return result;\n";
@@ -204,8 +204,8 @@ int main()
     auto sdlIncludeFile = sdlHeaderDirectory / "SDL.h";
 
     std::vector<Function> functions = ParseHeader(sdlIncludeFile, {includePath1});
-    Output(std::cout, functions);
-    Output(out, functions);
+    OutputFunctions(std::cout, functions);
+    OutputFunctions(out, functions);
 
     std::ifstream ifsEpilogue{epilogueFile};
     while (std::getline(ifsEpilogue, line))
