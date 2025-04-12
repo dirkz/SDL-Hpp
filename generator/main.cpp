@@ -15,24 +15,7 @@ namespace zlang
 
 vector<string> structNames{};
 
-static string ctypeString(CXType cursorType)
-{
-    if (cursorType.kind == CXType_Pointer)
-    {
-        CXType pointeeType = clang_getPointeeType(cursorType);
-        return ctypeString(pointeeType) + " *";
-    }
-    else
-    {
-        CXString typeStringCX = clang_getTypeKindSpelling(cursorType.kind);
-        string s{clang_getCString(typeStringCX)};
-        clang_disposeString(typeStringCX);
-
-        return s;
-    }
-}
-
-static std::vector<Function> parseHeader(const fs::path &path,
+static std::vector<Function> ParseHeader(const fs::path &path,
                                          const std::vector<std::string> &includePaths)
 {
     CXIndex index = clang_createIndex(0, 1);
@@ -108,7 +91,7 @@ static std::vector<Function> parseHeader(const fs::path &path,
     return functions;
 }
 
-static void output(const std::vector<Function> functions, std::ostream &out)
+static void Output(const std::vector<Function> functions, std::ostream &out)
 {
     for (const Function &fn : functions)
     {
@@ -206,8 +189,8 @@ int main()
     std::string includePath1 = "-I" + sdlIncludePath.string();
 
     auto sdlIncludeFile = sdlHeaderDirectory / "SDL.h";
-    std::vector<zlang::Function> functions = zlang::parseHeader(sdlIncludeFile, {includePath1});
-    zlang::output(functions, std::cout);
+    std::vector<zlang::Function> functions = zlang::ParseHeader(sdlIncludeFile, {includePath1});
+    zlang::Output(functions, std::cout);
 
     return 0;
 }
