@@ -2,7 +2,7 @@
 
 #include <SDL3/SDL.h>
 
-namespace zdl
+namespace sdl
 {
 
 void SDLThrow(std::source_location location)
@@ -8856,4 +8856,4 @@ inline const char *GetRevision(std::source_location location = std::source_locat
 }
 
 
-} // namespace zdl
+} // namespace sdl

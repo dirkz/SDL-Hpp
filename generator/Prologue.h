@@ -2,7 +2,7 @@
 
 #include <SDL3/SDL.h>
 
-namespace zdl
+namespace sdl
 {
 
 void SDLThrow(std::source_location location)
