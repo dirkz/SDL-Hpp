@@ -159,7 +159,10 @@ static void Output(std::ostream &out, const std::vector<Function> functions)
             else if (fn.ReturnsPointer())
             {
                 out << "    " << fn.ReturnTypeString() << "result = " << fn.Name() << "(";
+                OutputArguments(out, fn, true);
                 out << ");\n";
+                out << "    if (!result)\n    {\n        SDLThrow(location);\n    }\n";
+                out << "    return result;\n";
             }
 
             out << "}\n";
