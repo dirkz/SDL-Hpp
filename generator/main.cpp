@@ -117,7 +117,7 @@ static void OutputFunctions(std::ostream &out, const std::vector<Function> funct
 {
     for (const Function &fn : functions)
     {
-        if (fn.HasSDLPrefix())
+        if (fn.HasSDLPrefix() && fn.Name() != "SDL_size_mul_check_overflow_builtin")
         {
             out << "inline " << fn.ReturnTypeString() << " " << fn.NamespacedName() << "(";
             OutputFunctionArguments(out, fn, false);
