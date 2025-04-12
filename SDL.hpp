@@ -8855,5 +8855,4 @@ inline const char *GetRevision(std::source_location location = std::source_locat
     return result;
 }
 
-
 } // namespace sdl
