@@ -163,6 +163,23 @@ static void output(const std::vector<Function> functions, std::ostream &out)
                 }
                 out << ")\n";
             }
+            else if (fn.ReturnsBool())
+            {
+                out << "    if (!" << fn.Name() << "(";
+                bool haveOutputAtLeastOneParameter = false;
+                for (const Argument &arg : fn.Arguments())
+                {
+                    if (haveOutputAtLeastOneParameter)
+                    {
+                        out << ", ";
+                    }
+                    out << arg.Name();
+                    haveOutputAtLeastOneParameter = true;
+                }
+                out << "))\n" << "    {\n";
+                out << "        SDLThrow(location);\n";
+                out << "    }\n";
+            }
 
             out << "}\n";
             out << "\n";
