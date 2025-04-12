@@ -178,15 +178,15 @@ using namespace zlang;
 int main()
 {
     auto location = source_location::current();
-
     auto outputDirectory = fs::path{location.file_name()}.parent_path().parent_path();
+
     auto sdlIncludePath =
         fs::path{location.file_name()}.parent_path().parent_path() / "SDL" / "include";
     auto sdlHeaderDirectory = sdlIncludePath / "SDL3";
 
     std::string includePath1 = "-I" + sdlIncludePath.string();
-
     auto sdlIncludeFile = sdlHeaderDirectory / "SDL.h";
+
     std::vector<Function> functions = ParseHeader(sdlIncludeFile, {includePath1});
     Output(std::cout, functions);
 
