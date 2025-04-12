@@ -31,9 +31,16 @@ struct Function
         }
 
         m_returnType = clang_getCursorResultType(cursor);
-        CXString functionResultTypeCX = clang_getTypeSpelling(m_returnType);
-        m_returnTypeString = clang_getCString(functionResultTypeCX);
-        clang_disposeString(functionResultTypeCX);
+        if (m_returnType.kind == CXType_Bool)
+        {
+            m_returnTypeString = "bool";
+        }
+        else
+        {
+            CXString functionResultTypeCX = clang_getTypeSpelling(m_returnType);
+            m_returnTypeString = clang_getCString(functionResultTypeCX);
+            clang_disposeString(functionResultTypeCX);
+        }
 
         m_returnsBool = m_returnType.kind == CXType_Bool;
 
