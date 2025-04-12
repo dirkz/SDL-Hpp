@@ -129,7 +129,7 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                     cout << "Destructor: " << fn.Name() << "\n";
                     for (const Argument &arg : fn.Arguments())
                     {
-                        cout << "    arg: " << arg.Declaration() << "\n";
+                        cout << "    arg: " << arg.PointeeTypeString() << "\n";
                     }
                 }
             }
