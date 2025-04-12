@@ -5560,9 +5560,9 @@ inline SDL_Window * GetKeyboardFocus(std::source_location location = std::source
     return result;
 }
 
-inline const _Bool * GetKeyboardState(int *numkeys, std::source_location location = std::source_location::current())
+inline const bool * GetKeyboardState(int *numkeys, std::source_location location = std::source_location::current())
 {
-    const _Bool *result = SDL_GetKeyboardState(numkeys);
+    const bool *result = SDL_GetKeyboardState(numkeys);
     if (!result)
     {
         SDLThrow(location);

@@ -42,6 +42,11 @@ struct Function
             clang_disposeString(functionResultTypeCX);
         }
 
+        if (m_returnTypeString == "const _Bool *")
+        {
+            m_returnTypeString = "const bool *";
+        }
+
         m_returnsBool = m_returnType.kind == CXType_Bool;
 
         m_returnsPointer = m_returnType.kind == CXType_Pointer && m_returnTypeString != "void";
