@@ -2,6 +2,9 @@
 
 #include <SDL3/SDL.h>
 
+#include <source_location>
+#include <stdexcept>
+
 namespace sdl
 {
 
