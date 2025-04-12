@@ -114,6 +114,29 @@ static void OutputFunctionArguments(std::ostream &out, const Function &fn, bool 
     }
 }
 
+static void OutputDestructors(std::ostream &out, const std::vector<Function> functions)
+{
+    for (const Function &fn : functions)
+    {
+        if (fn.Name().find("Destroy") != std::string::npos ||
+            fn.Name().find("Release") != std::string::npos)
+        {
+            if (fn.Arguments().size() == 1)
+            {
+                const Argument &arg = fn.Arguments()[0];
+                if (arg.IsPointer())
+                {
+                    cout << "Destructor: " << fn.Name() << "\n";
+                    for (const Argument &arg : fn.Arguments())
+                    {
+                        cout << "    arg: " << arg.Declaration() << "\n";
+                    }
+                }
+            }
+        }
+    }
+}
+
 static void OutputFunctions(std::ostream &out, const std::vector<Function> functions)
 {
     std::set<std::string> functionsToSkip{"SDL_size_mul_check_overflow_builtin",
@@ -208,6 +231,7 @@ int main()
     auto sdlIncludeFile = sdlHeaderDirectory / "SDL.h";
 
     std::vector<Function> functions = ParseHeader(sdlIncludeFile, {includePath1});
+    OutputDestructors(out, functions);
     OutputFunctions(out, functions);
 
     std::ifstream ifsEpilogue{epilogueFile};

@@ -66,7 +66,7 @@ struct Function
         std::string prettyString{clang_getCString(pretty)};
         clang_disposeString(pretty);
 
-        m_arguments.emplace_back(argNameString, prettyString);
+        m_arguments.emplace_back(cursor, argNameString, prettyString);
     }
 
     const std::string &Name() const
