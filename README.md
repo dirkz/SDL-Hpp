@@ -18,8 +18,8 @@ to find out what is missing or not correctly generated.
 ## Naming
 
 A type like [SDL_Window](https://wiki.libsdl.org/SDL3/SDL_Window) becomes a  `Window`,
-which is a [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr)-like
-type, that is, it destroys the `SDL_Window` when it goes out of scope.
+which is a [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr),
+that is, it destroys the `SDL_Window` when it goes out of scope.
 
 ## Usage with CMake
 
