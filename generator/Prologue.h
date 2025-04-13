@@ -22,7 +22,7 @@ void SDLThrow(std::source_location location)
     throw std::runtime_error{error};
 }
 
-template <class T> void Release(T *t)
+template <class T> void Release(T *object)
 {
 }
 
@@ -30,7 +30,7 @@ template <class T> struct UniquePointer
 {
     UniquePointer() : m_object{nullptr} {};
 
-    UniquePointer(T *t) : m_object{t}
+    UniquePointer(T *object) : m_object{object}
     {
     }
 
@@ -73,3 +73,15 @@ template <class T> struct UniquePointer
     T *m_object = nullptr;
 };
 
+template <class T> void ReleaseFromDevice(SDL_GPUDevice *device, T *object)
+{
+}
+
+template <class T> struct DeviceOwned
+{
+    DeviceOwned(SDL_GPUDevice *device, T *object) m_device{device}, m_object{object} {};
+
+  private:
+    SDL_GPUDevice *m_device;
+    T *m_object = nullptr;
+};
