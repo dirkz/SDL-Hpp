@@ -234,6 +234,7 @@ int main()
     {
         out << line << "\n";
     }
+    out << "\n";
     ifsPrologue.close();
 
     auto sdlIncludePath =
