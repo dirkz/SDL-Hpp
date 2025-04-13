@@ -27,6 +27,14 @@ template <class T> void Release(T *object)
 {
 }
 
+template <class T> struct Deleter
+{
+    void operator()(T *object)
+    {
+        Release<T>(object);
+    }
+};
+
 template <class T> void ReleaseFromDevice(SDL_GPUDevice *device, T *object)
 {
 }
@@ -124,8 +132,7 @@ void Release<SDL_Environment>(SDL_Environment *env)
     SDL_DestroyEnvironment(env);
 }
 
-auto EnvironmentDeleter = [](SDL_Environment* object) { Release(object); };
-using Environment = std::unique_ptr<SDL_Environment, EnvironmentDeleter>;
+using Environment = std::unique_ptr<SDL_Environment, Deleter<SDL_Environment>>;
 
 template<>
 void Release<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
@@ -133,8 +140,7 @@ void Release<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
     SDL_DestroyAsyncIOQueue(queue);
 }
 
-auto AsyncIOQueueDeleter = [](SDL_AsyncIOQueue* object) { Release(object); };
-using AsyncIOQueue = std::unique_ptr<SDL_AsyncIOQueue, AsyncIOQueueDeleter>;
+using AsyncIOQueue = std::unique_ptr<SDL_AsyncIOQueue, Deleter<SDL_AsyncIOQueue>>;
 
 template<>
 void Release<SDL_Mutex>(SDL_Mutex *mutex)
@@ -142,8 +148,7 @@ void Release<SDL_Mutex>(SDL_Mutex *mutex)
     SDL_DestroyMutex(mutex);
 }
 
-auto MutexDeleter = [](SDL_Mutex* object) { Release(object); };
-using Mutex = std::unique_ptr<SDL_Mutex, MutexDeleter>;
+using Mutex = std::unique_ptr<SDL_Mutex, Deleter<SDL_Mutex>>;
 
 template<>
 void Release<SDL_RWLock>(SDL_RWLock *rwlock)
@@ -151,8 +156,7 @@ void Release<SDL_RWLock>(SDL_RWLock *rwlock)
     SDL_DestroyRWLock(rwlock);
 }
 
-auto RWLockDeleter = [](SDL_RWLock* object) { Release(object); };
-using RWLock = std::unique_ptr<SDL_RWLock, RWLockDeleter>;
+using RWLock = std::unique_ptr<SDL_RWLock, Deleter<SDL_RWLock>>;
 
 template<>
 void Release<SDL_Semaphore>(SDL_Semaphore *sem)
@@ -160,8 +164,7 @@ void Release<SDL_Semaphore>(SDL_Semaphore *sem)
     SDL_DestroySemaphore(sem);
 }
 
-auto SemaphoreDeleter = [](SDL_Semaphore* object) { Release(object); };
-using Semaphore = std::unique_ptr<SDL_Semaphore, SemaphoreDeleter>;
+using Semaphore = std::unique_ptr<SDL_Semaphore, Deleter<SDL_Semaphore>>;
 
 template<>
 void Release<SDL_Condition>(SDL_Condition *cond)
@@ -169,8 +172,7 @@ void Release<SDL_Condition>(SDL_Condition *cond)
     SDL_DestroyCondition(cond);
 }
 
-auto ConditionDeleter = [](SDL_Condition* object) { Release(object); };
-using Condition = std::unique_ptr<SDL_Condition, ConditionDeleter>;
+using Condition = std::unique_ptr<SDL_Condition, Deleter<SDL_Condition>>;
 
 template<>
 void Release<SDL_AudioStream>(SDL_AudioStream *stream)
@@ -178,8 +180,7 @@ void Release<SDL_AudioStream>(SDL_AudioStream *stream)
     SDL_DestroyAudioStream(stream);
 }
 
-auto AudioStreamDeleter = [](SDL_AudioStream* object) { Release(object); };
-using AudioStream = std::unique_ptr<SDL_AudioStream, AudioStreamDeleter>;
+using AudioStream = std::unique_ptr<SDL_AudioStream, Deleter<SDL_AudioStream>>;
 
 template<>
 void Release<SDL_Palette>(SDL_Palette *palette)
@@ -187,8 +188,7 @@ void Release<SDL_Palette>(SDL_Palette *palette)
     SDL_DestroyPalette(palette);
 }
 
-auto PaletteDeleter = [](SDL_Palette* object) { Release(object); };
-using Palette = std::unique_ptr<SDL_Palette, PaletteDeleter>;
+using Palette = std::unique_ptr<SDL_Palette, Deleter<SDL_Palette>>;
 
 template<>
 void Release<SDL_Surface>(SDL_Surface *surface)
@@ -196,8 +196,7 @@ void Release<SDL_Surface>(SDL_Surface *surface)
     SDL_DestroySurface(surface);
 }
 
-auto SurfaceDeleter = [](SDL_Surface* object) { Release(object); };
-using Surface = std::unique_ptr<SDL_Surface, SurfaceDeleter>;
+using Surface = std::unique_ptr<SDL_Surface, Deleter<SDL_Surface>>;
 
 template<>
 void Release<SDL_Window>(SDL_Window *window)
@@ -205,8 +204,7 @@ void Release<SDL_Window>(SDL_Window *window)
     SDL_DestroyWindowSurface(window);
 }
 
-auto WindowDeleter = [](SDL_Window* object) { Release(object); };
-using Window = std::unique_ptr<SDL_Window, WindowDeleter>;
+using Window = std::unique_ptr<SDL_Window, Deleter<SDL_Window>>;
 
 template<>
 void Release<SDL_Cursor>(SDL_Cursor *cursor)
@@ -214,8 +212,7 @@ void Release<SDL_Cursor>(SDL_Cursor *cursor)
     SDL_DestroyCursor(cursor);
 }
 
-auto CursorDeleter = [](SDL_Cursor* object) { Release(object); };
-using Cursor = std::unique_ptr<SDL_Cursor, CursorDeleter>;
+using Cursor = std::unique_ptr<SDL_Cursor, Deleter<SDL_Cursor>>;
 
 template<>
 void Release<SDL_GPUDevice>(SDL_GPUDevice *device)
@@ -223,8 +220,7 @@ void Release<SDL_GPUDevice>(SDL_GPUDevice *device)
     SDL_DestroyGPUDevice(device);
 }
 
-auto GPUDeviceDeleter = [](SDL_GPUDevice* object) { Release(object); };
-using GPUDevice = std::unique_ptr<SDL_GPUDevice, GPUDeviceDeleter>;
+using GPUDevice = std::unique_ptr<SDL_GPUDevice, Deleter<SDL_GPUDevice>>;
 
 template<>
 void ReleaseFromDevice<SDL_GPUTexture>(SDL_GPUDevice *device,SDL_GPUTexture *texture)
@@ -286,8 +282,7 @@ void Release<SDL_Process>(SDL_Process *process)
     SDL_DestroyProcess(process);
 }
 
-auto ProcessDeleter = [](SDL_Process* object) { Release(object); };
-using Process = std::unique_ptr<SDL_Process, ProcessDeleter>;
+using Process = std::unique_ptr<SDL_Process, Deleter<SDL_Process>>;
 
 template<>
 void Release<SDL_Texture>(SDL_Texture *texture)
@@ -295,8 +290,7 @@ void Release<SDL_Texture>(SDL_Texture *texture)
     SDL_DestroyTexture(texture);
 }
 
-auto TextureDeleter = [](SDL_Texture* object) { Release(object); };
-using Texture = std::unique_ptr<SDL_Texture, TextureDeleter>;
+using Texture = std::unique_ptr<SDL_Texture, Deleter<SDL_Texture>>;
 
 template<>
 void Release<SDL_Renderer>(SDL_Renderer *renderer)
@@ -304,8 +298,7 @@ void Release<SDL_Renderer>(SDL_Renderer *renderer)
     SDL_DestroyRenderer(renderer);
 }
 
-auto RendererDeleter = [](SDL_Renderer* object) { Release(object); };
-using Renderer = std::unique_ptr<SDL_Renderer, RendererDeleter>;
+using Renderer = std::unique_ptr<SDL_Renderer, Deleter<SDL_Renderer>>;
 
 template<>
 void Release<SDL_Tray>(SDL_Tray *tray)
@@ -313,8 +306,7 @@ void Release<SDL_Tray>(SDL_Tray *tray)
     SDL_DestroyTray(tray);
 }
 
-auto TrayDeleter = [](SDL_Tray* object) { Release(object); };
-using Tray = std::unique_ptr<SDL_Tray, TrayDeleter>;
+using Tray = std::unique_ptr<SDL_Tray, Deleter<SDL_Tray>>;
 
 inline void *malloc(size_t size, std::source_location location = std::source_location::current())
 {

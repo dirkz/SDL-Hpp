@@ -145,9 +145,7 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
 
                     std::string typeString =
                         pointedType.starts_with("SDL_") ? pointedType.substr(4) : pointedType;
-                    std::string deleterName = typeString + "Deleter";
-                    out << "auto " << deleterName << " = [](" << pointedType
-                        << "* object) { Release(object); };" << "\n";
+                    std::string deleterName = "Deleter<" + pointedType + ">";
                     out << "using " << typeString << " = std::unique_ptr<" << pointedType << ", "
                         << deleterName << ">;\n\n";
 

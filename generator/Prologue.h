@@ -27,6 +27,14 @@ template <class T> void Release(T *object)
 {
 }
 
+template <class T> struct Deleter
+{
+    void operator()(T *object)
+    {
+        Release<T>(object);
+    }
+};
+
 template <class T> void ReleaseFromDevice(SDL_GPUDevice *device, T *object)
 {
 }
