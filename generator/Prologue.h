@@ -2,6 +2,7 @@
 
 #include <SDL3/SDL.h>
 
+#include <memory>
 #include <source_location>
 #include <stdexcept>
 
@@ -26,70 +27,12 @@ template <class T> void Destroy(T *object)
 {
 }
 
-template <class T> struct UniquePointer
+template <class T> struct Deleter
 {
-    UniquePointer() : m_object{nullptr} {};
-
-    UniquePointer(T *object) : m_object{object}
+    void operator()(T *object)
     {
+        Destroy<T>(object);
     }
-
-    UniquePointer(T &&other) noexcept : m_object{other.m_object}
-    {
-        other.m_object = nullptr;
-    }
-
-    UniquePointer(const UniquePointer &) = delete;
-
-    ~UniquePointer()
-    {
-        Release();
-    }
-
-    void Release()
-    {
-        if (m_object)
-        {
-            Destroy(m_object);
-            m_object = nullptr;
-        }
-    }
-
-    T *Detach()
-    {
-        T *object = m_object;
-        m_object = nullptr;
-        return object;
-    }
-
-    T **GetAddressOf()
-    {
-        return &m_object;
-    }
-
-    T **ReleaseAndGetAddressOf()
-    {
-		Release(m_object);
-        return &m_object;
-    }
-
-    T *Get()
-    {
-        return m_object;
-    }
-
-    T *operator*()
-    {
-        return m_object;
-    }
-
-    operator T *()
-    {
-        return m_object;
-    }
-
-  private:
-    T *m_object = nullptr;
 };
 
 template <class T> void ReleaseFromDevice(SDL_GPUDevice *device, T *object)

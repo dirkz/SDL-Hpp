@@ -2,6 +2,7 @@
 
 #include <SDL3/SDL.h>
 
+#include <memory>
 #include <source_location>
 #include <stdexcept>
 
@@ -26,70 +27,12 @@ template <class T> void Destroy(T *object)
 {
 }
 
-template <class T> struct UniquePointer
+template <class T> struct Deleter
 {
-    UniquePointer() : m_object{nullptr} {};
-
-    UniquePointer(T *object) : m_object{object}
+    void operator()(T *object)
     {
+        Destroy<T>(object);
     }
-
-    UniquePointer(T &&other) noexcept : m_object{other.m_object}
-    {
-        other.m_object = nullptr;
-    }
-
-    UniquePointer(const UniquePointer &) = delete;
-
-    ~UniquePointer()
-    {
-        Release();
-    }
-
-    void Release()
-    {
-        if (m_object)
-        {
-            Destroy(m_object);
-            m_object = nullptr;
-        }
-    }
-
-    T *Detach()
-    {
-        T *object = m_object;
-        m_object = nullptr;
-        return object;
-    }
-
-    T **GetAddressOf()
-    {
-        return &m_object;
-    }
-
-    T **ReleaseAndGetAddressOf()
-    {
-		Release(m_object);
-        return &m_object;
-    }
-
-    T *Get()
-    {
-        return m_object;
-    }
-
-    T *operator*()
-    {
-        return m_object;
-    }
-
-    operator T *()
-    {
-        return m_object;
-    }
-
-  private:
-    T *m_object = nullptr;
 };
 
 template <class T> void ReleaseFromDevice(SDL_GPUDevice *device, T *object)
@@ -189,7 +132,7 @@ void Destroy<SDL_Environment>(SDL_Environment *env)
     SDL_DestroyEnvironment(env);
 }
 
-using Environment = UniquePointer<SDL_Environment>;
+using Environment = std::unique_ptr<SDL_Environment, Deleter<SDL_Environment>>;
 
 template<>
 void Destroy<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
@@ -197,7 +140,7 @@ void Destroy<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
     SDL_DestroyAsyncIOQueue(queue);
 }
 
-using AsyncIOQueue = UniquePointer<SDL_AsyncIOQueue>;
+using AsyncIOQueue = std::unique_ptr<SDL_AsyncIOQueue, Deleter<SDL_AsyncIOQueue>>;
 
 template<>
 void Destroy<SDL_Mutex>(SDL_Mutex *mutex)
@@ -205,7 +148,7 @@ void Destroy<SDL_Mutex>(SDL_Mutex *mutex)
     SDL_DestroyMutex(mutex);
 }
 
-using Mutex = UniquePointer<SDL_Mutex>;
+using Mutex = std::unique_ptr<SDL_Mutex, Deleter<SDL_Mutex>>;
 
 template<>
 void Destroy<SDL_RWLock>(SDL_RWLock *rwlock)
@@ -213,7 +156,7 @@ void Destroy<SDL_RWLock>(SDL_RWLock *rwlock)
     SDL_DestroyRWLock(rwlock);
 }
 
-using RWLock = UniquePointer<SDL_RWLock>;
+using RWLock = std::unique_ptr<SDL_RWLock, Deleter<SDL_RWLock>>;
 
 template<>
 void Destroy<SDL_Semaphore>(SDL_Semaphore *sem)
@@ -221,7 +164,7 @@ void Destroy<SDL_Semaphore>(SDL_Semaphore *sem)
     SDL_DestroySemaphore(sem);
 }
 
-using Semaphore = UniquePointer<SDL_Semaphore>;
+using Semaphore = std::unique_ptr<SDL_Semaphore, Deleter<SDL_Semaphore>>;
 
 template<>
 void Destroy<SDL_Condition>(SDL_Condition *cond)
@@ -229,7 +172,7 @@ void Destroy<SDL_Condition>(SDL_Condition *cond)
     SDL_DestroyCondition(cond);
 }
 
-using Condition = UniquePointer<SDL_Condition>;
+using Condition = std::unique_ptr<SDL_Condition, Deleter<SDL_Condition>>;
 
 template<>
 void Destroy<SDL_AudioStream>(SDL_AudioStream *stream)
@@ -237,7 +180,7 @@ void Destroy<SDL_AudioStream>(SDL_AudioStream *stream)
     SDL_DestroyAudioStream(stream);
 }
 
-using AudioStream = UniquePointer<SDL_AudioStream>;
+using AudioStream = std::unique_ptr<SDL_AudioStream, Deleter<SDL_AudioStream>>;
 
 template<>
 void Destroy<SDL_Palette>(SDL_Palette *palette)
@@ -245,7 +188,7 @@ void Destroy<SDL_Palette>(SDL_Palette *palette)
     SDL_DestroyPalette(palette);
 }
 
-using Palette = UniquePointer<SDL_Palette>;
+using Palette = std::unique_ptr<SDL_Palette, Deleter<SDL_Palette>>;
 
 template<>
 void Destroy<SDL_Surface>(SDL_Surface *surface)
@@ -253,7 +196,7 @@ void Destroy<SDL_Surface>(SDL_Surface *surface)
     SDL_DestroySurface(surface);
 }
 
-using Surface = UniquePointer<SDL_Surface>;
+using Surface = std::unique_ptr<SDL_Surface, Deleter<SDL_Surface>>;
 
 template<>
 void Destroy<SDL_Window>(SDL_Window *window)
@@ -261,7 +204,7 @@ void Destroy<SDL_Window>(SDL_Window *window)
     SDL_DestroyWindowSurface(window);
 }
 
-using Window = UniquePointer<SDL_Window>;
+using Window = std::unique_ptr<SDL_Window, Deleter<SDL_Window>>;
 
 template<>
 void Destroy<SDL_Cursor>(SDL_Cursor *cursor)
@@ -269,7 +212,7 @@ void Destroy<SDL_Cursor>(SDL_Cursor *cursor)
     SDL_DestroyCursor(cursor);
 }
 
-using Cursor = UniquePointer<SDL_Cursor>;
+using Cursor = std::unique_ptr<SDL_Cursor, Deleter<SDL_Cursor>>;
 
 template<>
 void Destroy<SDL_GPUDevice>(SDL_GPUDevice *device)
@@ -277,7 +220,7 @@ void Destroy<SDL_GPUDevice>(SDL_GPUDevice *device)
     SDL_DestroyGPUDevice(device);
 }
 
-using GPUDevice = UniquePointer<SDL_GPUDevice>;
+using GPUDevice = std::unique_ptr<SDL_GPUDevice, Deleter<SDL_GPUDevice>>;
 
 template<>
 void ReleaseFromDevice<SDL_GPUTexture>(SDL_GPUDevice *device,SDL_GPUTexture *texture)
@@ -339,7 +282,7 @@ void Destroy<SDL_Process>(SDL_Process *process)
     SDL_DestroyProcess(process);
 }
 
-using Process = UniquePointer<SDL_Process>;
+using Process = std::unique_ptr<SDL_Process, Deleter<SDL_Process>>;
 
 template<>
 void Destroy<SDL_Texture>(SDL_Texture *texture)
@@ -347,7 +290,7 @@ void Destroy<SDL_Texture>(SDL_Texture *texture)
     SDL_DestroyTexture(texture);
 }
 
-using Texture = UniquePointer<SDL_Texture>;
+using Texture = std::unique_ptr<SDL_Texture, Deleter<SDL_Texture>>;
 
 template<>
 void Destroy<SDL_Renderer>(SDL_Renderer *renderer)
@@ -355,7 +298,7 @@ void Destroy<SDL_Renderer>(SDL_Renderer *renderer)
     SDL_DestroyRenderer(renderer);
 }
 
-using Renderer = UniquePointer<SDL_Renderer>;
+using Renderer = std::unique_ptr<SDL_Renderer, Deleter<SDL_Renderer>>;
 
 template<>
 void Destroy<SDL_Tray>(SDL_Tray *tray)
@@ -363,7 +306,7 @@ void Destroy<SDL_Tray>(SDL_Tray *tray)
     SDL_DestroyTray(tray);
 }
 
-using Tray = UniquePointer<SDL_Tray>;
+using Tray = std::unique_ptr<SDL_Tray, Deleter<SDL_Tray>>;
 
 inline void *malloc(size_t size, std::source_location location = std::source_location::current())
 {
