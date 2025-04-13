@@ -22,7 +22,7 @@ void SDLThrow(std::source_location location)
     throw std::runtime_error{error};
 }
 
-template <class T> void Release(T *object)
+template <class T> void Destroy(T *object)
 {
 }
 
@@ -50,7 +50,7 @@ template <class T> struct UniquePointer
     {
         if (m_object)
         {
-            Release<T>(m_object);
+            Destroy(m_object);
             m_object = nullptr;
         }
     }
@@ -69,10 +69,7 @@ template <class T> struct UniquePointer
 
     T **ReleaseAndGetAddressOf()
     {
-        if (m_object)
-        {
-            Release(m_object);
-        }
+		Release(m_object);
         return &m_object;
     }
 
