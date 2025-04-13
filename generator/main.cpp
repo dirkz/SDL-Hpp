@@ -142,6 +142,10 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                         pointedType.starts_with("SDL_") ? pointedType.substr(4) : pointedType;
                     out << "using " << typeString << " = UniquePointer<" << pointedType << ">;\n\n";
                 }
+                else if (!alreadyGenerated.contains(pointedType))
+                {
+                    cout << "Unhandled release function: " << fn.Name() << "\n";
+                }
             }
             else if (fn.NumberOfArguments() == 2)
             {
@@ -159,6 +163,14 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                         << ");\n";
                     out << "}\n\n";
                 }
+                else
+                {
+                    cout << "Unhandled release function: " << fn.Name() << "\n";
+                }
+            }
+            else
+            {
+                cout << "Unhandled release function: " << fn.Name() << "\n";
             }
         }
     }
