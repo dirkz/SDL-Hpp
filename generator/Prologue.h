@@ -50,7 +50,7 @@ template <class T> struct UniquePointer
     {
         if (m_object)
         {
-            Release(m_object);
+            Release<T>(m_object);
             m_object = nullptr;
         }
     }
@@ -71,7 +71,7 @@ template <class T> struct UniquePointer
     {
         if (m_object)
         {
-            this->Release(m_object);
+            Release(m_object);
         }
         return &m_object;
     }
