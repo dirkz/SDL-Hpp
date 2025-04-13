@@ -90,3 +90,54 @@ template <class T> struct DeviceOwned
     SDL_GPUDevice *m_device;
     T *m_object = nullptr;
 };
+
+struct UniqueHaptic
+{
+    UniqueHaptic(SDL_Haptic *haptic, int effect) : m_haptic{haptic}, m_effect{effect} {};
+
+    ~UniqueHaptic()
+    {
+        SDL_DestroyHapticEffect(m_haptic, m_effect);
+    }
+
+  private:
+    SDL_Haptic *m_haptic;
+    int m_effect;
+};
+
+struct UniqueProperties
+{
+    UniqueProperties(SDL_PropertiesID props) : m_properties{props} {};
+
+    ~UniqueProperties()
+    {
+        SDL_DestroyProperties(m_properties);
+    }
+
+  private:
+    SDL_PropertiesID m_properties;
+};
+
+struct UniqueCameraSurface
+{
+    UniqueCameraSurface(SDL_Surface *surface, SDL_Camera *camera)
+        : m_surface{surface}, m_camera{camera} {};
+
+    ~UniqueCameraSurface()
+    {
+        if (m_surface)
+        {
+            SDL_ReleaseCameraFrame(m_camera, m_surface);
+        }
+    }
+
+    void Detach()
+    {
+        m_surface = nullptr;
+        m_camera = nullptr;
+    }
+
+  private:
+    SDL_Surface *m_surface;
+    SDL_Camera *m_camera;
+};

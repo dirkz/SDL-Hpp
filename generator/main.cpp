@@ -117,12 +117,17 @@ static void OutputFunctionArguments(std::ostream &out, const Function &fn, bool 
 static void OutputDestructors(std::ostream &out, const std::vector<Function> functions)
 {
     std::set<std::string> alreadyGenerated{};
+    std::set<std::string> functionsToIgnore{
+        "SDL_MemoryBarrierReleaseFunction", "SDL_DestroyHapticEffect", "SDL_DestroyProperties",
+        "SDL_ReleaseCameraFrame",           "SDL_GL_DestroyContext",   "SDL_Metal_DestroyView"};
 
     for (const Function &fn : functions)
     {
         if (fn.Name().find("Destroy") != std::string::npos ||
             fn.Name().find("Release") != std::string::npos)
         {
+            bool handled = false;
+
             if (fn.NumberOfArguments() == 1)
             {
                 const Argument &arg = fn.Arguments()[0];
@@ -141,10 +146,12 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                     std::string typeString =
                         pointedType.starts_with("SDL_") ? pointedType.substr(4) : pointedType;
                     out << "using " << typeString << " = UniquePointer<" << pointedType << ">;\n\n";
+
+                    handled = true;
                 }
-                else if (!alreadyGenerated.contains(pointedType))
+                else if (alreadyGenerated.contains(pointedType))
                 {
-                    cout << "Unhandled release function: " << fn.Name() << "\n";
+                    handled = true;
                 }
             }
             else if (fn.NumberOfArguments() == 2)
@@ -162,13 +169,12 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                     out << "    " << fn.Name() << "(" << arg1.Name() << ", " << arg2.Name()
                         << ");\n";
                     out << "}\n\n";
-                }
-                else
-                {
-                    cout << "Unhandled release function: " << fn.Name() << "\n";
+
+                    handled = true;
                 }
             }
-            else
+
+            if (!handled && !functionsToIgnore.contains(fn.Name()))
             {
                 cout << "Unhandled release function: " << fn.Name() << "\n";
             }
