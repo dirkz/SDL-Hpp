@@ -138,7 +138,7 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                     alreadyGenerated.insert(pointedType);
 
                     out << "template<>\n";
-                    out << "void Release<" << pointedType << ">(" << arg.Declaration() << ")\n";
+                    out << "void Destroy<" << pointedType << ">(" << arg.Declaration() << ")\n";
                     out << "{\n";
                     out << "    " << fn.Name() << "(" << arg.Name() << ");\n";
                     out << "}\n\n";
