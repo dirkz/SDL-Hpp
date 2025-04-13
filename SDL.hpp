@@ -22,7 +22,7 @@ void SDLThrow(std::source_location location)
     throw std::runtime_error{error};
 }
 
-template <class T> void Release(T *t)
+template <class T> void Release(T *object)
 {
 }
 
@@ -30,7 +30,7 @@ template <class T> struct UniquePointer
 {
     UniquePointer() : m_object{nullptr} {};
 
-    UniquePointer(T *t) : m_object{t}
+    UniquePointer(T *object) : m_object{object}
     {
     }
 
@@ -70,6 +70,24 @@ template <class T> struct UniquePointer
     }
 
   private:
+    T *m_object = nullptr;
+};
+
+template <class T> void ReleaseFromDevice(SDL_GPUDevice *device, T *object)
+{
+}
+
+template <class T> struct DeviceOwned
+{
+    DeviceOwned(SDL_GPUDevice *device, T *object) m_device{device}, m_object{object} {};
+
+    ~DeviceOwned()
+    {
+        ReleaseFromDevice(m_device, m_object);
+    }
+
+  private:
+    SDL_GPUDevice *m_device;
     T *m_object = nullptr;
 };
 
@@ -168,6 +186,60 @@ void Release<SDL_GPUDevice>(SDL_GPUDevice *device)
 }
 
 using GPUDevice = UniquePointer<SDL_GPUDevice>;
+
+template<>
+void ReleaseFromDevice<SDL_GPUTexture>(SDL_GPUDevice *device,SDL_GPUTexture *texture)
+{
+    SDL_ReleaseGPUTexture(device, texture);
+}
+
+template<>
+void ReleaseFromDevice<SDL_GPUSampler>(SDL_GPUDevice *device,SDL_GPUSampler *sampler)
+{
+    SDL_ReleaseGPUSampler(device, sampler);
+}
+
+template<>
+void ReleaseFromDevice<SDL_GPUBuffer>(SDL_GPUDevice *device,SDL_GPUBuffer *buffer)
+{
+    SDL_ReleaseGPUBuffer(device, buffer);
+}
+
+template<>
+void ReleaseFromDevice<SDL_GPUTransferBuffer>(SDL_GPUDevice *device,SDL_GPUTransferBuffer *transfer_buffer)
+{
+    SDL_ReleaseGPUTransferBuffer(device, transfer_buffer);
+}
+
+template<>
+void ReleaseFromDevice<SDL_GPUComputePipeline>(SDL_GPUDevice *device,SDL_GPUComputePipeline *compute_pipeline)
+{
+    SDL_ReleaseGPUComputePipeline(device, compute_pipeline);
+}
+
+template<>
+void ReleaseFromDevice<SDL_GPUShader>(SDL_GPUDevice *device,SDL_GPUShader *shader)
+{
+    SDL_ReleaseGPUShader(device, shader);
+}
+
+template<>
+void ReleaseFromDevice<SDL_GPUGraphicsPipeline>(SDL_GPUDevice *device,SDL_GPUGraphicsPipeline *graphics_pipeline)
+{
+    SDL_ReleaseGPUGraphicsPipeline(device, graphics_pipeline);
+}
+
+template<>
+void ReleaseFromDevice<SDL_Window>(SDL_GPUDevice *device,SDL_Window *window)
+{
+    SDL_ReleaseWindowFromGPUDevice(device, window);
+}
+
+template<>
+void ReleaseFromDevice<SDL_GPUFence>(SDL_GPUDevice *device,SDL_GPUFence *fence)
+{
+    SDL_ReleaseGPUFence(device, fence);
+}
 
 template<>
 void Release<SDL_Process>(SDL_Process *process)

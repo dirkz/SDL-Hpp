@@ -123,7 +123,7 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
         if (fn.Name().find("Destroy") != std::string::npos ||
             fn.Name().find("Release") != std::string::npos)
         {
-            if (fn.Arguments().size() == 1)
+            if (fn.NumberOfArguments() == 1)
             {
                 const Argument &arg = fn.Arguments()[0];
                 std::string pointedType = arg.PointeeTypeString();
@@ -141,6 +141,23 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                     std::string typeString =
                         pointedType.starts_with("SDL_") ? pointedType.substr(4) : pointedType;
                     out << "using " << typeString << " = UniquePointer<" << pointedType << ">;\n\n";
+                }
+            }
+            else if (fn.NumberOfArguments() == 2)
+            {
+                const Argument &arg1 = fn.Arguments()[0];
+                const Argument &arg2 = fn.Arguments()[1];
+                std::string pointedType1 = arg1.PointeeTypeString();
+                std::string pointedType2 = arg2.PointeeTypeString();
+                if (pointedType1 == "SDL_GPUDevice")
+                {
+                    out << "template<>\n";
+                    out << "void ReleaseFromDevice<" << pointedType2 << ">(" << arg1.Declaration()
+                        << "," << arg2.Declaration() << ")\n";
+                    out << "{\n";
+                    out << "    " << fn.Name() << "(" << arg1.Name() << ", " << arg2.Name()
+                        << ");\n";
+                    out << "}\n\n";
                 }
             }
         }

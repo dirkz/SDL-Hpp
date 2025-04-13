@@ -81,6 +81,11 @@ template <class T> struct DeviceOwned
 {
     DeviceOwned(SDL_GPUDevice *device, T *object) m_device{device}, m_object{object} {};
 
+    ~DeviceOwned()
+    {
+        ReleaseFromDevice(m_device, m_object);
+    }
+
   private:
     SDL_GPUDevice *m_device;
     T *m_object = nullptr;
