@@ -108,11 +108,11 @@ template <class T> struct DeviceOwned
     T *m_object = nullptr;
 };
 
-struct UniqueHaptic
+struct Haptic
 {
-    UniqueHaptic(SDL_Haptic *haptic, int effect) : m_haptic{haptic}, m_effect{effect} {};
+    Haptic(SDL_Haptic *haptic, int effect) : m_haptic{haptic}, m_effect{effect} {};
 
-    ~UniqueHaptic()
+    ~Haptic()
     {
         if (m_haptic)
         {
@@ -132,11 +132,11 @@ struct UniqueHaptic
     int m_effect;
 };
 
-struct UniqueProperties
+struct Properties
 {
-    UniqueProperties(SDL_PropertiesID props) : m_properties{props} {};
+    Properties(SDL_PropertiesID props) : m_properties{props} {};
 
-    ~UniqueProperties()
+    ~Properties()
     {
         SDL_DestroyProperties(m_properties);
     }
@@ -145,12 +145,12 @@ struct UniqueProperties
     SDL_PropertiesID m_properties;
 };
 
-struct UniqueCameraSurface
+struct CameraSurface
 {
-    UniqueCameraSurface(SDL_Surface *surface, SDL_Camera *camera)
+    CameraSurface(SDL_Surface *surface, SDL_Camera *camera)
         : m_surface{surface}, m_camera{camera} {};
 
-    ~UniqueCameraSurface()
+    ~CameraSurface()
     {
         if (m_surface)
         {
