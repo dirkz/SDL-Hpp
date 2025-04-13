@@ -2,6 +2,7 @@
 
 #include <SDL3/SDL.h>
 
+#include <memory>
 #include <source_location>
 #include <stdexcept>
 
@@ -25,60 +26,6 @@ void SDLThrow(std::source_location location)
 template <class T> void Release(T *object)
 {
 }
-
-template <class T> struct UniquePointer
-{
-    UniquePointer() : m_object{nullptr} {};
-
-    UniquePointer(T *object) : m_object{object}
-    {
-    }
-
-    UniquePointer(T &&other) noexcept : m_object{other.m_object}
-    {
-        other.m_object = nullptr;
-    }
-
-    UniquePointer(const UniquePointer &) = delete;
-
-    ~UniquePointer()
-    {
-        if (m_object)
-        {
-            Release(m_object);
-        }
-    }
-
-    T *Detach()
-    {
-        T *object = m_object;
-        m_object = nullptr;
-        return object;
-    }
-
-    T **Address()
-    {
-        return &m_object;
-    }
-
-    T *Get()
-    {
-        return m_object;
-    }
-
-    T *operator*()
-    {
-        return m_object;
-    }
-
-    operator T *()
-    {
-        return m_object;
-    }
-
-  private:
-    T *m_object = nullptr;
-};
 
 template <class T> void ReleaseFromDevice(SDL_GPUDevice *device, T *object)
 {
@@ -177,7 +124,7 @@ void Release<SDL_Environment>(SDL_Environment *env)
     SDL_DestroyEnvironment(env);
 }
 
-using Environment = UniquePointer<SDL_Environment>;
+using Environment = std::unique_ptr<SDL_Environment, [](SDL_Environment* object) { Release(object); }>;
 
 template<>
 void Release<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
@@ -185,7 +132,7 @@ void Release<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
     SDL_DestroyAsyncIOQueue(queue);
 }
 
-using AsyncIOQueue = UniquePointer<SDL_AsyncIOQueue>;
+using AsyncIOQueue = std::unique_ptr<SDL_AsyncIOQueue, [](SDL_AsyncIOQueue* object) { Release(object); }>;
 
 template<>
 void Release<SDL_Mutex>(SDL_Mutex *mutex)
@@ -193,7 +140,7 @@ void Release<SDL_Mutex>(SDL_Mutex *mutex)
     SDL_DestroyMutex(mutex);
 }
 
-using Mutex = UniquePointer<SDL_Mutex>;
+using Mutex = std::unique_ptr<SDL_Mutex, [](SDL_Mutex* object) { Release(object); }>;
 
 template<>
 void Release<SDL_RWLock>(SDL_RWLock *rwlock)
@@ -201,7 +148,7 @@ void Release<SDL_RWLock>(SDL_RWLock *rwlock)
     SDL_DestroyRWLock(rwlock);
 }
 
-using RWLock = UniquePointer<SDL_RWLock>;
+using RWLock = std::unique_ptr<SDL_RWLock, [](SDL_RWLock* object) { Release(object); }>;
 
 template<>
 void Release<SDL_Semaphore>(SDL_Semaphore *sem)
@@ -209,7 +156,7 @@ void Release<SDL_Semaphore>(SDL_Semaphore *sem)
     SDL_DestroySemaphore(sem);
 }
 
-using Semaphore = UniquePointer<SDL_Semaphore>;
+using Semaphore = std::unique_ptr<SDL_Semaphore, [](SDL_Semaphore* object) { Release(object); }>;
 
 template<>
 void Release<SDL_Condition>(SDL_Condition *cond)
@@ -217,7 +164,7 @@ void Release<SDL_Condition>(SDL_Condition *cond)
     SDL_DestroyCondition(cond);
 }
 
-using Condition = UniquePointer<SDL_Condition>;
+using Condition = std::unique_ptr<SDL_Condition, [](SDL_Condition* object) { Release(object); }>;
 
 template<>
 void Release<SDL_AudioStream>(SDL_AudioStream *stream)
@@ -225,7 +172,7 @@ void Release<SDL_AudioStream>(SDL_AudioStream *stream)
     SDL_DestroyAudioStream(stream);
 }
 
-using AudioStream = UniquePointer<SDL_AudioStream>;
+using AudioStream = std::unique_ptr<SDL_AudioStream, [](SDL_AudioStream* object) { Release(object); }>;
 
 template<>
 void Release<SDL_Palette>(SDL_Palette *palette)
@@ -233,7 +180,7 @@ void Release<SDL_Palette>(SDL_Palette *palette)
     SDL_DestroyPalette(palette);
 }
 
-using Palette = UniquePointer<SDL_Palette>;
+using Palette = std::unique_ptr<SDL_Palette, [](SDL_Palette* object) { Release(object); }>;
 
 template<>
 void Release<SDL_Surface>(SDL_Surface *surface)
@@ -241,7 +188,7 @@ void Release<SDL_Surface>(SDL_Surface *surface)
     SDL_DestroySurface(surface);
 }
 
-using Surface = UniquePointer<SDL_Surface>;
+using Surface = std::unique_ptr<SDL_Surface, [](SDL_Surface* object) { Release(object); }>;
 
 template<>
 void Release<SDL_Window>(SDL_Window *window)
@@ -249,7 +196,7 @@ void Release<SDL_Window>(SDL_Window *window)
     SDL_DestroyWindowSurface(window);
 }
 
-using Window = UniquePointer<SDL_Window>;
+using Window = std::unique_ptr<SDL_Window, [](SDL_Window* object) { Release(object); }>;
 
 template<>
 void Release<SDL_Cursor>(SDL_Cursor *cursor)
@@ -257,7 +204,7 @@ void Release<SDL_Cursor>(SDL_Cursor *cursor)
     SDL_DestroyCursor(cursor);
 }
 
-using Cursor = UniquePointer<SDL_Cursor>;
+using Cursor = std::unique_ptr<SDL_Cursor, [](SDL_Cursor* object) { Release(object); }>;
 
 template<>
 void Release<SDL_GPUDevice>(SDL_GPUDevice *device)
@@ -265,7 +212,7 @@ void Release<SDL_GPUDevice>(SDL_GPUDevice *device)
     SDL_DestroyGPUDevice(device);
 }
 
-using GPUDevice = UniquePointer<SDL_GPUDevice>;
+using GPUDevice = std::unique_ptr<SDL_GPUDevice, [](SDL_GPUDevice* object) { Release(object); }>;
 
 template<>
 void ReleaseFromDevice<SDL_GPUTexture>(SDL_GPUDevice *device,SDL_GPUTexture *texture)
@@ -327,7 +274,7 @@ void Release<SDL_Process>(SDL_Process *process)
     SDL_DestroyProcess(process);
 }
 
-using Process = UniquePointer<SDL_Process>;
+using Process = std::unique_ptr<SDL_Process, [](SDL_Process* object) { Release(object); }>;
 
 template<>
 void Release<SDL_Texture>(SDL_Texture *texture)
@@ -335,7 +282,7 @@ void Release<SDL_Texture>(SDL_Texture *texture)
     SDL_DestroyTexture(texture);
 }
 
-using Texture = UniquePointer<SDL_Texture>;
+using Texture = std::unique_ptr<SDL_Texture, [](SDL_Texture* object) { Release(object); }>;
 
 template<>
 void Release<SDL_Renderer>(SDL_Renderer *renderer)
@@ -343,7 +290,7 @@ void Release<SDL_Renderer>(SDL_Renderer *renderer)
     SDL_DestroyRenderer(renderer);
 }
 
-using Renderer = UniquePointer<SDL_Renderer>;
+using Renderer = std::unique_ptr<SDL_Renderer, [](SDL_Renderer* object) { Release(object); }>;
 
 template<>
 void Release<SDL_Tray>(SDL_Tray *tray)
@@ -351,7 +298,7 @@ void Release<SDL_Tray>(SDL_Tray *tray)
     SDL_DestroyTray(tray);
 }
 
-using Tray = UniquePointer<SDL_Tray>;
+using Tray = std::unique_ptr<SDL_Tray, [](SDL_Tray* object) { Release(object); }>;
 
 inline void *malloc(size_t size, std::source_location location = std::source_location::current())
 {

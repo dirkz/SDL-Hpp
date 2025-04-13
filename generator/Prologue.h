@@ -2,6 +2,7 @@
 
 #include <SDL3/SDL.h>
 
+#include <memory>
 #include <source_location>
 #include <stdexcept>
 
@@ -25,60 +26,6 @@ void SDLThrow(std::source_location location)
 template <class T> void Release(T *object)
 {
 }
-
-template <class T> struct UniquePointer
-{
-    UniquePointer() : m_object{nullptr} {};
-
-    UniquePointer(T *object) : m_object{object}
-    {
-    }
-
-    UniquePointer(T &&other) noexcept : m_object{other.m_object}
-    {
-        other.m_object = nullptr;
-    }
-
-    UniquePointer(const UniquePointer &) = delete;
-
-    ~UniquePointer()
-    {
-        if (m_object)
-        {
-            Release(m_object);
-        }
-    }
-
-    T *Detach()
-    {
-        T *object = m_object;
-        m_object = nullptr;
-        return object;
-    }
-
-    T **Address()
-    {
-        return &m_object;
-    }
-
-    T *Get()
-    {
-        return m_object;
-    }
-
-    T *operator*()
-    {
-        return m_object;
-    }
-
-    operator T *()
-    {
-        return m_object;
-    }
-
-  private:
-    T *m_object = nullptr;
-};
 
 template <class T> void ReleaseFromDevice(SDL_GPUDevice *device, T *object)
 {
