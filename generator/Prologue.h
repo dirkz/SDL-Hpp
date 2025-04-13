@@ -56,8 +56,18 @@ template <class T> struct UniquePointer
         return object;
     }
 
-    T **Address()
+    T **GetAddressOf()
     {
+        return &m_object;
+    }
+
+    T **ReleaseAndGetAddressOf()
+    {
+        if (m_object)
+        {
+            Release(m_object);
+            m_object = nullptr;
+        }
         return &m_object;
     }
 
