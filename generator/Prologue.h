@@ -43,10 +43,17 @@ template <class T> struct UniquePointer
 
     ~UniquePointer()
     {
-        if (m_object != nullptr)
+        if (m_object)
         {
             Release(m_object);
         }
+    }
+
+    T *Detach()
+    {
+        T *object = m_object;
+        m_object = nullptr;
+        return object;
     }
 
     T **Address()
@@ -83,7 +90,17 @@ template <class T> struct DeviceOwned
 
     ~DeviceOwned()
     {
-        ReleaseFromDevice(m_device, m_object);
+        if (m_object)
+        {
+            ReleaseFromDevice(m_device, m_object);
+        }
+    }
+
+    T *Detach()
+    {
+        T *object = m_object;
+        m_object = nullptr;
+        return object;
     }
 
   private:
@@ -97,7 +114,17 @@ struct UniqueHaptic
 
     ~UniqueHaptic()
     {
-        SDL_DestroyHapticEffect(m_haptic, m_effect);
+        if (m_haptic)
+        {
+            SDL_DestroyHapticEffect(m_haptic, m_effect);
+        }
+    }
+
+    SDL_Haptic *Detach()
+    {
+        SDL_Haptic *haptic = m_haptic;
+        m_haptic = nullptr;
+        return haptic;
     }
 
   private:
@@ -131,10 +158,12 @@ struct UniqueCameraSurface
         }
     }
 
-    void Detach()
+    SDL_Surface *Detach()
     {
+        SDL_Surface *surface = m_surface;
         m_surface = nullptr;
         m_camera = nullptr;
+        return surface;
     }
 
   private:
