@@ -37,7 +37,7 @@ template <class T> void Destroy(T *object)
 {
 }
 
-template <class T> struct Deleter
+template <class T> struct Destroyer
 {
     void operator()(T *object)
     {
