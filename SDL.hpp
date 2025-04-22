@@ -9,7 +9,7 @@
 namespace sdl
 {
 
-void SDLThrow(std::source_location location)
+inline void SDLThrow(std::source_location location)
 {
     constexpr size_t BufferSize = 256;
     char error[BufferSize];
