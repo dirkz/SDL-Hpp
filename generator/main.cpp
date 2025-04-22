@@ -138,7 +138,7 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                     alreadyGenerated.insert(pointedType);
 
                     out << "template<>\n";
-                    out << "void Destroy<" << pointedType << ">(" << arg.Declaration() << ")\n";
+                    out << "inline void Destroy<" << pointedType << ">(" << arg.Declaration() << ")\n";
                     out << "{\n";
                     out << "    " << fn.Name() << "(" << arg.Name() << ");\n";
                     out << "}\n\n";
@@ -165,7 +165,7 @@ static void OutputDestructors(std::ostream &out, const std::vector<Function> fun
                 if (pointedType1 == "SDL_GPUDevice")
                 {
                     out << "template<>\n";
-                    out << "void ReleaseFromDevice<" << pointedType2 << ">(" << arg1.Declaration()
+                    out << "inline void ReleaseFromDevice<" << pointedType2 << ">(" << arg1.Declaration()
                         << "," << arg2.Declaration() << ")\n";
                     out << "{\n";
                     out << "    " << fn.Name() << "(" << arg1.Name() << ", " << arg2.Name()

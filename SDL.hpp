@@ -137,7 +137,7 @@ struct CameraSurface
 };
 
 template<>
-void Destroy<SDL_Environment>(SDL_Environment *env)
+inline void Destroy<SDL_Environment>(SDL_Environment *env)
 {
     SDL_DestroyEnvironment(env);
 }
@@ -145,7 +145,7 @@ void Destroy<SDL_Environment>(SDL_Environment *env)
 using Environment = std::unique_ptr<SDL_Environment, Deleter<SDL_Environment>>;
 
 template<>
-void Destroy<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
+inline void Destroy<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
 {
     SDL_DestroyAsyncIOQueue(queue);
 }
@@ -153,7 +153,7 @@ void Destroy<SDL_AsyncIOQueue>(SDL_AsyncIOQueue *queue)
 using AsyncIOQueue = std::unique_ptr<SDL_AsyncIOQueue, Deleter<SDL_AsyncIOQueue>>;
 
 template<>
-void Destroy<SDL_Mutex>(SDL_Mutex *mutex)
+inline void Destroy<SDL_Mutex>(SDL_Mutex *mutex)
 {
     SDL_DestroyMutex(mutex);
 }
@@ -161,7 +161,7 @@ void Destroy<SDL_Mutex>(SDL_Mutex *mutex)
 using Mutex = std::unique_ptr<SDL_Mutex, Deleter<SDL_Mutex>>;
 
 template<>
-void Destroy<SDL_RWLock>(SDL_RWLock *rwlock)
+inline void Destroy<SDL_RWLock>(SDL_RWLock *rwlock)
 {
     SDL_DestroyRWLock(rwlock);
 }
@@ -169,7 +169,7 @@ void Destroy<SDL_RWLock>(SDL_RWLock *rwlock)
 using RWLock = std::unique_ptr<SDL_RWLock, Deleter<SDL_RWLock>>;
 
 template<>
-void Destroy<SDL_Semaphore>(SDL_Semaphore *sem)
+inline void Destroy<SDL_Semaphore>(SDL_Semaphore *sem)
 {
     SDL_DestroySemaphore(sem);
 }
@@ -177,7 +177,7 @@ void Destroy<SDL_Semaphore>(SDL_Semaphore *sem)
 using Semaphore = std::unique_ptr<SDL_Semaphore, Deleter<SDL_Semaphore>>;
 
 template<>
-void Destroy<SDL_Condition>(SDL_Condition *cond)
+inline void Destroy<SDL_Condition>(SDL_Condition *cond)
 {
     SDL_DestroyCondition(cond);
 }
@@ -185,7 +185,7 @@ void Destroy<SDL_Condition>(SDL_Condition *cond)
 using Condition = std::unique_ptr<SDL_Condition, Deleter<SDL_Condition>>;
 
 template<>
-void Destroy<SDL_AudioStream>(SDL_AudioStream *stream)
+inline void Destroy<SDL_AudioStream>(SDL_AudioStream *stream)
 {
     SDL_DestroyAudioStream(stream);
 }
@@ -193,7 +193,7 @@ void Destroy<SDL_AudioStream>(SDL_AudioStream *stream)
 using AudioStream = std::unique_ptr<SDL_AudioStream, Deleter<SDL_AudioStream>>;
 
 template<>
-void Destroy<SDL_Palette>(SDL_Palette *palette)
+inline void Destroy<SDL_Palette>(SDL_Palette *palette)
 {
     SDL_DestroyPalette(palette);
 }
@@ -201,7 +201,7 @@ void Destroy<SDL_Palette>(SDL_Palette *palette)
 using Palette = std::unique_ptr<SDL_Palette, Deleter<SDL_Palette>>;
 
 template<>
-void Destroy<SDL_Surface>(SDL_Surface *surface)
+inline void Destroy<SDL_Surface>(SDL_Surface *surface)
 {
     SDL_DestroySurface(surface);
 }
@@ -209,7 +209,7 @@ void Destroy<SDL_Surface>(SDL_Surface *surface)
 using Surface = std::unique_ptr<SDL_Surface, Deleter<SDL_Surface>>;
 
 template<>
-void Destroy<SDL_Window>(SDL_Window *window)
+inline void Destroy<SDL_Window>(SDL_Window *window)
 {
     SDL_DestroyWindowSurface(window);
 }
@@ -217,7 +217,7 @@ void Destroy<SDL_Window>(SDL_Window *window)
 using Window = std::unique_ptr<SDL_Window, Deleter<SDL_Window>>;
 
 template<>
-void Destroy<SDL_Cursor>(SDL_Cursor *cursor)
+inline void Destroy<SDL_Cursor>(SDL_Cursor *cursor)
 {
     SDL_DestroyCursor(cursor);
 }
@@ -225,7 +225,7 @@ void Destroy<SDL_Cursor>(SDL_Cursor *cursor)
 using Cursor = std::unique_ptr<SDL_Cursor, Deleter<SDL_Cursor>>;
 
 template<>
-void Destroy<SDL_GPUDevice>(SDL_GPUDevice *device)
+inline void Destroy<SDL_GPUDevice>(SDL_GPUDevice *device)
 {
     SDL_DestroyGPUDevice(device);
 }
@@ -233,61 +233,61 @@ void Destroy<SDL_GPUDevice>(SDL_GPUDevice *device)
 using GPUDevice = std::unique_ptr<SDL_GPUDevice, Deleter<SDL_GPUDevice>>;
 
 template<>
-void ReleaseFromDevice<SDL_GPUTexture>(SDL_GPUDevice *device,SDL_GPUTexture *texture)
+inline void ReleaseFromDevice<SDL_GPUTexture>(SDL_GPUDevice *device,SDL_GPUTexture *texture)
 {
     SDL_ReleaseGPUTexture(device, texture);
 }
 
 template<>
-void ReleaseFromDevice<SDL_GPUSampler>(SDL_GPUDevice *device,SDL_GPUSampler *sampler)
+inline void ReleaseFromDevice<SDL_GPUSampler>(SDL_GPUDevice *device,SDL_GPUSampler *sampler)
 {
     SDL_ReleaseGPUSampler(device, sampler);
 }
 
 template<>
-void ReleaseFromDevice<SDL_GPUBuffer>(SDL_GPUDevice *device,SDL_GPUBuffer *buffer)
+inline void ReleaseFromDevice<SDL_GPUBuffer>(SDL_GPUDevice *device,SDL_GPUBuffer *buffer)
 {
     SDL_ReleaseGPUBuffer(device, buffer);
 }
 
 template<>
-void ReleaseFromDevice<SDL_GPUTransferBuffer>(SDL_GPUDevice *device,SDL_GPUTransferBuffer *transfer_buffer)
+inline void ReleaseFromDevice<SDL_GPUTransferBuffer>(SDL_GPUDevice *device,SDL_GPUTransferBuffer *transfer_buffer)
 {
     SDL_ReleaseGPUTransferBuffer(device, transfer_buffer);
 }
 
 template<>
-void ReleaseFromDevice<SDL_GPUComputePipeline>(SDL_GPUDevice *device,SDL_GPUComputePipeline *compute_pipeline)
+inline void ReleaseFromDevice<SDL_GPUComputePipeline>(SDL_GPUDevice *device,SDL_GPUComputePipeline *compute_pipeline)
 {
     SDL_ReleaseGPUComputePipeline(device, compute_pipeline);
 }
 
 template<>
-void ReleaseFromDevice<SDL_GPUShader>(SDL_GPUDevice *device,SDL_GPUShader *shader)
+inline void ReleaseFromDevice<SDL_GPUShader>(SDL_GPUDevice *device,SDL_GPUShader *shader)
 {
     SDL_ReleaseGPUShader(device, shader);
 }
 
 template<>
-void ReleaseFromDevice<SDL_GPUGraphicsPipeline>(SDL_GPUDevice *device,SDL_GPUGraphicsPipeline *graphics_pipeline)
+inline void ReleaseFromDevice<SDL_GPUGraphicsPipeline>(SDL_GPUDevice *device,SDL_GPUGraphicsPipeline *graphics_pipeline)
 {
     SDL_ReleaseGPUGraphicsPipeline(device, graphics_pipeline);
 }
 
 template<>
-void ReleaseFromDevice<SDL_Window>(SDL_GPUDevice *device,SDL_Window *window)
+inline void ReleaseFromDevice<SDL_Window>(SDL_GPUDevice *device,SDL_Window *window)
 {
     SDL_ReleaseWindowFromGPUDevice(device, window);
 }
 
 template<>
-void ReleaseFromDevice<SDL_GPUFence>(SDL_GPUDevice *device,SDL_GPUFence *fence)
+inline void ReleaseFromDevice<SDL_GPUFence>(SDL_GPUDevice *device,SDL_GPUFence *fence)
 {
     SDL_ReleaseGPUFence(device, fence);
 }
 
 template<>
-void Destroy<SDL_Process>(SDL_Process *process)
+inline void Destroy<SDL_Process>(SDL_Process *process)
 {
     SDL_DestroyProcess(process);
 }
@@ -295,7 +295,7 @@ void Destroy<SDL_Process>(SDL_Process *process)
 using Process = std::unique_ptr<SDL_Process, Deleter<SDL_Process>>;
 
 template<>
-void Destroy<SDL_Texture>(SDL_Texture *texture)
+inline void Destroy<SDL_Texture>(SDL_Texture *texture)
 {
     SDL_DestroyTexture(texture);
 }
@@ -303,7 +303,7 @@ void Destroy<SDL_Texture>(SDL_Texture *texture)
 using Texture = std::unique_ptr<SDL_Texture, Deleter<SDL_Texture>>;
 
 template<>
-void Destroy<SDL_Renderer>(SDL_Renderer *renderer)
+inline void Destroy<SDL_Renderer>(SDL_Renderer *renderer)
 {
     SDL_DestroyRenderer(renderer);
 }
@@ -311,7 +311,7 @@ void Destroy<SDL_Renderer>(SDL_Renderer *renderer)
 using Renderer = std::unique_ptr<SDL_Renderer, Deleter<SDL_Renderer>>;
 
 template<>
-void Destroy<SDL_Tray>(SDL_Tray *tray)
+inline void Destroy<SDL_Tray>(SDL_Tray *tray)
 {
     SDL_DestroyTray(tray);
 }
