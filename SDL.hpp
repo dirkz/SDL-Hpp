@@ -52,6 +52,9 @@ template <class T> void ReleaseFromDevice(SDL_GPUDevice *device, T *object)
 template <class T> struct DeviceOwned
 {
     DeviceOwned(SDL_GPUDevice *device, T *object) : m_device{device}, m_object{object} {};
+    DeviceOwned(const DeviceOwned &) = delete;
+
+    DeviceOwned &operator=(const DeviceOwned &) = delete;
 
     ~DeviceOwned()
     {
