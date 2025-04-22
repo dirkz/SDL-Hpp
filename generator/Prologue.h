@@ -23,6 +23,16 @@ inline void SDLThrow(std::source_location location)
     throw std::runtime_error{error};
 }
 
+struct FreeVoid
+{
+    void operator()(void *p)
+    {
+        SDL_free(p);
+    }
+};
+
+using Void = std::unique_ptr<void, FreeVoid>;
+
 template <class T> void Destroy(T *object)
 {
 }
