@@ -79,6 +79,9 @@ template <class T> struct DeviceOwned
 struct Haptic
 {
     Haptic(SDL_Haptic *haptic, int effect) : m_haptic{haptic}, m_effect{effect} {};
+    Haptic(const Haptic &) = delete;
+
+    Haptic &operator=(const Haptic &) = delete;
 
     ~Haptic()
     {
@@ -103,6 +106,9 @@ struct Haptic
 struct Properties
 {
     Properties(SDL_PropertiesID props) : m_properties{props} {};
+    Properties(const Properties &) = delete;
+
+    Properties &operator=(const Properties &) = delete;
 
     ~Properties()
     {
@@ -117,6 +123,9 @@ struct CameraSurface
 {
     CameraSurface(SDL_Surface *surface, SDL_Camera *camera)
         : m_surface{surface}, m_camera{camera} {};
+    CameraSurface(const CameraSurface &) = delete;
+
+    CameraSurface &operator=(const CameraSurface &) = delete;
 
     ~CameraSurface()
     {
