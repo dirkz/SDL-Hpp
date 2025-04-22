@@ -26,7 +26,10 @@ that is, it destroys the `SDL_Window` when it goes out of scope.
 For example:
 
 * Add the project as a git submodule.
-* In your `CMakeLists.txt`, set `SDL_STATIC` (BOOL) or offer it as option.
+* In your `CMakeLists.txt`, set `SDL_STATIC` to "ON" or offer it as option
+  (`option(SDL_STATIC "Build SDL as a static library" ON)`).
+  This avoids having to fiddle with your PATH or having to install SDL,
+  and just use the version that comes with this project.
 * Add the project: `add_subdirectory(SDL-Hpp)`.
-* Link to it: `target_link_libraries(${PROJECT_NAME} PRIVATE SDL-Hpp)`.
+* Link to it: `target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE SDL-Hpp)`.
 * Include it like this: `#include <SDL.hpp>`.
