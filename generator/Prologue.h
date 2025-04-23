@@ -6,6 +6,23 @@
 #include <source_location>
 #include <stdexcept>
 
+// Avoid endless recursion
+
+#ifdef SDL_memcpy
+#undef SDL_memcpy
+#define SDL_memcpy ::memcpy
+#endif
+
+#ifdef SDL_memmove
+#undef SDL_memmove
+#define SDL_memmove ::memmove
+#endif
+
+#ifdef SDL_memset
+#undef SDL_memset
+#define SDL_memset ::memset
+#endif
+
 namespace sdl
 {
 
