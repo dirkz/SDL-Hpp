@@ -64,6 +64,11 @@ template <class T> struct DeviceOwned
         }
     }
 
+    T *Get()
+    {
+        return m_object;
+    }
+
     T *Detach()
     {
         T *object = m_object;
