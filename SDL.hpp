@@ -31,7 +31,7 @@ inline void SDLThrow(std::source_location location)
     constexpr size_t BufferSize = 256;
     char error[BufferSize];
     const char *pErrorMessage = SDL_GetError();
-    if (!pErrorMessage)
+    if (!pErrorMessage || pErrorMessage[0] == '\0')
     {
         pErrorMessage = "(unknown)";
     }
