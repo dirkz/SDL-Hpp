@@ -70,7 +70,7 @@ static std::vector<Function> ParseHeader(const fs::path &path,
                 {
                     Function fn{currentCursor};
 
-                    if (fn.Name().starts_with("SDL_"))
+                    if (fn.HasSDLPrefix())
                     {
                         int numArgs = clang_Cursor_getNumArguments(currentCursor);
                         if (numArgs != -1)
