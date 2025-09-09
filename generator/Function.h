@@ -13,6 +13,9 @@ struct Function
 {
     Function(CXCursor cursor)
     {
+        int variadic = clang_Cursor_isVariadic(cursor);
+        m_isVariadic = variadic != 0;
+
         CXString functionName = clang_getCursorSpelling(cursor);
         m_name = clang_getCString(functionName);
         clang_disposeString(functionName);
@@ -129,6 +132,11 @@ struct Function
         return m_isVoid;
     }
 
+    bool IsVariadic() const
+    {
+        return m_isVariadic;
+    }
+
   private:
     std::string m_name;
     std::string m_namespacedName;
@@ -141,6 +149,7 @@ struct Function
     bool m_isHidden;
     bool m_isUnchecked;
     bool m_isVoid;
+    bool m_isVariadic;
 };
 
 } // namespace zlang

@@ -65,25 +65,21 @@ static std::vector<Function> ParseHeader(const fs::path &path,
             }
 
             case CXCursor_FunctionDecl: {
-                int variadic = clang_Cursor_isVariadic(currentCursor);
-                if (!variadic)
+                Function fn{currentCursor};
+
+                if (fn.HasSDLPrefix() && !fn.IsVariadic())
                 {
-                    Function fn{currentCursor};
-
-                    if (fn.HasSDLPrefix())
+                    int numArgs = clang_Cursor_getNumArguments(currentCursor);
+                    if (numArgs != -1)
                     {
-                        int numArgs = clang_Cursor_getNumArguments(currentCursor);
-                        if (numArgs != -1)
+                        for (int i = 0; i < numArgs; ++i)
                         {
-                            for (int i = 0; i < numArgs; ++i)
-                            {
-                                CXCursor argCursor = clang_Cursor_getArgument(currentCursor, i);
-                                fn.AddArgument(argCursor);
-                            }
+                            CXCursor argCursor = clang_Cursor_getArgument(currentCursor, i);
+                            fn.AddArgument(argCursor);
                         }
-
-                        pFunctions->push_back(fn);
                     }
+
+                    pFunctions->push_back(fn);
                 }
                 break;
             }
