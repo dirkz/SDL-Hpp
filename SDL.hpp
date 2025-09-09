@@ -1046,24 +1046,9 @@ inline char *UCS4ToUTF8(Uint32 codepoint, char *dst, std::source_location locati
     return result;
 }
 
-inline int sscanf(const char *text, const char *fmt)
-{
-    return SDL_sscanf(text, fmt);
-}
-
 inline int vsscanf(const char *text, const char *fmt, va_list ap)
 {
     return SDL_vsscanf(text, fmt, ap);
-}
-
-inline int snprintf(char *text, size_t maxlen, const char *fmt)
-{
-    return SDL_snprintf(text, maxlen, fmt);
-}
-
-inline int swprintf(wchar_t *text, size_t maxlen, const wchar_t *fmt)
-{
-    return SDL_swprintf(text, maxlen, fmt);
 }
 
 inline int vsnprintf(char *text, size_t maxlen, const char *fmt, va_list ap)
@@ -1074,11 +1059,6 @@ inline int vsnprintf(char *text, size_t maxlen, const char *fmt, va_list ap)
 inline int vswprintf(wchar_t *text, size_t maxlen, const wchar_t *fmt, va_list ap)
 {
     return SDL_vswprintf(text, maxlen, fmt, ap);
-}
-
-inline int asprintf(char **strp, const char *fmt)
-{
-    return SDL_asprintf(strp, fmt);
 }
 
 inline int vasprintf(char **strp, const char *fmt, va_list ap)
@@ -1620,14 +1600,6 @@ inline void *GetAtomicPointer(void **a, std::source_location location = std::sou
 inline float SwapFloat(float x)
 {
     return SDL_SwapFloat(x);
-}
-
-inline void SetError(const char *fmt, std::source_location location = std::source_location::current())
-{
-    if (!SDL_SetError(fmt))
-    {
-        SDLThrow(location);
-    }
 }
 
 inline void SetErrorV(const char *fmt, va_list ap, std::source_location location = std::source_location::current())
@@ -2176,11 +2148,6 @@ inline size_t ReadIO(SDL_IOStream *context, void *ptr, size_t size)
 inline size_t WriteIO(SDL_IOStream *context, const void *ptr, size_t size)
 {
     return SDL_WriteIO(context, ptr, size);
-}
-
-inline size_t IOprintf(SDL_IOStream *context, const char *fmt)
-{
-    return SDL_IOprintf(context, fmt);
 }
 
 inline size_t IOvprintf(SDL_IOStream *context, const char *fmt, va_list ap)
@@ -7572,51 +7539,6 @@ inline void SetLogPriorityPrefix(SDL_LogPriority priority, const char *prefix, s
     }
 }
 
-inline void Log(const char *fmt)
-{
-    SDL_Log(fmt);
-}
-
-inline void LogTrace(int category, const char *fmt)
-{
-    SDL_LogTrace(category, fmt);
-}
-
-inline void LogVerbose(int category, const char *fmt)
-{
-    SDL_LogVerbose(category, fmt);
-}
-
-inline void LogDebug(int category, const char *fmt)
-{
-    SDL_LogDebug(category, fmt);
-}
-
-inline void LogInfo(int category, const char *fmt)
-{
-    SDL_LogInfo(category, fmt);
-}
-
-inline void LogWarn(int category, const char *fmt)
-{
-    SDL_LogWarn(category, fmt);
-}
-
-inline void LogError(int category, const char *fmt)
-{
-    SDL_LogError(category, fmt);
-}
-
-inline void LogCritical(int category, const char *fmt)
-{
-    SDL_LogCritical(category, fmt);
-}
-
-inline void LogMessage(int category, SDL_LogPriority priority, const char *fmt)
-{
-    SDL_LogMessage(category, priority, fmt);
-}
-
 inline void LogMessageV(int category, SDL_LogPriority priority, const char *fmt, va_list ap)
 {
     SDL_LogMessageV(category, priority, fmt, ap);
@@ -8478,14 +8400,6 @@ inline void GetRenderVSync(SDL_Renderer *renderer, int *vsync, std::source_locat
 inline void RenderDebugText(SDL_Renderer *renderer, float x, float y, const char *str, std::source_location location = std::source_location::current())
 {
     if (!SDL_RenderDebugText(renderer, x, y, str))
-    {
-        SDLThrow(location);
-    }
-}
-
-inline void RenderDebugTextFormat(SDL_Renderer *renderer, float x, float y, const char *fmt, std::source_location location = std::source_location::current())
-{
-    if (!SDL_RenderDebugTextFormat(renderer, x, y, fmt))
     {
         SDLThrow(location);
     }
